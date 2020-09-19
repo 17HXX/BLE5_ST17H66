@@ -1,0 +1,156 @@
+/*
+ * 	Copyright (c) 2020 ShenZhen Lenze Technology Co,.LTD. All rights reserved.
+ *
+ *  @Author	:	Qi Yang
+ *
+ */
+//**************************************************************************************************
+//                                      《防止重包含》
+//**************************************************************************************************
+#ifndef COLOR_MODE_H_
+#define COLOR_MODE_H_
+#include"types.h"
+//**************************************************************************************************
+//                                       《类型定义》
+//**************************************************************************************************
+#define		EEPROM_FIRSTUSE_ADD				0x00
+#define		EEPROM_TEST_MODE_ADD			0x01
+#define		EEPROM_LIGHTMODE_ADD			0x08
+#define		EEPROM_STATICCOLOR				0x0e
+
+#define		EEPROM_MYSELF_JUMP_COLOR		0x0f
+#define		EEPROM_JUMP_NUM_COLOR			0x21
+
+#define		EEPROM_JUMP_SPEED_COLOR			0x22
+#define		EEPROM_MYSELF_BREATH_COLOR		0x35
+#define		EEPROM_BREATH_SPEED_COLOR		0x48
+#define  	EEPROM_Fade_Color_ADD 			0x4A
+#define 	EEPROM_BTEATH_NUM				0x4C
+
+typedef struct{
+	uint8 		light_state;//on--off
+	uint8 		light_mode;//led_mode_manual & others
+	uint8 		light_red;//0--255
+	uint8 		light_green;
+	uint8 		light_blue;
+	uint8 		light_white;
+	uint8 		light_red_recorder;//5--255, 10 level
+	uint8 		light_green_recorder;
+	uint8 		light_blue_recorder;
+	uint8 		light_white_recorder;
+	uint8 		light_mode_recorder;//led_mode_manual & others recorder
+	uint8 		light_color_mode_recorder;//0--15,color mode recorder
+	uint8 		light_lightness_level;//10 level
+	uint16 	light_speed;//5--150
+}RGBW_Light_t;
+
+enum{
+	Light_State_Off		= 	0,
+	Light_State_On		= 	1,
+}Light_State_OnOff;
+
+enum{
+	Disable		=	0,
+	Enable		=	1,
+}En_State_t;
+
+enum{
+	led_red_mode = 0,
+	led_green_mode,
+	led_blue_mode,
+	led_white_mode,
+	led_orangered_mode,
+	led_darkturquoise_mode,
+	led_purple_mode,
+	led_yellow_mode,
+	led_lightskyblue_mode,
+	led_lightpink_mode,
+	led_greenyellow_mode,
+	led_cyan_mode,
+	led_maroon_mode,
+	led_darkseagreen_mode,
+	led_mediumblue_mode,
+	led_violetred_mode,
+}RGBLight_Static_Color_Mode;
+
+enum{
+	led_mode_off = 0,
+	led_mode_manual,
+
+	Led_Fade_SevenColor 		= 	0x70,
+	Led_Fade_ThreeColor,
+	Led_Fade_Red,
+	Led_Fade_Green,
+	Led_Fade_Blue,
+	Led_Fade_Yellow,
+	Led_Fade_Cyan,
+	Led_Fade_Magenta,
+	Led_Fade_White,
+	Led_Fade_Red_Green,
+	Led_Fade_Red_Blue,
+	Led_Fade_Green_Blue,
+
+	Led_Flash_SevenColor 		= 	0x80,
+	Led_Flash_ThreeColor,
+	Led_Flash_Red,
+	Led_Flash_Green,
+	Led_Flash_Blue,
+	Led_Flash_Yellow,
+	Led_Flash_Cyan,
+	Led_Flash_Magenta,
+	Led_Flash_White,
+
+	Led_Jump_SevenColor 		= 	0x90,
+	Led_Jump_ThreeColor,
+	Led_Jump_AllStaticColor,
+
+	Led_Breath_Colors_Seting	=	0xa0,	//自定义多彩呼吸
+	Led_Fade_Color_To_Color,				//自定义多彩渐变
+	Led_Jump_Seting,						//自定义多彩跳变
+
+}RGBLight_Dynamic_Mode;
+//**************************************************************************************************
+//                                          《变量声明》
+//**************************************************************************************************
+extern RGBW_Light_t 						App_Set_Light_Para;
+extern uint16 									PWMLIGHT_Tick_Cnt;
+extern uint16 									PWMLIGHT_Fade_Time;
+extern uint8 									Mode_Change_Cnt;
+extern uint8 									eeprom_light_RGBcolor[];
+extern uint8 									PWMLIGHT_RGBLight_Buffer[][24];
+extern uint8 									PWMLIGHT_RGBLight_Jump_Buffer[];
+extern uint8 									PWMLIGHT_RGBLight_Set_Breath_Num;
+extern uint8									PWMLIGHT_RGBLight_Breath_Change_Cnt;
+extern uint8									PWMLIGHT_RGBLight_Set_Color_Num;
+extern uint8									PWMLIGHT_RGBLight_Board_Mic_Enable	;
+//**************************************************************************************************
+//                                          《函数声明》
+//**************************************************************************************************
+void 	PWMLIGHT_RGBLight_DiDaTick_100us				(void											);
+void 	PWMLIGHT_RGBLight_Mode_Static_Color			(uint8 color										);//《静态颜色模式处理》(color:颜色序号)
+void 	PWMLIGHT_RGBLight_Mode_Colors_Fade				(void											);//《多色渐变模式处理》(多色渐变，不支持自定义)
+void 	PWMLIGHT_RGBLight_Mode_Jump						(uint8 Color_Num, uint8 *RGB_Data, uint16 Jump_Speed		);//《跳变模式处理》(Color_Num:跳变颜色数量,RGB_Data:设置的跳变颜色,Jump_Speed:跳变速度)
+void 	PWMLIGHT_RGBLight_Mode_Flash					(uint8 Color_Num, uint8 *RGB_Data, uint16 Flash_Speed	);//《闪烁模式处理》(Color_Num:闪烁颜色数量,RGB_Data:设置的闪烁颜色,Flash_Speed:闪烁速度)
+void 	PWMLIGHT_RGBLight_Mode_Fade						(uint8 Led_Enter_Mode,  uint16 Fade_Speed				);//《渐变模式处理》(颜色顺序：红绿蓝黄青紫白Led_Enter_Mode:渐变模式，Fade_Speed：渐变速度)
+void 	PWMLIGHT_RGBLight_Mode_Seting_Breath			(uint8 Color_Num, uint16 Fade_Speed					);//《多色呼吸自定义模式》(Color_Num：自定义颜色数量,Fade_Speed:呼吸速度)
+void 	PWMLIGHT_RGBLight_Deal_Process					(void											);//《轮询处理模式切换，颜色变化》
+//void 	PWMLIGHT_RGBLight_Timer_Turn_OnOff_Deal		(PWMLIGHT_RGBLight_Alarm *Turn_OnOff_State			);//《定时开关灯处理》
+
+typedef struct{
+ u8   light_state;//on--off
+ u8   light_mode;//led_mode_manual & others
+ u8   light_red;//0--255
+ u8   light_green;
+ u8   light_blue;
+ u8   light_white;
+ u8   light_red_recorder;//5--255, 10 level
+ u8   light_green_recorder;
+ u8   light_blue_recorder;
+ u8   light_white_recorder;
+ u8   light_mode_recorder;//led_mode_manual & others recorder
+ u8   light_color_mode_recorder;//0--15,color mode recorder
+ u8   light_lightness_level;//10 level
+ u16  light_speed;//5--150
+}RGBW_Light_t;
+
+#endif /* COLOR_MODE_H_ */

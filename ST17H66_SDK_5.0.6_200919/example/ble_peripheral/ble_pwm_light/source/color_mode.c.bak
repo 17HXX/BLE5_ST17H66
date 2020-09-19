@@ -1,0 +1,474 @@
+/*
+ * light.c
+ *
+ */
+
+#include "color_mode.h"
+
+#define		LIGHT_MXA   255
+
+
+void YQ_RGBLight_DiDaTick_100us(void){
+//	if(!clock_time_exceed(YQ_DiDa_Time_10MS, 300))//300us
+//		return;
+//	YQ_DiDa_Time_10MS = clock_time();
+//	YQ_Fade_Time++;
+//	tt1++;
+//	if(tt1>6){
+//		tt1=0;
+//		YQ_Tick_Cnt++;
+//	}
+}
+
+
+//**************************************************************************************************
+//三个RGB色值:color1_R_G_B,color2_R_G_B,color3_R_G_B
+//七个RGB色值:color1_R_G_B,color2_R_G_B,color3_R_G_B,...,color7_R_G_B
+//*************************************************************************************************
+uint8 YQ_RGBLight_Buffer[][24] = {
+		{255,0,0,																			},//红色
+		{0,255,0,																			},//绿色
+		{0,0,255,																			},//蓝色
+		{255,255,0,																			},//黄色
+		{0,255,255,																			},//青色
+		{255,0,255,																			},//紫色
+		{153,153,153,																		},//白色
+		{255,0,0,	0,255,0,																},//红绿渐变
+		{255,0,0,	0,0,255,																},//红蓝渐变
+		{0,255,0,	0,0,255,																},//绿蓝渐变
+		{255,0,0,	0,255,0,	0,0,255,													},//红绿蓝
+		{255,0,0,	0,255,0,	0,0,255,	255,255,0,	0,255,255,	255,0,255,	153,153,153,},//红绿蓝黄青紫白
+		{0,0,0,		0,0,0,		0,0,0,		0,0,0,		0,0,0,		0,0,0,					},//自定义跳变
+		{153,153,153,		0,0,0,		0,0,0,		0,0,0,		0,0,0,		0,0,0,			},//自定义呼吸
+};
+//**************************************************************************************************
+//红外遥控器按键颜色设置表
+//十六个RGB色值:color1_R_G_B,color2_R_G_B,color3_R_G_B...,color16_R_G_B
+//*************************************************************************************************
+uint8 YQ_RGBLight_Jump_Buffer[48] = {
+		//红					绿					兰					白
+		255,0,0,			0,255,0,			0,0,255,			153,153,153,
+		//OrangeRed								Purple				Yellow
+		255,28,0,			0,115,28,			85,0,227,			255,57,0,
+		//LightSkyBlue		LightPink			GreenYollow			Cyan
+		0,115,54,			140,0,227,			255,143,0,			0,115,143,
+		//Maroon			DarkSeaGreen		MediumBlue			VioletRed
+		196,0,227,			225,227,0,			0,115,227,			255,0,227,
+};
+//**************************************************************************************************
+//          《跳变模式处理》(Color_Num:跳变颜色数量,RGB_Data:设置的跳变颜色,Jump_Speed:跳变速度)
+//**************************************************************************************************
+void YQ_RGBLight_Mode_Jump(uint8 Color_Num, uint8 * RGB_Data, uint16 Jump_Speed){
+	if(YQ_Tick_Cnt > Jump_Speed){
+		YQ_Tick_Cnt = 0;
+		App_Set_Light_Para.light_red 	= *(RGB_Data + Mode_Change_Cnt*3);
+		App_Set_Light_Para.light_green 	= *(RGB_Data + Mode_Change_Cnt*3 + 1);
+		App_Set_Light_Para.light_blue 	= *(RGB_Data + Mode_Change_Cnt*3 + 2);
+		App_Set_Light_Para.light_white 	= 0;//w模式下，其他功能没关闭w通道
+		Mode_Change_Cnt++;
+		if(Mode_Change_Cnt >= Color_Num){
+			Mode_Change_Cnt = 0;
+		}
+	}
+}
+//**************************************************************************************************
+//          《闪烁模式处理》(Color_Num:闪烁颜色数量,RGB_Data:设置的闪烁颜色,Flash_Speed:闪烁速度)
+//**************************************************************************************************
+void YQ_RGBLight_Mode_Flash(uint8 Color_Num, uint8 *RGB_Data, uint16 Flash_Speed){
+	if(YQ_Tick_Cnt > Flash_Speed){
+		YQ_Tick_Cnt = 0;
+		App_Set_Light_Para.light_white 	= 0;//w模式下，其他功能没关闭w通道
+		if(Mode_Change_Cnt == 0){
+			App_Set_Light_Para.light_red 	= *(RGB_Data);
+			App_Set_Light_Para.light_green 	= *(RGB_Data + 1);
+			App_Set_Light_Para.light_blue 	= *(RGB_Data + 2);
+		}else if(Mode_Change_Cnt == 1){
+			LED_OFF();
+		}else if(Mode_Change_Cnt == 2){
+			App_Set_Light_Para.light_red 	= *(RGB_Data + 3);
+			App_Set_Light_Para.light_green 	= *(RGB_Data + 4);
+			App_Set_Light_Para.light_blue 	= *(RGB_Data + 5);
+		}else if(Mode_Change_Cnt == 3){
+			LED_OFF();
+		}else if(Mode_Change_Cnt == 4){
+			App_Set_Light_Para.light_red 	= *(RGB_Data + 6);
+			App_Set_Light_Para.light_green 	= *(RGB_Data + 7);
+			App_Set_Light_Para.light_blue 	= *(RGB_Data + 8);
+		}else if(Mode_Change_Cnt == 5){
+			LED_OFF();
+		}else if(Mode_Change_Cnt == 6){
+			App_Set_Light_Para.light_red 	= *(RGB_Data + 9);
+			App_Set_Light_Para.light_green 	= *(RGB_Data + 10);
+			App_Set_Light_Para.light_blue 	= *(RGB_Data + 11);
+		}else if(Mode_Change_Cnt == 7){
+			LED_OFF();
+		}else if(Mode_Change_Cnt == 8){
+			App_Set_Light_Para.light_red 	= *(RGB_Data + 12);
+			App_Set_Light_Para.light_green 	= *(RGB_Data + 13);
+			App_Set_Light_Para.light_blue 	= *(RGB_Data + 14);
+		}else if(Mode_Change_Cnt == 9){
+			LED_OFF();
+		}else if(Mode_Change_Cnt == 10){
+			App_Set_Light_Para.light_red 	= *(RGB_Data + 15);
+			App_Set_Light_Para.light_green 	= *(RGB_Data + 16);
+			App_Set_Light_Para.light_blue 	= *(RGB_Data + 17);
+		}else if(Mode_Change_Cnt == 11){
+			LED_OFF();
+		}else if(Mode_Change_Cnt == 12){
+			App_Set_Light_Para.light_red 	= *(RGB_Data + 18);
+			App_Set_Light_Para.light_green 	= *(RGB_Data + 19);
+			App_Set_Light_Para.light_blue 	= *(RGB_Data + 20);
+		}else if(Mode_Change_Cnt == 13){
+			LED_OFF();
+		}
+		Mode_Change_Cnt++;
+		if(Mode_Change_Cnt >= (Color_Num*2 )){
+			Mode_Change_Cnt = 0;
+		}
+	}
+}
+//**************************************************************************************************
+//          《渐变模式处理》(颜色顺序：红绿蓝黄青紫白)
+//			(Led_Enter_Mode:Led_Fade_SevenColor -- Led_Fade_Green_Blue)
+//**************************************************************************************************
+void YQ_RGBLight_Mode_Fade(uint8 Led_Enter_Mode,  uint16 Fade_Speed){
+
+	if(Mode_Change_Cnt == 0){
+		App_Set_Light_Para.light_red	=	0;
+		App_Set_Light_Para.light_green	=	0;
+		App_Set_Light_Para.light_blue	=	0;
+		App_Set_Light_Para.light_white 	= 	0;//w模式下，其他功能没关闭w通道
+
+		if((Led_Enter_Mode == Led_Fade_Green) || (Led_Enter_Mode == Led_Fade_Green_Blue)){
+			Mode_Change_Cnt = 3;
+		}else if(Led_Enter_Mode == Led_Fade_Blue){
+			Mode_Change_Cnt = 5;
+		}else if(Led_Enter_Mode == Led_Fade_Yellow){
+			Mode_Change_Cnt = 7;
+		}else if(Led_Enter_Mode == Led_Fade_Cyan){
+			Mode_Change_Cnt = 9;
+		}else if(Led_Enter_Mode == Led_Fade_Magenta){
+			Mode_Change_Cnt = 11;
+		}else if(Led_Enter_Mode == Led_Fade_White){
+			Mode_Change_Cnt = 13;
+		}
+		else{
+			Mode_Change_Cnt++;
+		}
+	}else if(Mode_Change_Cnt == 1){
+		if(YQ_Tick_Cnt > Fade_Speed){
+			YQ_Tick_Cnt = 0;
+			if(App_Set_Light_Para.light_red < LIGHT_MXA){
+				App_Set_Light_Para.light_red++;
+			}else{
+				Mode_Change_Cnt++;
+			}
+		}
+	}else if(Mode_Change_Cnt == 2){
+		if(YQ_Tick_Cnt > Fade_Speed){
+			YQ_Tick_Cnt = 0;
+			if(App_Set_Light_Para.light_red>0){
+				App_Set_Light_Para.light_red--;
+			}else{
+				if(Led_Enter_Mode == Led_Fade_Red){
+					Mode_Change_Cnt = 0;
+				}else if(Led_Enter_Mode == Led_Fade_Red_Blue){
+					Mode_Change_Cnt = 5;
+				}else{
+					Mode_Change_Cnt++;
+				}
+			}
+		}
+	}else if(Mode_Change_Cnt == 3){
+		if(YQ_Tick_Cnt > Fade_Speed){
+			YQ_Tick_Cnt = 0;
+			if(App_Set_Light_Para.light_green < LIGHT_MXA){
+				App_Set_Light_Para.light_green++;
+			}
+			else{
+				Mode_Change_Cnt++;
+			}
+		}
+	}else if(Mode_Change_Cnt == 4){
+		if(YQ_Tick_Cnt > Fade_Speed){
+			YQ_Tick_Cnt = 0;
+			if(App_Set_Light_Para.light_green > 0){
+				App_Set_Light_Para.light_green--;
+			}else{
+				if((Led_Enter_Mode == Led_Fade_Green) || (Led_Enter_Mode == Led_Fade_Red_Green)){
+					Mode_Change_Cnt = 0;
+				}
+				else{
+					Mode_Change_Cnt++;
+				}
+			}
+		}
+	}else if(Mode_Change_Cnt == 5){
+		if(YQ_Tick_Cnt > Fade_Speed){
+			YQ_Tick_Cnt = 0;
+			if(App_Set_Light_Para.light_blue < LIGHT_MXA){
+				App_Set_Light_Para.light_blue++;
+			}else{
+				Mode_Change_Cnt++;
+			}
+		}
+	}else if(Mode_Change_Cnt == 6){
+		if(YQ_Tick_Cnt > Fade_Speed){
+			YQ_Tick_Cnt = 0;
+			if(App_Set_Light_Para.light_blue > 0){
+				App_Set_Light_Para.light_blue--;
+			}else{
+				if((Led_Enter_Mode == Led_Fade_Blue) ||(Led_Enter_Mode == Led_Fade_Red_Blue)){
+					Mode_Change_Cnt = 0;
+				}
+				else{
+					Mode_Change_Cnt++;
+				}
+			}
+		}
+	}else if(Mode_Change_Cnt == 7){
+		if(YQ_Tick_Cnt > Fade_Speed){
+			YQ_Tick_Cnt = 0;
+			if(App_Set_Light_Para.light_red < LIGHT_MXA){
+				App_Set_Light_Para.light_red++;
+				App_Set_Light_Para.light_green++;
+			}else{
+				Mode_Change_Cnt++;
+			}
+		}
+	}else if(Mode_Change_Cnt == 8){
+		if(YQ_Tick_Cnt > Fade_Speed){
+			YQ_Tick_Cnt = 0;
+			if(App_Set_Light_Para.light_red > 0){
+				App_Set_Light_Para.light_red--;
+				App_Set_Light_Para.light_green--;
+			}else{
+				if(Led_Enter_Mode == Led_Fade_Yellow){
+					Mode_Change_Cnt = 0;
+				}
+				else{
+					Mode_Change_Cnt++;
+				}
+			}
+		}
+	}else if(Mode_Change_Cnt == 9){
+		if(YQ_Tick_Cnt > Fade_Speed){
+			YQ_Tick_Cnt = 0;
+			if(App_Set_Light_Para.light_green < LIGHT_MXA){
+				App_Set_Light_Para.light_blue++;
+				App_Set_Light_Para.light_green++;
+			}else{
+				Mode_Change_Cnt++;
+			}
+		}
+	}else if(Mode_Change_Cnt == 10){
+		if(YQ_Tick_Cnt > Fade_Speed){
+			YQ_Tick_Cnt = 0;
+			if(App_Set_Light_Para.light_green > 0){
+				App_Set_Light_Para.light_blue--;
+				App_Set_Light_Para.light_green--;
+			}else{
+				if(Led_Enter_Mode == Led_Fade_Cyan){
+					Mode_Change_Cnt = 0;
+				}
+				else{
+					Mode_Change_Cnt++;
+				}
+			}
+		}
+	}else if(Mode_Change_Cnt == 11){
+		if(YQ_Tick_Cnt > Fade_Speed){
+			YQ_Tick_Cnt = 0;
+			if(App_Set_Light_Para.light_red < LIGHT_MXA){
+				App_Set_Light_Para.light_red++;
+				App_Set_Light_Para.light_blue++;
+			}else{
+				Mode_Change_Cnt++;
+			}
+		}
+	}else if(Mode_Change_Cnt == 12){
+		if(YQ_Tick_Cnt > Fade_Speed){
+			YQ_Tick_Cnt = 0;
+			if(App_Set_Light_Para.light_red > 0){
+				App_Set_Light_Para.light_red--;
+				App_Set_Light_Para.light_blue--;
+			}else{
+				if(Led_Enter_Mode == Led_Fade_Magenta){
+					Mode_Change_Cnt = 0;
+				}
+				else{
+					Mode_Change_Cnt++;
+				}
+			}
+		}
+	}else if(Mode_Change_Cnt == 13){
+		if(YQ_Tick_Cnt > Fade_Speed){
+			YQ_Tick_Cnt = 0;
+			if(App_Set_Light_Para.light_red < LIGHT_MXA){
+				App_Set_Light_Para.light_red++;
+				App_Set_Light_Para.light_green++;
+				App_Set_Light_Para.light_blue++;
+			}else{
+				Mode_Change_Cnt++;
+			}
+		}
+	}else if(Mode_Change_Cnt == 14){
+		if(YQ_Tick_Cnt > Fade_Speed){
+			YQ_Tick_Cnt = 0;
+			if(App_Set_Light_Para.light_red > 0){
+				App_Set_Light_Para.light_red--;
+				App_Set_Light_Para.light_green--;
+				App_Set_Light_Para.light_blue--;
+			}else{
+				Mode_Change_Cnt=0;
+			}
+		}
+	}
+}
+
+//**************************************************************************************************
+//          《多色渐变模式处理》
+//**************************************************************************************************
+void  YQ_RGBLight_Mode_Colors_Fade(void){
+	if(Mode_Change_Cnt == 0){
+		App_Set_Light_Para.light_red 	= LIGHT_MXA;
+		App_Set_Light_Para.light_green 	= 0;
+		App_Set_Light_Para.light_blue 	= 0;
+		App_Set_Light_Para.light_white 	= 0;//w模式下，其他功能没关闭w通道
+		Mode_Change_Cnt++;
+	}else if(Mode_Change_Cnt == 1){
+		if(YQ_Tick_Cnt > App_Set_Light_Para.light_speed){
+			YQ_Tick_Cnt = 0;
+			if(App_Set_Light_Para.light_green < LIGHT_MXA){
+				App_Set_Light_Para.light_green++;
+			}else{
+				Mode_Change_Cnt++;
+			}
+		}
+	}else if(Mode_Change_Cnt == 2){
+		if(YQ_Tick_Cnt > App_Set_Light_Para.light_speed){
+			YQ_Tick_Cnt = 0;
+			if(App_Set_Light_Para.light_red > 0){
+				App_Set_Light_Para.light_red--;
+			}else{
+				Mode_Change_Cnt++;
+			}
+		}
+	}else if(Mode_Change_Cnt == 3){
+		if(YQ_Tick_Cnt > App_Set_Light_Para.light_speed){
+			YQ_Tick_Cnt = 0;
+			if(App_Set_Light_Para.light_blue < LIGHT_MXA){
+				App_Set_Light_Para.light_blue++;
+			}else{
+				Mode_Change_Cnt++;
+			}
+		}
+	}else if(Mode_Change_Cnt == 4){
+		if(YQ_Tick_Cnt > App_Set_Light_Para.light_speed){
+			YQ_Tick_Cnt = 0;
+			if(App_Set_Light_Para.light_green > 0){
+				App_Set_Light_Para.light_green--;
+			}else{
+				Mode_Change_Cnt++;
+			}
+		}
+	}else if(Mode_Change_Cnt == 5){
+		if(YQ_Tick_Cnt > App_Set_Light_Para.light_speed){
+			YQ_Tick_Cnt = 0;
+			if(App_Set_Light_Para.light_red < LIGHT_MXA){
+				App_Set_Light_Para.light_red++;
+			}else{
+				Mode_Change_Cnt++;
+			}
+		}
+	}else if(Mode_Change_Cnt == 6){
+		 if(YQ_Tick_Cnt > App_Set_Light_Para.light_speed){
+			 YQ_Tick_Cnt = 0;
+			 if(App_Set_Light_Para.light_green < LIGHT_MXA){
+				 App_Set_Light_Para.light_green++;
+			 }else{
+				 Mode_Change_Cnt++;
+			 }
+		}
+	}else if(Mode_Change_Cnt == 7){
+		if(YQ_Tick_Cnt > App_Set_Light_Para.light_speed){
+			YQ_Tick_Cnt = 0;
+		   if(App_Set_Light_Para.light_green > 0){
+			   App_Set_Light_Para.light_green--;
+			   App_Set_Light_Para.light_blue--;
+		   }else{
+			   Mode_Change_Cnt=0;
+		   }
+		}
+	}else {
+		Mode_Change_Cnt=0;
+	}
+}
+//**************************************************************************************************
+//						《轮询处理模式切换，颜色变化》
+//**************************************************************************************************
+void YQ_RGBLight_Deal_Process(void){
+
+//	if(App_Set_Light_Para.light_mode == led_mode_manual){
+//		;
+//	}
+//	else if((App_Set_Light_Para.light_mode >= Led_Fade_SevenColor) && (App_Set_Light_Para.light_mode <= Led_Fade_Green_Blue)){//所有渐变模式
+//		YQ_RGBLight_Mode_Fade(App_Set_Light_Para.light_mode, App_Set_Light_Para.light_speed);
+//	}
+//	else if(App_Set_Light_Para.light_mode == Led_Flash_SevenColor){//7色频闪
+//		YQ_RGBLight_Mode_Flash(7, YQ_RGBLight_Buffer[11], App_Set_Light_Para.light_speed);
+//	}
+//	else if(App_Set_Light_Para.light_mode == Led_Flash_ThreeColor){//3色频闪
+//		YQ_RGBLight_Mode_Flash(3, YQ_RGBLight_Buffer[11], App_Set_Light_Para.light_speed);
+//	}
+//	else
+	if((App_Set_Light_Para.light_mode >= Led_Flash_Red) && (App_Set_Light_Para.light_mode <= Led_Flash_White)){//7种单色频闪
+		YQ_RGBLight_Mode_Flash(1, YQ_RGBLight_Buffer[App_Set_Light_Para.light_mode - Led_Flash_Red], App_Set_Light_Para.light_speed);
+	}
+//	else if(App_Set_Light_Para.light_mode == Led_Jump_SevenColor){//7色跳变
+//		YQ_RGBLight_Mode_Jump(7, YQ_RGBLight_Buffer[11], App_Set_Light_Para.light_speed);
+//	}
+//	else if(App_Set_Light_Para.light_mode == Led_Jump_ThreeColor){//3色跳变
+//		YQ_RGBLight_Mode_Jump(3, YQ_RGBLight_Buffer[11], App_Set_Light_Para.light_speed);
+//	}
+//	else if(App_Set_Light_Para.light_mode == Led_Jump_AllStaticColor){//16色跳变
+//		YQ_RGBLight_Mode_Jump(16, YQ_RGBLight_Jump_Buffer, App_Set_Light_Para.light_speed);
+//	}
+	else if(App_Set_Light_Para.light_mode == Led_Breath_Colors_Seting){//自定义多彩呼吸
+		YQ_RGBLight_Mode_Seting_Breath(YQ_RGBLight_Set_Breath_Num, App_Set_Light_Para.light_speed);
+	}
+	else if(App_Set_Light_Para.light_mode == Led_Fade_Color_To_Color){//多彩渐变
+		YQ_RGBLight_Mode_Colors_Fade();
+	}
+	else if(App_Set_Light_Para.light_mode == Led_Jump_Seting){//自定义多彩跳变
+		YQ_RGBLight_Mode_Jump(YQ_RGBLight_Set_Color_Num, YQ_RGBLight_Buffer[12], App_Set_Light_Para.light_speed);
+	}
+	else if(App_Set_Light_Para.light_mode == led_mode_off){
+		LED_OFF();
+	}
+}
+//**************************************************************************************************
+//								《定时开关灯处理》
+//*************************************************************************************************
+//void YQ_RGBLight_Timer_Turn_OnOff_Deal(YQ_RGBLight_Alarm *Turn_OnOff_State){
+//	if(Turn_OnOff_State->Timer_Turn_OnOff_Light == Disable){//关灯
+//		App_Set_Light_Para.light_state 	= 	Light_State_Off;
+//		App_Set_Light_Para.light_mode 	= 	led_mode_off;
+////		uart_printf(0,"poweroff_led:\n");
+//	}else{//开灯
+//		App_Set_Light_Para.light_state 	= 	Light_State_On;
+//		i2c_sim_burst_read(MY_I2C_DEV_ID, EEPROM_LIGHTMODE_ADD, eeprom_light_RGBcolor, 6);
+////		uart_printf(0, "eeprom_light_data:\n");
+////		uart_printf(6, eeprom_light_RGBcolor);
+//		App_Set_Light_Para.light_mode 	= 	eeprom_light_RGBcolor[0];
+//		App_Set_Light_Para.light_red 	= 	eeprom_light_RGBcolor[1];
+//		App_Set_Light_Para.light_green 	= 	eeprom_light_RGBcolor[2];
+//		App_Set_Light_Para.light_blue 	= 	eeprom_light_RGBcolor[3];
+//		App_Set_Light_Para.light_white 	= 	eeprom_light_RGBcolor[4];
+//		Mode_Change_Cnt 				= 	0;
+//		YQ_RGBLight_Breath_Change_Cnt	=	0;//每次从第一个颜色起变化
+//		YQ_Tick_Cnt						=   App_Set_Light_Para.light_speed;
+//		YQ_Fade_Time					=   App_Set_Light_Para.light_speed;
+//	}
+//}
+

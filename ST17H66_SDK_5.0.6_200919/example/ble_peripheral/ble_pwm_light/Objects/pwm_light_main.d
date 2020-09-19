@@ -1,0 +1,11 @@
+.\objects\pwm_light_main.o: source\pwm_light_Main.c
+.\objects\pwm_light_main.o: ..\..\..\components\osal\include\OSAL.h
+.\objects\pwm_light_main.o: ..\..\..\components\osal\include\comdef.h
+.\objects\pwm_light_main.o: ..\..\..\components\inc\types.h
+.\objects\pwm_light_main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\pwm_light_main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\pwm_light_main.o: ..\..\..\components\osal\include\OSAL_Memory.h
+.\objects\pwm_light_main.o: ..\..\..\components\osal\include\OSAL_Timers.h
+.\objects\pwm_light_main.o: ..\..\..\components\osal\include\OSAL_Tasks.h
+.\objects\pwm_light_main.o: ..\..\..\components\osal\include\OSAL_PwrMgr.h
+.\objects\pwm_light_main.o: ..\..\..\components\osal\include\osal_snv.h
