@@ -61,7 +61,7 @@ http://www2.keil.com/mdk5  或者 https://www.keil.com/download/product/
 ### `2.2 安装MDK芯片支持包`
 安装完MDK后，需要安装芯片对应的ARM支持包（pack）。  
 - 方式一 登录官网：http://www.keil.com/dd2/pack/ 下载 `keil.STM32F1xx_DFP.2.2.0.pack`后安装，双击运行，默认路径点击next>>等待安装完成。
-- 方式二 在线安装：打开软件，在导航栏打开pack安装姐买你，然后选择OK选项。
+- 方式二 在线安装：打开软件，在导航栏打开pack安装管理界面，然后选择OK选项。
 
 ![](doc/image/development_install/mdk_pack02.png)
 ![](doc/image/development_install/mdk_pack03.png)
