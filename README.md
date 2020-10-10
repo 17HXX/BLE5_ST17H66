@@ -13,11 +13,11 @@
 1.  `编译工具`：`MDK` 即RealView MDK 或MDK-ARM（Microcontroller Development kit），是 ARM 公司收购Keil公司以后，基于uVision界面推出的针对ARM7、ARM9、Cortex-M0、Cortex-M1、Cortex-M2、Cortex-M3、Cortex-R4等ARM处理器的嵌入式软件开发工具。MDK-ARM 集成了业内最领先的技术，包括 uVision4 集成开发环境与 RealView 编译器RVCT。支持 ARM7、ARM9 和最新的Cortex-M3/M1/M0 核处理器，自动配置启动代码，集成 Flash 烧写模块，强大的 Simulation 设备模拟，性能分析等功能，与 ARM 之前的工具包 ADS 等相比，RealView 编译器的最新版本可将性能改善超过 20%。  
 Keil公司开发的ARM开发工具MDK，是用来开发基于ARM核的系列微控制器的嵌入式应用程序。它适合不同层次的开发者使用，包括专业的应用程序开发工程师和嵌入式软件开发的入门者。MDK包含了工业标准的Keil C编译器、宏汇编器、调试器、实时内核等组件，支持所有基于ARM的设备，能帮助工程师按照计划完成项目。
 
-2. `在线下载工具`：`Lekit.exe`在`<\BLE5_ST17H66\doc\development_docs\1，ST17H66开发套件入门及调试>`目录，用于开发调试时下载程序到目标板，查看打印信息，[`2，ST17H66开发板烧写方法说明V1.1`](\BLE5_ST17H66\doc\development_docs\1，ST17H66开发套件入门及调试\2，ST17H66开发板烧写方法说明V1.1.pdf) 和 [`3，ST17H66在线下载烧录器烧写方法说明V1.1`](\BLE5_ST17H66\doc\development_docs\1，ST17H66开发套件入门及调试\3，ST17H66在线下载烧录器烧写方法说明V1.1.pdf)。
+2. `在线下载工具`：[Lekit.exe](./doc/development_docs/1，ST17H66开发套件入门及调试) ，用于开发调试时下载程序到目标板，查看打印信息，[2，ST17H66开发板烧写方法说明V1.1](./doc/development_docs/1，ST17H66开发套件入门及调试) 和 [3，ST17H66在线下载烧录器烧写方法说明V1.1](./doc/development_docs/1，ST17H66开发套件入门及调试)。
   
-3. `离线烧录工具`：`LeWrite.exe`  在`<\BLE5_ST17H66\doc\development_docs\4，ST17H66烧录>`目录，配合离线烧录器用于量产烧录，[`1，ST17H66离线烧录-厂房烧录操作说明V1.0`](\BLE5_ST17H66\doc\development_docs\4，ST17H66烧录\1，ST17H66离线烧录-厂房烧录操作说明V1.0.pdf)。
+3. `离线烧录工具`：[LeWrite.exe](./doc/development_docs/4，ST17H66烧录) ，配合离线烧录器用于量产烧录，[1，ST17H66离线烧录-厂房烧录操作说明V1.0](./doc/development_docs/4，ST17H66烧录)。
 
-4. `测试工具`：安卓用户搜索安装 `nRF Connect`，安装包apk文件在目录`<\BLE5_ST17H66\doc\tools\nRF Connect for Mobile_v4.24.3_apkpure.com.apk>`，IOS用户在App Store搜索安装 `Lightblue`，测试工具均为第三方开发，测试结果客观公正。
+4. `测试工具`：安卓用户搜索安装 `nRF Connect`，[安装包apk文件目录](./doc/tools)，IOS用户在App Store搜索安装 `Lightblue`，测试工具均为第三方开发，测试结果客观公正。
 
 
 ### `2.1 MDK安装`
@@ -74,9 +74,11 @@ http://www2.keil.com/mdk5  或者 https://www.keil.com/download/product/
 
 ## `3 文档介绍`
 
-1. [ST17H66 Soc数据手册](\BLE5_ST17H66\doc\development_docs\3，ST17H66参考资料\1，ST17H66B2_BLE_SoC_Datasheet_v1.1.1.pdf)
-2. [ST17H66 SDK简介](\BLE5_ST17H66\doc\development_docs\3，ST17H66参考资料\2，ST17H66_slave_SDK开发流程.pdf)
-3. [ST17H66 开发常见问题](\BLE5_ST17H66\doc\development_docs\3，ST17H66参考资料\3，ST17H66开发常见问题.md)
+文档路径为<\BLE5_ST17H66\doc\development_docs>
+
+1. [ST17H66 Soc数据手册](./doc/development_docs/3，ST17H66参考资料)
+2. [ST17H66 SDK简介](./doc/development_docs/3，ST17H66参考资料)
+3. [ST17H66 开发常见问题](./doc/development_docs/3，ST17H66参考资料/3，ST17H66开发常见问题.md)
    
 ## `4 工程编译`
 
