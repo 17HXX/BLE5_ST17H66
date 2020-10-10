@@ -1,0 +1,9 @@
+﻿目标文件名：simpleBlePeripheral.hexf
+公司：Lenze
+项目：iSearching
+IC型号：17H66
+设备名：iTAG
+CRC24：XXXXXX （这个是步骤二中计算得出的）
+时间：170416
+备注：
+
