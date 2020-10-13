@@ -22,7 +22,7 @@
 #include "pwrmgr.h"
 #include "error.h"
 #include "jump_function.h"
-#define UART_TX_BUFFER_SIZE   256
+
 
 typedef struct _uart_Context{
     bool          enable;

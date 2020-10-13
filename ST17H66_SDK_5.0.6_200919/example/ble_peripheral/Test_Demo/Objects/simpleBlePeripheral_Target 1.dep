@@ -1,0 +1,1212 @@
+Dependencies for Project 'simpleBlePeripheral', Target 'Target 1': (DO NOT MODIFY !)
+F (.\main.c)(0x5F51A4CF)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\components\driver\timer\timer.h)(0x5F4CE424)
+I (..\..\..\misc\jump_function.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll_def.h)(0x5F4E0E43)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\ble\controller\ll_buf.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll_sleep.h)(0x5F4CE424)
+I (..\..\..\components\osal\include\OSAL_PwrMgr.h)(0x5F4CC36A)
+I (..\..\..\components\ble\controller\ll_common.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll.h)(0x5F4F1757)
+I (..\..\..\components\ble\include\hci.h)(0x5F4F1758)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\ble\include\l2cap.h)(0x5F4F1757)
+I (..\..\..\components\driver\pwrmgr\pwrmgr.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\rf_phy_driver.h)(0x5F4F1757)
+I (..\..\..\components\ble\controller\ll_hw_drv.h)(0x5F4CE424)
+I (..\..\..\components\driver\flash\flash.h)(0x5F4F1758)
+I (..\..\..\components\inc\version.h)(0x5F4DA32E)
+F (..\..\..\components\driver\uart\uart.c)(0x5F4F370B)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\uart.o --omf_browse .\objects\uart.crf --depend .\objects\uart.d)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE42DE)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\driver\pwrmgr\pwrmgr.h)(0x5F4CE424)
+F (..\..\..\components\driver\clock\clock.c)(0x5F4CE424)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\clock.o --omf_browse .\objects\clock.crf --depend .\objects\clock.d)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\inc\global_config.h)(0x5F4F1758)
+F (..\..\..\components\driver\gpio\gpio.c)(0x5F59D243)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\gpio.o --omf_browse .\objects\gpio.crf --depend .\objects\gpio.d)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE42DE)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\driver\pwrmgr\pwrmgr.h)(0x5F4CE424)
+I (..\..\..\misc\jump_function.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll_def.h)(0x5F4E0E43)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\ble\controller\ll_buf.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll_sleep.h)(0x5F4CE424)
+I (..\..\..\components\osal\include\OSAL_PwrMgr.h)(0x5F4CC36A)
+I (..\..\..\components\ble\controller\ll_common.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll.h)(0x5F4F1757)
+I (..\..\..\components\driver\timer\timer.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\hci.h)(0x5F4F1758)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\ble\include\l2cap.h)(0x5F4F1757)
+F (..\..\..\components\driver\timer\timer.c)(0x5F4CE424)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\timer.o --omf_browse .\objects\timer.crf --depend .\objects\timer.d)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\driver\timer\timer.h)(0x5F4CE424)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\components\driver\pwrmgr\pwrmgr.h)(0x5F4CE424)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\misc\jump_function.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll_def.h)(0x5F4E0E43)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\ble\controller\ll_buf.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll_sleep.h)(0x5F4CE424)
+I (..\..\..\components\osal\include\OSAL_PwrMgr.h)(0x5F4CC36A)
+I (..\..\..\components\ble\controller\ll_common.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll.h)(0x5F4F1757)
+I (..\..\..\components\ble\include\hci.h)(0x5F4F1758)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\ble\include\l2cap.h)(0x5F4F1757)
+F (..\..\..\components\driver\pwrmgr\pwrmgr.c)(0x5F4CE424)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\pwrmgr.o --omf_browse .\objects\pwrmgr.crf --depend .\objects\pwrmgr.d)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\ble\controller\ll_sleep.h)(0x5F4CE424)
+I (..\..\..\components\osal\include\OSAL_PwrMgr.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\ble\controller\ll_def.h)(0x5F4E0E43)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\ble\controller\ll_buf.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll_common.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll.h)(0x5F4F1757)
+I (..\..\..\components\driver\timer\timer.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE42DE)
+I (..\..\..\components\driver\pwrmgr\pwrmgr.h)(0x5F4CE424)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\misc\jump_function.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\hci.h)(0x5F4F1758)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\ble\include\l2cap.h)(0x5F4F1757)
+F (..\..\..\components\driver\log\my_printf.c)(0x5F4CC36A)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\my_printf.o --omf_browse .\objects\my_printf.crf --depend .\objects\my_printf.d)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x56FE42E0)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE42DE)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+F (..\..\..\components\libraries\cliface\cliface.c)(0x5F4CC36A)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\cliface.o --omf_browse .\objects\cliface.crf --depend .\objects\cliface.d)
+I (..\..\..\components\libraries\cliface\cliface.h)(0x5F4CC36A)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE42DE)
+F (..\..\..\components\driver\key\key.c)(0x5F4CE424)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\key.o --omf_browse .\objects\key.crf --depend .\objects\key.d)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\driver\key\key.h)(0x5F4CE424)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\driver\pwrmgr\pwrmgr.h)(0x5F4CE424)
+F (..\..\..\components\driver\pwm\pwm.c)(0x5F4F1757)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\pwm.o --omf_browse .\objects\pwm.crf --depend .\objects\pwm.d)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\components\driver\pwm\pwm.h)(0x5F4F1757)
+I (..\..\..\components\driver\pwrmgr\pwrmgr.h)(0x5F4CE424)
+F (.\source\led_light.c)(0x5F4CE424)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\led_light.o --omf_browse .\objects\led_light.crf --depend .\objects\led_light.d)
+I (source\led_light.h)(0x5F4CE424)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\driver\pwm\pwm.h)(0x5F4F1757)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+F (..\..\..\components\osal\snv\osal_snv.c)(0x5F522B8B)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\osal_snv.o --omf_browse .\objects\osal_snv.crf --depend .\objects\osal_snv.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (..\..\..\components\osal\include\osal.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\driver\flash\flash.h)(0x5F4F1758)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\inc\version.h)(0x5F4DA32E)
+I (..\..\..\components\osal\include\osal_snv.h)(0x5F4CC36A)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+F (..\..\..\components\driver\flash\flash.c)(0x5F4F1758)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\flash.o --omf_browse .\objects\flash.crf --depend .\objects\flash.d)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE42DE)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\driver\flash\flash.h)(0x5F4F1758)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\inc\version.h)(0x5F4DA32E)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\driver\pwrmgr\pwrmgr.h)(0x5F4CE424)
+F (..\..\..\components\libraries\fs\fs.c)(0x5F4F1758)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\fs.o --omf_browse .\objects\fs.crf --depend .\objects\fs.d)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\osal.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\libraries\fs\fs.h)(0x5F4F1758)
+I (..\..\..\components\driver\flash\flash.h)(0x5F4F1758)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\inc\version.h)(0x5F4DA32E)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+F (..\..\..\components\driver\adc\adc.c)(0x5F65BA59)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\adc.o --omf_browse .\objects\adc.crf --depend .\objects\adc.d)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE42DE)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\driver\pwrmgr\pwrmgr.h)(0x5F4CE424)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\components\driver\adc\adc.h)(0x5F65BA68)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\misc\jump_function.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll_def.h)(0x5F4E0E43)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\ble\controller\ll_buf.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll_sleep.h)(0x5F4CE424)
+I (..\..\..\components\osal\include\OSAL_PwrMgr.h)(0x5F4CC36A)
+I (..\..\..\components\ble\controller\ll_common.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll.h)(0x5F4F1757)
+I (..\..\..\components\driver\timer\timer.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\hci.h)(0x5F4F1758)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\ble\include\l2cap.h)(0x5F4F1757)
+F (..\..\..\components\profiles\Roles\central.c)(0x5F4CE424)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\central.o --omf_browse .\objects\central.crf --depend .\objects\central.d)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\osal_cbTimer.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\osal_snv.h)(0x5F4CC36A)
+I (..\..\..\components\ble\hci\hci_tl.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\hci.h)(0x5F4F1758)
+I (..\..\..\components\ble\controller\ll.h)(0x5F4F1757)
+I (..\..\..\components\driver\timer\timer.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll_def.h)(0x5F4E0E43)
+I (..\..\..\components\ble\controller\ll_buf.h)(0x5F4CE424)
+I (..\..\..\components\ble\hci\hci_data.h)(0x5F4CE424)
+I (..\..\..\components\ble\hci\hci_event.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\l2cap.h)(0x5F4F1757)
+I (..\..\..\components\ble\host\linkdb.h)(0x5F4F1757)
+I (..\..\..\components\ble\include\gap.h)(0x5F4F1758)
+I (..\..\..\components\ble\include\sm.h)(0x5F4CE424)
+I (..\..\..\components\profiles\Roles\gapbondmgr.h)(0x5F4CE424)
+I (..\..\..\components\profiles\Roles\central.h)(0x5F4CE424)
+F (..\..\..\components\profiles\Roles\gap.c)(0x5F718BAF)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\gap.o --omf_browse .\objects\gap.crf --depend .\objects\gap.d)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\ble\include\gap.h)(0x5F4F1758)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\ble\include\sm.h)(0x5F4CE424)
+F (..\..\..\components\profiles\Roles\gapbondmgr.c)(0x5F4CE424)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\gapbondmgr.o --omf_browse .\objects\gapbondmgr.crf --depend .\objects\gapbondmgr.d)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\osal_snv.h)(0x5F4CC36A)
+I (..\..\..\components\ble\include\gap.h)(0x5F4F1758)
+I (..\..\..\components\ble\include\sm.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\linkdb.h)(0x5F4F1757)
+I (..\..\..\components\ble\include\gatt.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\att.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\l2cap.h)(0x5F4F1757)
+I (..\..\..\components\ble\include\gatt_uuid.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\hci.h)(0x5F4F1758)
+I (..\..\..\components\ble\controller\ll.h)(0x5F4F1757)
+I (..\..\..\components\driver\timer\timer.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll_def.h)(0x5F4E0E43)
+I (..\..\..\components\ble\controller\ll_buf.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gattservapp.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gapgattserver.h)(0x5F4CE424)
+I (..\..\..\components\profiles\Roles\gapbondmgr.h)(0x5F4CE424)
+F (..\..\..\components\profiles\Roles\gapgattserver.c)(0x5F4CE424)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\gapgattserver.o --omf_browse .\objects\gapgattserver.crf --depend .\objects\gapgattserver.d)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\ble\include\gap.h)(0x5F4F1758)
+I (..\..\..\components\ble\include\sm.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gapgattserver.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\att.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\l2cap.h)(0x5F4F1757)
+I (..\..\..\components\ble\include\gatt.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gatt_uuid.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gattservapp.h)(0x5F4CE424)
+F (..\..\..\components\profiles\Roles\peripheral.c)(0x5F4CE424)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\peripheral.o --omf_browse .\objects\peripheral.crf --depend .\objects\peripheral.d)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\ble\hci\hci_tl.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\hci.h)(0x5F4F1758)
+I (..\..\..\components\ble\controller\ll.h)(0x5F4F1757)
+I (..\..\..\components\driver\timer\timer.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll_def.h)(0x5F4E0E43)
+I (..\..\..\components\ble\controller\ll_buf.h)(0x5F4CE424)
+I (..\..\..\components\ble\hci\hci_data.h)(0x5F4CE424)
+I (..\..\..\components\ble\hci\hci_event.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\l2cap.h)(0x5F4F1757)
+I (..\..\..\components\ble\include\gap.h)(0x5F4F1758)
+I (..\..\..\components\ble\include\sm.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\linkdb.h)(0x5F4F1757)
+I (..\..\..\components\ble\include\att.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gatt.h)(0x5F4CE424)
+I (..\..\..\components\osal\include\osal_snv.h)(0x5F4CC36A)
+I (..\..\..\components\profiles\Roles\peripheral.h)(0x5F4CE424)
+I (..\..\..\components\profiles\Roles\gapbondmgr.h)(0x5F4CE424)
+F (..\..\..\components\profiles\GATT\gattservapp.c)(0x5F4F1758)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\gattservapp.o --omf_browse .\objects\gattservapp.crf --depend .\objects\gattservapp.d)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\ble\host\linkdb.h)(0x5F4F1757)
+I (..\..\..\components\ble\include\gatt.h)(0x5F4CE424)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\ble\include\att.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\l2cap.h)(0x5F4F1757)
+I (..\..\..\components\ble\include\gatt_uuid.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gattservapp.h)(0x5F4CE424)
+F (..\..\..\components\profiles\ota_app\ota_app_service.c)(0x5F60B6E4)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\ota_app_service.o --omf_browse .\objects\ota_app_service.crf --depend .\objects\ota_app_service.d)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE42DE)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\ble\host\linkdb.h)(0x5F4F1757)
+I (..\..\..\components\ble\include\att.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\l2cap.h)(0x5F4F1757)
+I (..\..\..\components\ble\include\gatt.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gatt_uuid.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gatt_profile_uuid.h)(0x5F4CE424)
+I (..\..\..\components\Profiles\Roles\peripheral.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gattservapp.h)(0x5F4CE424)
+I (..\..\..\components\profiles\ota_app\ota_app_service.h)(0x5F4CE424)
+I (..\..\..\components\inc\version.h)(0x5F4DA32E)
+F (.\source\sbpProfile_ota.c)(0x5F5F608F)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\sbpprofile_ota.o --omf_browse .\objects\sbpprofile_ota.crf --depend .\objects\sbpprofile_ota.d)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\ble\host\linkdb.h)(0x5F4F1757)
+I (..\..\..\components\ble\include\att.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\l2cap.h)(0x5F4F1757)
+I (..\..\..\components\ble\include\gatt.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gatt_uuid.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gattservapp.h)(0x5F4CE424)
+I (..\..\..\components\Profiles\Roles\gapbondmgr.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gap.h)(0x5F4F1758)
+I (..\..\..\components\ble\include\sm.h)(0x5F4CE424)
+I (source\sbpProfile_ota.h)(0x5F59EA56)
+I (source\lxl_gpio_all_init.h)(0x5F72D95D)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x56FE42DE)
+I (..\..\..\components\osal\include\OSAL_Tasks.h)(0x5F4F3A6A)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\components\driver\pwrmgr\pwrmgr.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gatt_profile_uuid.h)(0x5F4CE424)
+I (..\..\..\components\Profiles\Roles\peripheral.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gapgattserver.h)(0x5F4CE424)
+I (..\..\..\components\driver\adc\adc.h)(0x5F65BA68)
+I (..\..\..\components\driver\pwm\pwm.h)(0x5F4F1757)
+F (.\source\lxl_gpio_adc_count.c)(0x5F72AEC0)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\lxl_gpio_adc_count.o --omf_browse .\objects\lxl_gpio_adc_count.crf --depend .\objects\lxl_gpio_adc_count.d)
+I (source\lxl_gpio_all_init.h)(0x5F72D95D)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x56FE42DE)
+I (..\..\..\components\osal\include\OSAL_Tasks.h)(0x5F4F3A6A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\driver\pwrmgr\pwrmgr.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\att.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\l2cap.h)(0x5F4F1757)
+I (..\..\..\components\ble\include\gatt.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gatt_uuid.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gatt_profile_uuid.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\linkdb.h)(0x5F4F1757)
+I (..\..\..\components\ble\host\gattservapp.h)(0x5F4CE424)
+I (..\..\..\components\Profiles\Roles\peripheral.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gapgattserver.h)(0x5F4CE424)
+I (..\..\..\components\Profiles\Roles\gapbondmgr.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gap.h)(0x5F4F1758)
+I (..\..\..\components\ble\include\sm.h)(0x5F4CE424)
+I (..\..\..\components\driver\adc\adc.h)(0x5F65BA68)
+I (..\..\..\components\driver\pwm\pwm.h)(0x5F4F1757)
+F (.\source\lxl_gpio_all_init.c)(0x5F72DA6B)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\lxl_gpio_all_init.o --omf_browse .\objects\lxl_gpio_all_init.crf --depend .\objects\lxl_gpio_all_init.d)
+I (source\lxl_gpio_all_init.h)(0x5F72D95D)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x56FE42DE)
+I (..\..\..\components\osal\include\OSAL_Tasks.h)(0x5F4F3A6A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\driver\pwrmgr\pwrmgr.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\att.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\l2cap.h)(0x5F4F1757)
+I (..\..\..\components\ble\include\gatt.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gatt_uuid.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gatt_profile_uuid.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\linkdb.h)(0x5F4F1757)
+I (..\..\..\components\ble\host\gattservapp.h)(0x5F4CE424)
+I (..\..\..\components\Profiles\Roles\peripheral.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gapgattserver.h)(0x5F4CE424)
+I (..\..\..\components\Profiles\Roles\gapbondmgr.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gap.h)(0x5F4F1758)
+I (..\..\..\components\ble\include\sm.h)(0x5F4CE424)
+I (..\..\..\components\driver\adc\adc.h)(0x5F65BA68)
+I (..\..\..\components\driver\pwm\pwm.h)(0x5F4F1757)
+F (.\source\lxl_gpio_lcd_fun.c)(0x5F72DA2C)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\lxl_gpio_lcd_fun.o --omf_browse .\objects\lxl_gpio_lcd_fun.crf --depend .\objects\lxl_gpio_lcd_fun.d)
+I (source\lxl_gpio_all_init.h)(0x5F72D95D)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x56FE42DE)
+I (..\..\..\components\osal\include\OSAL_Tasks.h)(0x5F4F3A6A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\driver\pwrmgr\pwrmgr.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\att.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\l2cap.h)(0x5F4F1757)
+I (..\..\..\components\ble\include\gatt.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gatt_uuid.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gatt_profile_uuid.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\linkdb.h)(0x5F4F1757)
+I (..\..\..\components\ble\host\gattservapp.h)(0x5F4CE424)
+I (..\..\..\components\Profiles\Roles\peripheral.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gapgattserver.h)(0x5F4CE424)
+I (..\..\..\components\Profiles\Roles\gapbondmgr.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gap.h)(0x5F4F1758)
+I (..\..\..\components\ble\include\sm.h)(0x5F4CE424)
+I (..\..\..\components\driver\adc\adc.h)(0x5F65BA68)
+I (..\..\..\components\driver\pwm\pwm.h)(0x5F4F1757)
+F (.\source\lxl_gpio_pwm_count.c)(0x5F703606)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\lxl_gpio_pwm_count.o --omf_browse .\objects\lxl_gpio_pwm_count.crf --depend .\objects\lxl_gpio_pwm_count.d)
+I (.\source\lxl_gpio_all_init.h)(0x5F72D95D)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x56FE42DE)
+I (..\..\..\components\osal\include\OSAL_Tasks.h)(0x5F4F3A6A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\driver\pwrmgr\pwrmgr.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\att.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\l2cap.h)(0x5F4F1757)
+I (..\..\..\components\ble\include\gatt.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gatt_uuid.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gatt_profile_uuid.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\linkdb.h)(0x5F4F1757)
+I (..\..\..\components\ble\host\gattservapp.h)(0x5F4CE424)
+I (..\..\..\components\Profiles\Roles\peripheral.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gapgattserver.h)(0x5F4CE424)
+I (..\..\..\components\Profiles\Roles\gapbondmgr.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gap.h)(0x5F4F1758)
+I (..\..\..\components\ble\include\sm.h)(0x5F4CE424)
+I (..\..\..\components\driver\adc\adc.h)(0x5F65BA68)
+I (..\..\..\components\driver\pwm\pwm.h)(0x5F4F1757)
+F (.\source\lxl_gpio_sensor_func.c)(0x5F72DA18)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\lxl_gpio_sensor_func.o --omf_browse .\objects\lxl_gpio_sensor_func.crf --depend .\objects\lxl_gpio_sensor_func.d)
+I (source\lxl_gpio_all_init.h)(0x5F72D95D)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x56FE42DE)
+I (..\..\..\components\osal\include\OSAL_Tasks.h)(0x5F4F3A6A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\driver\pwrmgr\pwrmgr.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\att.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\l2cap.h)(0x5F4F1757)
+I (..\..\..\components\ble\include\gatt.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gatt_uuid.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gatt_profile_uuid.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\linkdb.h)(0x5F4F1757)
+I (..\..\..\components\ble\host\gattservapp.h)(0x5F4CE424)
+I (..\..\..\components\Profiles\Roles\peripheral.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gapgattserver.h)(0x5F4CE424)
+I (..\..\..\components\Profiles\Roles\gapbondmgr.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gap.h)(0x5F4F1758)
+I (..\..\..\components\ble\include\sm.h)(0x5F4CE424)
+I (..\..\..\components\driver\adc\adc.h)(0x5F65BA68)
+I (..\..\..\components\driver\pwm\pwm.h)(0x5F4F1757)
+F (.\source\lxl_log_uart_func.c)(0x5F4F3B64)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\lxl_log_uart_func.o --omf_browse .\objects\lxl_log_uart_func.crf --depend .\objects\lxl_log_uart_func.d)
+I (source\lxl_gpio_all_init.h)(0x5F72D95D)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x56FE42DE)
+I (..\..\..\components\osal\include\OSAL_Tasks.h)(0x5F4F3A6A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\driver\pwrmgr\pwrmgr.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\att.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\l2cap.h)(0x5F4F1757)
+I (..\..\..\components\ble\include\gatt.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gatt_uuid.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gatt_profile_uuid.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\linkdb.h)(0x5F4F1757)
+I (..\..\..\components\ble\host\gattservapp.h)(0x5F4CE424)
+I (..\..\..\components\Profiles\Roles\peripheral.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gapgattserver.h)(0x5F4CE424)
+I (..\..\..\components\Profiles\Roles\gapbondmgr.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gap.h)(0x5F4F1758)
+I (..\..\..\components\ble\include\sm.h)(0x5F4CE424)
+I (..\..\..\components\driver\adc\adc.h)(0x5F65BA68)
+I (..\..\..\components\driver\pwm\pwm.h)(0x5F4F1757)
+F (.\source\lxl_simple_profile_func.c)(0x5F72DA4E)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\lxl_simple_profile_func.o --omf_browse .\objects\lxl_simple_profile_func.crf --depend .\objects\lxl_simple_profile_func.d)
+I (source\lxl_gpio_all_init.h)(0x5F72D95D)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x56FE42DE)
+I (..\..\..\components\osal\include\OSAL_Tasks.h)(0x5F4F3A6A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\driver\pwrmgr\pwrmgr.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\att.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\l2cap.h)(0x5F4F1757)
+I (..\..\..\components\ble\include\gatt.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gatt_uuid.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gatt_profile_uuid.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\linkdb.h)(0x5F4F1757)
+I (..\..\..\components\ble\host\gattservapp.h)(0x5F4CE424)
+I (..\..\..\components\Profiles\Roles\peripheral.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gapgattserver.h)(0x5F4CE424)
+I (..\..\..\components\Profiles\Roles\gapbondmgr.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gap.h)(0x5F4F1758)
+I (..\..\..\components\ble\include\sm.h)(0x5F4CE424)
+I (..\..\..\components\driver\adc\adc.h)(0x5F65BA68)
+I (..\..\..\components\driver\pwm\pwm.h)(0x5F4F1757)
+F (.\source\lxl_ui_count_func.c)(0x5F72DA53)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\lxl_ui_count_func.o --omf_browse .\objects\lxl_ui_count_func.crf --depend .\objects\lxl_ui_count_func.d)
+I (source\lxl_gpio_all_init.h)(0x5F72D95D)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x56FE42DE)
+I (..\..\..\components\osal\include\OSAL_Tasks.h)(0x5F4F3A6A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\driver\pwrmgr\pwrmgr.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\att.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\l2cap.h)(0x5F4F1757)
+I (..\..\..\components\ble\include\gatt.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gatt_uuid.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gatt_profile_uuid.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\linkdb.h)(0x5F4F1757)
+I (..\..\..\components\ble\host\gattservapp.h)(0x5F4CE424)
+I (..\..\..\components\Profiles\Roles\peripheral.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gapgattserver.h)(0x5F4CE424)
+I (..\..\..\components\Profiles\Roles\gapbondmgr.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gap.h)(0x5F4F1758)
+I (..\..\..\components\ble\include\sm.h)(0x5F4CE424)
+I (..\..\..\components\driver\adc\adc.h)(0x5F65BA68)
+I (..\..\..\components\driver\pwm\pwm.h)(0x5F4F1757)
+F (..\..\..\misc\jump_table.c)(0x5F4CE424)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\jump_table.o --omf_browse .\objects\jump_table.crf --depend .\objects\jump_table.d)
+I (..\..\..\misc\jump_function.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\ble\controller\ll_def.h)(0x5F4E0E43)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\ble\controller\ll_buf.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll_sleep.h)(0x5F4CE424)
+I (..\..\..\components\osal\include\OSAL_PwrMgr.h)(0x5F4CC36A)
+I (..\..\..\components\ble\controller\ll_common.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll.h)(0x5F4F1757)
+I (..\..\..\components\driver\timer\timer.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\hci.h)(0x5F4F1758)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\ble\include\l2cap.h)(0x5F4F1757)
+I (..\..\..\components\inc\global_config.h)(0x5F4F1758)
+I (..\..\..\components\osal\include\OSAL_Tasks.h)(0x5F4F3A6A)
+I (..\..\..\components\ble\controller\rf_phy_driver.h)(0x5F4F1757)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll_hw_drv.h)(0x5F4CE424)
+I (..\..\..\components\driver\pwrmgr\pwrmgr.h)(0x5F4CE424)
+F (..\..\..\lib\rf.lib)(0x5F4CC36A)()
+F (..\..\..\lib\ble_host.lib)(0x5F4CC36A)()
+F (.\source\OSAL_SimpleBLEPeripheral.c)(0x5F65BD31)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\osal_simplebleperipheral.o --omf_browse .\objects\osal_simplebleperipheral.crf --depend .\objects\osal_simplebleperipheral.d)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Tasks.h)(0x5F4F3A6A)
+I (source\lxl_gpio_all_init.h)(0x5F72D95D)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x56FE42DE)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\driver\pwrmgr\pwrmgr.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\att.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\l2cap.h)(0x5F4F1757)
+I (..\..\..\components\ble\include\gatt.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gatt_uuid.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gatt_profile_uuid.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\linkdb.h)(0x5F4F1757)
+I (..\..\..\components\ble\host\gattservapp.h)(0x5F4CE424)
+I (..\..\..\components\Profiles\Roles\peripheral.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gapgattserver.h)(0x5F4CE424)
+I (..\..\..\components\Profiles\Roles\gapbondmgr.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gap.h)(0x5F4F1758)
+I (..\..\..\components\ble\include\sm.h)(0x5F4CE424)
+I (..\..\..\components\driver\adc\adc.h)(0x5F65BA68)
+I (..\..\..\components\driver\pwm\pwm.h)(0x5F4F1757)
+I (..\..\..\components\ble\controller\ll.h)(0x5F4F1757)
+I (..\..\..\components\driver\timer\timer.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll_def.h)(0x5F4E0E43)
+I (..\..\..\components\ble\controller\ll_buf.h)(0x5F4CE424)
+I (..\..\..\components\ble\hci\hci_tl.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\hci.h)(0x5F4F1758)
+I (..\..\..\components\ble\hci\hci_data.h)(0x5F4CE424)
+I (..\..\..\components\ble\hci\hci_event.h)(0x5F4CE424)
+I (..\..\..\components\osal\include\osal_cbTimer.h)(0x5F4CC36A)
+I (source\simpleBLEPeripheral.h)(0x5F4CE424)
+I (source\halPeripheral.h)(0x5F4CE424)
+I (..\..\..\components\driver\key\key.h)(0x5F4CE424)
+F (.\source\simpleBLEPeripheral.c)(0x5F72A529)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\simplebleperipheral.o --omf_browse .\objects\simplebleperipheral.crf --depend .\objects\simplebleperipheral.d)
+I (..\..\..\components\ble\include\bcomdef.h)(0x5F4CE424)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\ble\controller\rf_phy_driver.h)(0x5F4F1757)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll_hw_drv.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll_def.h)(0x5F4E0E43)
+I (..\..\..\components\ble\controller\ll_buf.h)(0x5F4CE424)
+I (..\..\..\misc\jump_function.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll_sleep.h)(0x5F4CE424)
+I (..\..\..\components\osal\include\OSAL_PwrMgr.h)(0x5F4CC36A)
+I (..\..\..\components\ble\controller\ll_common.h)(0x5F4CE424)
+I (..\..\..\components\ble\controller\ll.h)(0x5F4F1757)
+I (..\..\..\components\driver\timer\timer.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\hci.h)(0x5F4F1758)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\ble\include\l2cap.h)(0x5F4F1757)
+I (..\..\..\components\inc\global_config.h)(0x5F4F1758)
+I (..\..\..\components\ble\include\gatt.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\att.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gapgattserver.h)(0x5F4CE424)
+I (..\..\..\components\ble\host\gattservapp.h)(0x5F4CE424)
+I (source\sbpProfile_ota.h)(0x5F59EA56)
+I (..\..\..\components\Profiles\ota_app\ota_app_service.h)(0x5F4CE424)
+I (..\..\..\components\inc\version.h)(0x5F4DA32E)
+I (..\..\..\components\Profiles\Roles\peripheral.h)(0x5F4CE424)
+I (..\..\..\components\Profiles\Roles\gapbondmgr.h)(0x5F4CE424)
+I (..\..\..\components\ble\include\gap.h)(0x5F4F1758)
+I (..\..\..\components\ble\include\sm.h)(0x5F4CE424)
+I (source\simpleBLEPeripheral.h)(0x5F4CE424)
+I (..\..\..\components\ble\hci\hci_tl.h)(0x5F4CE424)
+I (..\..\..\components\ble\hci\hci_data.h)(0x5F4CE424)
+I (..\..\..\components\ble\hci\hci_event.h)(0x5F4CE424)
+I (source\led_light.h)(0x5F4CE424)
+F (.\source\SimpleBLEPeripheral_Main.c)(0x5F4CE424)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\simplebleperipheral_main.o --omf_browse .\objects\simplebleperipheral_main.crf --depend .\objects\simplebleperipheral_main.d)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Tasks.h)(0x5F4F3A6A)
+I (..\..\..\components\osal\include\OSAL_PwrMgr.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\osal_snv.h)(0x5F4CC36A)
+F (.\source\halPeripheral.c)(0x5F4CE424)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\halperipheral.o --omf_browse .\objects\halperipheral.crf --depend .\objects\halperipheral.d)
+I (..\..\..\misc\rom_sym_def.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\comdef.h)(0x5F4CC36A)
+I (..\..\..\components\inc\types.h)(0x5F4CE424)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x56FE42DC)
+I (..\..\..\components\osal\include\OSAL_Memory.h)(0x5F4CC36A)
+I (..\..\..\components\osal\include\OSAL_Timers.h)(0x5F4CC36A)
+I (source\halPeripheral.h)(0x5F4CE424)
+I (..\..\..\components\driver\key\key.h)(0x5F4CE424)
+I (..\..\..\components\driver\gpio\gpio.h)(0x5F7033D6)
+I (..\..\..\components\inc\bus_dev.h)(0x5F4F15C4)
+I (..\..\..\components\inc\mcu.h)(0x5F4CE424)
+I (..\..\..\components\arch\cm0\core_bumbee_m0.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)
+I (..\..\..\components\inc\mcu_phy_bumbee.h)(0x5F4CE424)
+I (..\..\..\components\inc\error.h)(0x5F4F1758)
+I (..\..\..\components\driver\log\log.h)(0x5F718C1A)
+I (..\..\..\components\driver\uart\uart.h)(0x5F65BB89)
+I (..\..\..\components\driver\clock\clock.h)(0x5F4CE424)
+I (..\..\..\components\driver\pwrmgr\pwrmgr.h)(0x5F4CE424)
+I (..\..\..\components\inc\global_config.h)(0x5F4F1758)
+I (..\..\..\components\libraries\cliface\cliface.h)(0x5F4CC36A)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x56FE42DE)
+I (source\led_light.h)(0x5F4CE424)
+F (RTE\Device\ARMCM0\startup_ARMCM0.s)(0x5F4CC36A)(--cpu Cortex-M0 --li -g --apcs=interwork --pd "__MICROLIB SETA 1"-I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include--pd "__UVISION_VERSION SETA 520" --pd "_RTE_ SETA 1" --pd "ARMCM0 SETA 1"--list .\listings\startup_armcm0.lst --xref -o .\objects\startup_armcm0.o --depend .\objects\startup_armcm0.d)
+F (RTE\Device\ARMCM0\system_ARMCM0.c)(0x5F4CC36A)(--c99 -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I ..\..\..\components\inc -I ..\..\..\components\ble\controller -I ..\..\..\components\osal\include -I ..\..\..\components\common -I ..\..\..\components\ble\include -I ..\..\..\components\ble\hci -I ..\..\..\components\ble\host -I ..\..\..\components\Profiles\ota_app -I ..\..\..\components\Profiles\DevInfo -I ..\..\..\components\Profiles\SimpleProfile -I ..\..\..\components\Profiles\Roles -I .\source -I ..\..\..\components\libraries\crc16 -I ..\..\..\components\driver\clock -I ..\..\..\components\arch\cm0 -I ..\..\..\components\driver\pwrmgr -I ..\..\..\components\driver\uart -I ..\..\..\components\driver\gpio -I ..\..\..\components\driver\timer -I ..\..\..\misc -I ..\..\..\components\driver\log -I ..\..\..\components\libraries\cliface -I ..\..\..\components\driver\key -I ..\..\..\components\driver\pwm -I ..\..\..\components\driver\flash -I ..\..\..\components\libraries\fs -I ..\..\..\components\driver\adc -I .\source -I ..\..\..\components\driver\pwm -DADV_NCONN_CFG=0x01  -DADV_CONN_CFG=0x02  -DSCAN_CFG=0x04   -DINIT_CFG=0x08   -DBROADCASTER_CFG=0x01 -DOBSERVER_CFG=0x02  -DPERIPHERAL_CFG=0x04  -DCENTRAL_CFG=0x08 -I F:\LENZE_FJW_ST17H66_BLE\lenze_st17h66_基础资料-200826\外发-lenze_st17h66_客户资料_临时版本-200929\ST17H66_SDK_5.0.5_200831_v1\example\ble_peripheral\simpleBlePeripheral\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include-D__UVISION_VERSION="520" -D_RTE_ -DARMCM0 -DCFG_CP -DOSAL_CBTIMER_NUM_TASKS="1" -DHOST_CONFIG="4" -DHCI_TL_NONE="1" -DENABLE_LOG_ROM_="0" -D_BUILD_FOR_DTM_="0" -DDEBUG_INFO="1" -DDBG_ROM_MAIN="0" -DAPP_CFG="0" -DOSALMEM_METRICS="0" -DPHY_MCU_TYPE="MCU_BUMBEE_M0" -DCFG_SLEEP_MODE="PWR_MODE_SLEEP"-o .\objects\system_armcm0.o --omf_browse .\objects\system_armcm0.crf --depend .\objects\system_armcm0.d)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\ARMCM0.h)(0x562075B4)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h)(0x5625B70C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x56FE42DE)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625A350)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h)(0x55D41F08)

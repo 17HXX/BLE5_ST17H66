@@ -21,6 +21,9 @@ extern "C" {
 	
 #include "types.h"
 #include "gpio.h"
+	
+#define UART_TX_BUFFER_SIZE   255
+#define UART_RX_BUFFER_SIZE   255	
 
 #define UART_TX_FIFO_SIZE    16
 #define UART_RX_FIFO_SIZE    16
