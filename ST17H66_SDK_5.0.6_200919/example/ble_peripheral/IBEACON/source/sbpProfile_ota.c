@@ -528,9 +528,9 @@ static bStatus_t simpleProfile_WriteAttrCB( uint16 connHandle, gattAttribute_t *
 							}
 							else
 							{	 
-								SimpleBLEPeripheral_SetRSSI(pValue[IBEACON_SET_DATA_INDEX]);
+								SimpleBLEPeripheral_SetRSSI(0x0100 - pValue[IBEACON_SET_DATA_INDEX]);
 							}
-							LOG("set RSSI=%x\n",pValue[IBEACON_SET_DATA_INDEX]);
+							LOG("set RSSI=%d\n",pValue[IBEACON_SET_DATA_INDEX]);
 						break;	
 
 						case IBEACON_SET_ADV_INTVL_CMD:
