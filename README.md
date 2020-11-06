@@ -2,8 +2,8 @@
 
 欢迎使用伦茨开源项目，在开始进入项目之前，请详细阅读SDK介绍文档，对伦茨系列芯片和SDK有大概认识，有助通过介绍快速上手。
 
-为方便下载，提供百度云盘下载[ST17H66项目下载链接](https://pan.baidu.com/s/1JPPSTlaUgrCsB8snVX9GhA)  
-提取码：qy5i
+为方便下载，提供百度云盘下载[ST17H66项目下载链接](https://pan.baidu.com/s/1AhewCj6NejWPhtIfEG4tCw)  
+提取码：sr3x
 
 ## `1 ST17H66 BLE 固件程序`
 本仓库包含SDK release 版本工程，线上线下同步发布。  
