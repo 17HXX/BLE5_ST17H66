@@ -14,13 +14,17 @@
 #define SIMPLEBLEPERIPHERAL_H
 
 #include "types.h" 
+#include "rf_phy_driver.h"
+#include "bleuart_protocol.h"
 /*********************************************************************
  * INCLUDES
  */
 
 /*********************************************************************
  * CONSTANTS
- */
+ */ 
+ 
+ 
 
 #define INVALID_CONNHANDLE                    0xFFFF
 
@@ -38,6 +42,7 @@
 #define BUP_OSAL_EVT_UART_TX_COMPLETE                     0x0100
 #define BUP_OSAL_EVT_UART_TO_TIMER                        0x0200
 #define BUP_OSAL_EVT_RF433_KEY                            0x0400// chendy add just for
+#define BUP_OSAL_EVT_AT                            		  0x0800// JFM add for AT
 
 
 //#define FLOW_CTRL_IO_UART_TX          P18 //mobile --> ble --> uart --> host
@@ -66,6 +71,22 @@ extern uint16 gapConnHandle;
 void bleuart_Init( uint8 task_id );
 uint16_t bleuart_conn_interval(void);
 uint16 bleuart_ProcessEvent( uint8 task_id, uint16 events );
+
+extern void on_BUP_Evt(BUP_Evt_t* pev);
+extern uint8 Modify_BLEDevice_Data;
+extern uint8  advint;
+extern uint8 AT_bleuart_auto;
+extern uint8 AT_bleuart_sleep;
+extern uint8 AT_bleuart_txpower;
+
+extern uint8 AT_Tx_Power[8];
+extern uint8 at_tx_power;
+
+extern uint8*scanR;
+extern uint8*advertdata;
+extern uint8 Modify_Mac_Data;
+
+
 
 /*********************************************************************
 *********************************************************************/

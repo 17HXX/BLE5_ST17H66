@@ -73,6 +73,11 @@ extern bStatus_t bleuart_AddService( bleuart_ProfileChangeCB_t cb);
 extern uint8 bleuart_NotifyIsReady(void);
 
 extern bStatus_t bleuart_Notify( uint16 connHandle, attHandleValueNoti_t *pNoti, uint8 taskId );
+
+
+extern CONST uint8 bleuart_ServiceUUID[ATT_UUID_SIZE];
+extern CONST uint8 bleuart_RxCharUUID[ATT_UUID_SIZE];
+extern CONST uint8 bleuart_TxCharUUID[ATT_UUID_SIZE];
 /*********************************************************************
 *********************************************************************/
 
