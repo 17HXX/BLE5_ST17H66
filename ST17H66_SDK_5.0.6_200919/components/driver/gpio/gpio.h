@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 /*******************************************************************************
 * @file		gpio.h
 * @brief	Contains all functions support for gpio and iomux driver
@@ -120,8 +121,8 @@ typedef enum{
 
 typedef enum{
     GPIO_FLOATING   = 0x00,     //no pull
-    GPIO_PULL_UP    = 0x01,     //pull up weak
-    GPIO_PULL_UP_S  = 0x02,     //pull up strong
+	GPIO_PULL_UP_S  = 0x01,     //pull up strong
+    GPIO_PULL_UP    = 0x02,     //pull up weak
     GPIO_PULL_DOWN  = 0x03,
 }gpio_pupd_e;
 
@@ -161,8 +162,6 @@ void hal_gpio_pull_set(gpio_pin_e pin, gpio_pupd_e type) ;
 void hal_gpio_wakeup_set(gpio_pin_e pin, gpio_polarity_e type);
 
 void hal_gpio_pin2pin3_control(gpio_pin_e pin, uint8_t en);
-void hal_gpio_retention_enable(gpio_pin_e pin,uint8_t en);
-
 int hal_gpioin_disable(gpio_pin_e pin);
 
 void __attribute__((used)) hal_GPIO_IRQHandler(void);

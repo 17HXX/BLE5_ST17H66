@@ -62,7 +62,7 @@ const pTaskEventHandlerFn tasksArr[] =
 
 };
 
-const signed char tasksCnt = sizeof( tasksArr ) / sizeof( tasksArr[0] );
+const uint8 tasksCnt = sizeof( tasksArr ) / sizeof( tasksArr[0] );
 uint16 *tasksEvents;
 
 /*********************************************************************

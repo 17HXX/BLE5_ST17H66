@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 #include "bcomdef.h"
 #include <stdio.h>
 #include <string.h>
@@ -13,10 +14,11 @@
 #include "gatt_profile_uuid.h"
 #include "peripheral.h"
 #include "gattservapp.h"
-
+#include "clock.h"
 #include "ota_app_service.h"
 #include "log.h"
 #include "error.h"
+#include "ll.h"
 
 CONST uint8 ota_ServiceUUID[ATT_UUID_SIZE] =
     {0x23, 0xf1, 0x6e, 0x53, 0xa4, 0x22, 0x42, 0x61, 0x91, 0x51, 0x8b, 0x9b, 0x01, 0xff, 0x33, 0x58};
@@ -160,6 +162,11 @@ static void load_ota_version(void)
 }
 
 void __attribute__((weak)) ui_firmware_upgrade(void);
+static void ota_disconnect_link(void)
+{
+    LL_Disconnect(0, LL_DISCONNECT_REMOTE_DEV_POWER_OFF);
+    WaitMs(500);
+}
 
 static void process_cmd(uint8_t *cmdbuf, uint8_t size)
 {
@@ -177,11 +184,13 @@ static void process_cmd(uint8_t *cmdbuf, uint8_t size)
             //GAPRole_TerminateConnection();
             if (size != 3)
             {
-                NVIC_SystemReset();
+                ota_disconnect_link();
+                hal_system_soft_reset();
             }
             if (cmdbuf[2] != 1)
             {
-                NVIC_SystemReset();
+                ota_disconnect_link();
+                hal_system_soft_reset();
             }
             //if cmdbuf[2] is 1
             //case host will initiate termination request
@@ -246,7 +255,7 @@ static void handleConnStatusCB(uint16 connHandle, uint8 changeType)
             GATTServApp_InitCharCfg(connHandle, ota_ResponseCCCD);
             if (s_reboot_flg)
             {
-                NVIC_SystemReset();
+                hal_system_soft_reset();
             }
         }
         else
@@ -366,7 +375,7 @@ int ota_vendor_module_StartOTA(uint8_t mode)
     ret = set_ota_mode(mode);
     if (ret == PPlus_SUCCESS)
     {
-        NVIC_SystemReset();
+        hal_system_soft_reset();
     }
     return ret;
 }

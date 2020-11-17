@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 #include <string.h>
 
 #include "clock.h"
@@ -13,9 +14,7 @@
 #include "dma.h"
 #include "spi.h"
 #include "uart.h"
-#include "i2c.h"
-
-#define DMA_GET_MAX_TRANSPORT_SIZE(ch)      ((ch == DMA_CH_0) ? 0x7ff : 0x1f)                         
+#include "i2c.h"                         
 
 typedef struct{
     bool init_flg;
@@ -211,8 +210,6 @@ int hal_dma_config_channel(DMA_CH_t ch, DMA_CH_CFG_t* cfg)
     return PPlus_SUCCESS;
 }
 
-
-
 int hal_dma_start_channel(DMA_CH_t ch)
 {
     DMA_CH_Ctx_t* pctx;
@@ -319,7 +316,9 @@ int hal_dma_wait_channel_complete(DMA_CH_t ch)
 int hal_dma_init(void)
 {
     uint8_t ret;
+   
     hal_clk_gate_enable(MOD_DMA);
+    hal_clk_reset(MOD_DMA);
     NVIC_SetPriority((IRQn_Type)DMAC_IRQn, IRQ_PRIO_HAL);
     NVIC_EnableIRQ((IRQn_Type)DMAC_IRQn);
 
@@ -330,7 +329,7 @@ int hal_dma_init(void)
     {
         s_dma_ctx.init_flg = TRUE;
         memset(&(s_dma_ctx.dma_ch_ctx[0]), 0, sizeof(DMA_CH_Ctx_t)*DMA_CH_NUM);
-
+        
         //dmac controller enable
         AP_DMA_MISC->DmaCfgReg = DMA_DMAC_E;
     }

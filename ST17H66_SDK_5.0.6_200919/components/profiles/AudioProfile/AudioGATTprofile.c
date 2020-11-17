@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 /**************************************************************************************************
   Filename:       AudioGATTprofile.c
   Revised:         
@@ -28,7 +29,7 @@
 #include "AudioGATTprofile.h"
 
 #include "log.h"
-#include "common.h"
+//#include "common.h"
 #include "peripheral.h"
 
 #include "hidkbd.h"

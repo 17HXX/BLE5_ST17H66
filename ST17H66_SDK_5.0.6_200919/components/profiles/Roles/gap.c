@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 /*************************************************************************************************
   Filename:       gap.c
   Revised:         
@@ -128,8 +129,7 @@ bStatus_t GAP_DeviceInit(  uint8 taskID,
 
 	case (GAP_PROFILE_CENTRAL | GAP_PROFILE_PERIPHERAL):
       {
-//        LOG_DEBUG("GAP_DeviceInit: GAP_PROFILE_CENTRAL | GAP_PROFILE_PERIPHERAL \n");
-		  LOG("GAP_DeviceInit: GAP_PROFILE_CENTRAL | GAP_PROFILE_PERIPHERAL \n");
+        LOG_DEBUG("GAP_DeviceInit: GAP_PROFILE_CENTRAL | GAP_PROFILE_PERIPHERAL \n");
         stat = SUCCESS;
       }
 	  break;

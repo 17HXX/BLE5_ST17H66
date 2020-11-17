@@ -11,10 +11,11 @@
 .\objects\simplebleperipheral.o: ..\..\..\components\inc\bus_dev.h
 .\objects\simplebleperipheral.o: ..\..\..\components\inc\mcu.h
 .\objects\simplebleperipheral.o: ..\..\..\components\arch\cm0\core_bumbee_m0.h
-.\objects\simplebleperipheral.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cm0.h
-.\objects\simplebleperipheral.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmInstr.h
-.\objects\simplebleperipheral.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmFunc.h
-.\objects\simplebleperipheral.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h
+.\objects\simplebleperipheral.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h
+.\objects\simplebleperipheral.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h
+.\objects\simplebleperipheral.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h
+.\objects\simplebleperipheral.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h
+.\objects\simplebleperipheral.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h
 .\objects\simplebleperipheral.o: ..\..\..\components\inc\mcu_phy_bumbee.h
 .\objects\simplebleperipheral.o: ..\..\..\components\inc\error.h
 .\objects\simplebleperipheral.o: ..\..\..\components\ble\controller\rf_phy_driver.h
@@ -34,6 +35,7 @@
 .\objects\simplebleperipheral.o: ..\..\..\components\osal\include\OSAL_Memory.h
 .\objects\simplebleperipheral.o: ..\..\..\components\osal\include\OSAL_Timers.h
 .\objects\simplebleperipheral.o: ..\..\..\components\ble\include\l2cap.h
+.\objects\simplebleperipheral.o: ..\..\..\components\inc\version.h
 .\objects\simplebleperipheral.o: ..\..\..\components\inc\global_config.h
 .\objects\simplebleperipheral.o: ..\..\..\components\ble\include\gatt.h
 .\objects\simplebleperipheral.o: ..\..\..\components\ble\include\att.h
@@ -41,7 +43,6 @@
 .\objects\simplebleperipheral.o: ..\..\..\components\ble\host\gattservapp.h
 .\objects\simplebleperipheral.o: source\sbpProfile_ota.h
 .\objects\simplebleperipheral.o: ..\..\..\components\Profiles\ota_app\ota_app_service.h
-.\objects\simplebleperipheral.o: ..\..\..\components\inc\version.h
 .\objects\simplebleperipheral.o: ..\..\..\components\Profiles\Roles\peripheral.h
 .\objects\simplebleperipheral.o: ..\..\..\components\Profiles\Roles\gapbondmgr.h
 .\objects\simplebleperipheral.o: ..\..\..\components\ble\include\gap.h

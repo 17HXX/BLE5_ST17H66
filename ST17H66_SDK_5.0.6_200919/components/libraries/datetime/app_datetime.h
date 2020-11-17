@@ -2,16 +2,6 @@
 *******
 **************************************************************************************************/
 
-/************************************************************** 
- *
- * Module Name:	RTC module
- * File name:	app_datetime.h 
- * Brief description:
- *    RCT function for nrf52 platform
- * Author:	Eagle.Lao
- * Data:	2017-06-12
- * Revision:V0.01
-****************************************************************/
 
 #ifndef APP_DATETIME_H
 #define APP_DATETIME_H

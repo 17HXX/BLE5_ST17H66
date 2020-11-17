@@ -85,6 +85,8 @@ uint32_t hal_ms_intv(uint32_t tick);
 extern uint32_t rtc_get_counter(void);
 void WaitMs(uint32_t msecond);
 void WaitUs(uint32_t wtTime);
+void hal_system_soft_reset(void);
+
 
 extern int clk_init(sysclk_t h_system_clk_sel);
 extern void WaitRTCCount(uint32_t rtcDelyCnt);

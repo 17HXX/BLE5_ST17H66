@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 /* Peripheral group ----------------------------------------------------------- */
 /** @defgroup GPDMA	GPDMA (General Purpose Direct Memory Access)
  * @ingroup LPC177x_8xCMSIS_FwLib_Drivers
@@ -265,6 +266,9 @@ typedef enum{
 #define DMA_DST_XIMT_IS_FLASH 		    ((0UL))
 /** DMAC Source peripheral to destination peripheral - DMA control */
 #define DMA_DST_XIMT_NOT_FLASH 		    ((1UL))
+
+#define DMA_GET_MAX_TRANSPORT_SIZE(ch)      ((ch == DMA_CH_0) ? 0x7ff : 0x1f)
+
 
 
 /**

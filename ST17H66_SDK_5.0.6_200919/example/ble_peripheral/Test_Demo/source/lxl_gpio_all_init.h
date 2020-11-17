@@ -3,8 +3,8 @@
 
 #include <string.h>
 #include <stdlib.h>
-#include "OSAL_Tasks.h"
 #include "types.h"
+#include "OSAL_Tasks.h"
 #include "rom_sym_def.h"
 #include "types.h"
 #include "gpio.h"
@@ -258,7 +258,8 @@ int lxl_pwm_init(void);                       //初始化当前占空比
 * UART功能函数
 **************************************************************************************/
 #define LXL_IIC_ID_ADDV_TICK          (0x24)       //iic的地址
-
+#define UART_TX_BUFFER_SIZE   255
+#define UART_RX_BUFFER_SIZE   255
 typedef struct {
 	u8 adv_mode_tick ;	  //当前处于 1:nfc 2:摄像头 3:无
 

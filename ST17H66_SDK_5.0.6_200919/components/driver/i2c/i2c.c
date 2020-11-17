@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 /*******************************************************************************
 * @file		i2c.c
 * @brief	Contains all functions support for i2c driver
@@ -126,66 +127,67 @@ int hal_i2c_wait_tx_completed(void* pi2c)
 
 void* hal_i2c_init(i2c_dev_t dev, I2C_CLOCK_e i2c_clock_rate)
 {
-  AP_I2C_TypeDef * pi2cdev = NULL;
-  if(dev == I2C_0){
-    pi2cdev = AP_I2C0;
-    hal_clk_gate_enable(MOD_I2C0);
-  }
-  else if(dev == I2C_1){
-    pi2cdev = AP_I2C1;
-    hal_clk_gate_enable(MOD_I2C1);
-  }
-  else{
-    return NULL;
-  }
+    int pclk = clk_get_pclk();
+    AP_I2C_TypeDef * pi2cdev = NULL;
+    if(dev == I2C_0){
+        pi2cdev = AP_I2C0;
+        hal_clk_gate_enable(MOD_I2C0);
+    }
+    else if(dev == I2C_1){
+        pi2cdev = AP_I2C1;
+        hal_clk_gate_enable(MOD_I2C1);
+    }
+    else{
+        return NULL;
+    }
 
-  pi2cdev->IC_ENABLE=0;
+    pi2cdev->IC_ENABLE=0;
 	pi2cdev->IC_CON=0x61;
-  if(i2c_clock_rate==I2C_CLOCK_100K){
-    pi2cdev->IC_CON= ((pi2cdev->IC_CON) & 0xfffffff9)|(0x01 << 1);
-    if(pclk==16000000){
-      pi2cdev->IC_SS_SCL_HCNT=70;  //16
-      pi2cdev->IC_SS_SCL_LCNT=76;  //32)
-    }else if(pclk==32000000){
-      pi2cdev->IC_SS_SCL_HCNT=148;  //16
-      pi2cdev->IC_SS_SCL_LCNT=154;  //32)
-    }else if(pclk==48000000){
-      pi2cdev->IC_SS_SCL_HCNT=230;  //16
-      pi2cdev->IC_SS_SCL_LCNT=236;  //32)
-    }else if(pclk==64000000){
-      pi2cdev->IC_SS_SCL_HCNT=307;  //16
-      pi2cdev->IC_SS_SCL_LCNT=320;  //32)
-    }else if(pclk==96000000){
-      pi2cdev->IC_SS_SCL_HCNT=460;  //16
-      pi2cdev->IC_SS_SCL_LCNT=470;  //32)
+    if(i2c_clock_rate==I2C_CLOCK_100K){
+        pi2cdev->IC_CON= ((pi2cdev->IC_CON) & 0xfffffff9)|(0x01 << 1);
+        if(pclk==16000000){
+            pi2cdev->IC_SS_SCL_HCNT=70;  //16
+            pi2cdev->IC_SS_SCL_LCNT=76;  //32)
+        }else if(pclk==32000000){
+            pi2cdev->IC_SS_SCL_HCNT=148;  //16
+            pi2cdev->IC_SS_SCL_LCNT=154;  //32)
+        }else if(pclk==48000000){
+            pi2cdev->IC_SS_SCL_HCNT=230;  //16
+            pi2cdev->IC_SS_SCL_LCNT=236;  //32)
+        }else if(pclk==64000000){
+            pi2cdev->IC_SS_SCL_HCNT=307;  //16
+            pi2cdev->IC_SS_SCL_LCNT=320;  //32)
+        }else if(pclk==96000000){
+            pi2cdev->IC_SS_SCL_HCNT=460;  //16
+            pi2cdev->IC_SS_SCL_LCNT=470;  //32)
+        }
+    }else if(i2c_clock_rate==I2C_CLOCK_400K){
+        pi2cdev->IC_CON= ((pi2cdev->IC_CON) & 0xfffffff9)|(0x02 << 1);
+        if(pclk==16000000){
+        pi2cdev->IC_FS_SCL_HCNT=10;  //16
+        pi2cdev->IC_FS_SCL_LCNT=17;  //32)
+        }else if(pclk==32000000){
+            pi2cdev->IC_FS_SCL_HCNT=30;  //16
+            pi2cdev->IC_FS_SCL_LCNT=35;  //32)
+        }else if(pclk==48000000){
+            pi2cdev->IC_FS_SCL_HCNT=48;  //16
+            pi2cdev->IC_FS_SCL_LCNT=54;  //32)
+        }else if(pclk==64000000){
+            pi2cdev->IC_FS_SCL_HCNT=67;  //16
+            pi2cdev->IC_FS_SCL_LCNT=75;  //32)
+        }else if(pclk==96000000){
+            pi2cdev->IC_FS_SCL_HCNT=105;  //16
+            pi2cdev->IC_FS_SCL_LCNT=113;  //32)
+        }
     }
-  }else if(i2c_clock_rate==I2C_CLOCK_400K){
-    pi2cdev->IC_CON= ((pi2cdev->IC_CON) & 0xfffffff9)|(0x02 << 1);
-    if(pclk==16000000){
-      pi2cdev->IC_FS_SCL_HCNT=10;  //16
-      pi2cdev->IC_FS_SCL_LCNT=17;  //32)
-    }else if(pclk==32000000){
-      pi2cdev->IC_FS_SCL_HCNT=30;  //16
-      pi2cdev->IC_FS_SCL_LCNT=35;  //32)
-    }else if(pclk==48000000){
-      pi2cdev->IC_FS_SCL_HCNT=48;  //16
-      pi2cdev->IC_FS_SCL_LCNT=54;  //32)
-    }else if(pclk==64000000){
-      pi2cdev->IC_FS_SCL_HCNT=67;  //16
-      pi2cdev->IC_FS_SCL_LCNT=75;  //32)
-    }else if(pclk==96000000){
-      pi2cdev->IC_FS_SCL_HCNT=105;  //16
-      pi2cdev->IC_FS_SCL_LCNT=113;  //32)
-    }
-  }
 
 	pi2cdev->IC_TAR = I2C_MASTER_ADDR_DEF;
 	pi2cdev->IC_INTR_MASK=0;
 	pi2cdev->IC_RX_TL=0x0;
 	pi2cdev->IC_TX_TL=0x1;
 		
-  pi2cdev->IC_ENABLE=1;
-  return (void*)pi2cdev;
+    pi2cdev->IC_ENABLE=1;
+    return (void*)pi2cdev;
 }
 
 

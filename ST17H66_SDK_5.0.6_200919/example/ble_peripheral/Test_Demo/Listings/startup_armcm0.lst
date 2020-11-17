@@ -152,8 +152,8 @@ ARM Macro Assembler    Page 3
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M0 --apcs=interw
 ork --depend=.\objects\startup_armcm0.d -o.\objects\startup_armcm0.o -I.\RTE\_T
-arget_1 -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include -IC:\Keil_v5\ARM\PA
-CK\ARM\CMSIS\4.2.0\Device\ARM\ARMCM0\Include --predefine="__MICROLIB SETA 1" --
+arget_1 -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include -IC:\Keil_v5\ARM\PA
+CK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include --predefine="__MICROLIB SETA 1" --
 predefine="__UVISION_VERSION SETA 525" --predefine="_RTE_ SETA 1" --predefine="
 ARMCM0 SETA 1" --list=.\listings\startup_armcm0.lst RTE\Device\ARMCM0\startup_A
 RMCM0.s

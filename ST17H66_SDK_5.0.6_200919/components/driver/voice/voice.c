@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 /*******************************************************************************
 * @file   voice.c
 * @brief  Contains all functions support for adc driver
@@ -22,6 +23,7 @@
 #include <string.h>
 #include "log.h"
 #include "voice.h"
+#include "jump_function.h"
 
 static voice_Ctx_t mVoiceCtx;
 
@@ -176,11 +178,11 @@ static void set_voice_amute_cfg(
 void __attribute__((used)) hal_ADC_IRQHandler(void)
 {
 //  uint32_t voice_data[HALF_VOICE_SAMPLE_SIZE];
-	
+	volatile uint32_t voice_int_status = GET_IRQ_STATUS;
 //	LOG("Voice interrupt processing\n");
   MASK_VOICE_INT;
 	
-	if (GET_IRQ_STATUS & BIT(8)) {
+	if (voice_int_status & BIT(8)) {
 		int n;
 		for (n = 0; n < HALF_VOICE_WORD_SIZE; n++) {
 			voice_data[n] = (uint32_t)(read_reg(VOICE_BASE + n * 4));
@@ -198,7 +200,7 @@ void __attribute__((used)) hal_ADC_IRQHandler(void)
 //			LOG("Voice memory half full interrupt processing completed\n");
 		}
 	}
-	else if (GET_IRQ_STATUS & BIT(9)) {
+	if (voice_int_status & BIT(9)) {
 		int n;
 		for (n = 0; n < HALF_VOICE_WORD_SIZE; n++) {
 			voice_data[n] = (uint32_t)(read_reg(VOICE_MID_BASE + n * 4));
@@ -255,9 +257,7 @@ int hal_voice_config(voice_Cfg_t cfg, voice_Hdl_t evt_handler)
 	hal_clk_gate_enable(MOD_ADCC);//enable I2C clk gated
 
 	mVoiceCtx.evt_handler = evt_handler; //evt_handler;
-	
-//	mVoiceCtx.evt_handler = evtHandler;
-	
+		
   if(cfg.voiceSelAmicDmic) {
 		hal_voice_dmic_mode();
 		hal_voice_dmic_open(cfg.dmicDataPin, cfg.dmicClkPin);		
@@ -265,6 +265,7 @@ int hal_voice_config(voice_Cfg_t cfg, voice_Hdl_t evt_handler)
 	else {
 		hal_voice_amic_mode();
 		hal_voice_amic_gain(cfg.amicGain);
+		hal_gpio_cfg_analog_io(P15,Bit_ENABLE);//config micphone bias
 	}
 	
 	hal_voice_gain(cfg.voiceGain);
@@ -284,9 +285,7 @@ int hal_voice_config(voice_Cfg_t cfg, voice_Hdl_t evt_handler)
 	set_voice_amute_cfg(64, 6, 9, 0, 1, 55, 10, 48, 3, 10);
 	
   mVoiceCtx.cfg = cfg;
-	
-//	mVoiceCtx.evt_handler = evt_handler;
-  
+
   
   //CLK_1P28M_ENABLE;
   AP_PCRM->CLKSEL |= BIT(6);
@@ -329,17 +328,19 @@ int hal_voice_start(void)
 	else {
 		AP_PCRM->ANA_CTL |= BIT(16);	//Power on PGA
 		AP_PCRM->ANA_CTL |= BIT(3);		//Power on ADC
+		AP_PCRM->ANA_CTL |= BIT(0);
+		AP_PCRM->ANA_CTL |= BIT(23);
   }
 
 
   NVIC_SetPriority((IRQn_Type)ADCC_IRQn, IRQ_PRIO_HAL);//teddy add 20190121	
-  //ADCC_IRQ_ENABLE;
   NVIC_EnableIRQ((IRQn_Type)ADCC_IRQn);
   
   
 	//Enable voice core
 	hal_voice_enable();
 	
+	JUMP_FUNCTION(V29_IRQ_HANDLER)                  =   (uint32_t)&hal_ADC_IRQHandler;
 	//Enable VOICE IRQ
 	ENABLE_VOICE_INT;
 	
@@ -349,22 +350,23 @@ int hal_voice_start(void)
 
 int hal_voice_stop(void)
 {
-  MASK_VOICE_INT;
-  
+	MASK_VOICE_INT;
+
 	//Disable voice core
 	hal_voice_disable();
-	
-  if (mVoiceCtx.cfg.voiceSelAmicDmic) {
+
+	if (mVoiceCtx.cfg.voiceSelAmicDmic) {
 	}		
 	else {
 		AP_PCRM->ANA_CTL &= ~BIT(16);	//Power off PGA
-  }
- 	
-  //Enable sleep
-  hal_pwrmgr_unlock(MOD_VOC);
-  hal_pwrmgr_unlock(MOD_ADCC);
+	}
 
-  mVoiceCtx.enable = FALSE;
+	//Enable sleep
+	hal_pwrmgr_unlock(MOD_VOC);
+	hal_pwrmgr_unlock(MOD_ADCC);
+
+	JUMP_FUNCTION(V29_IRQ_HANDLER)                  = 0;
+	mVoiceCtx.enable = FALSE;
 	
 	return 0;
 }

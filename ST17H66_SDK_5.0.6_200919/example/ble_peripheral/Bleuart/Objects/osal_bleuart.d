@@ -48,8 +48,8 @@
 .\objects\osal_bleuart.o: ..\..\..\components\ble\controller\ll_sleep.h
 .\objects\osal_bleuart.o: ..\..\..\components\osal\include\OSAL_PwrMgr.h
 .\objects\osal_bleuart.o: ..\..\..\components\ble\controller\ll_common.h
+.\objects\osal_bleuart.o: ..\..\..\components\inc\version.h
 .\objects\osal_bleuart.o: source\bleuart_protocol.h
 .\objects\osal_bleuart.o: ..\..\..\components\osal\include\osal_snv.h
 .\objects\osal_bleuart.o: ..\..\..\components\driver\flash\flash.h
-.\objects\osal_bleuart.o: ..\..\..\components\inc\version.h
 .\objects\osal_bleuart.o: ..\..\..\components\Profiles\Roles\gapbondmgr.h

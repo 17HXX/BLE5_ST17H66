@@ -76,7 +76,7 @@ void pwm_light_init(void)
 	  pwm_light_red_ch.pwmPolarity=PWM_POLARITY_FALLING;
 	  pwm_light_red_ch.cntTopVal = PWM_LIGHT_CNTTOPVALUE;	
 	  pwm_light_red_ch.cmpVal = color_data.light_red;
-	  hal_pwm_ch_start_config(pwm_light_red_ch);
+	  hal_pwm_ch_start(pwm_light_red_ch);
 	  
 	  pwm_light_green_ch.pwmN=PWM_CH1;
 	  pwm_light_green_ch.pwmPin=PWM_LIGHT_GREEN_PIN;
@@ -84,7 +84,7 @@ void pwm_light_init(void)
 	  pwm_light_green_ch.pwmPolarity=PWM_POLARITY_FALLING;
 	  pwm_light_green_ch.cntTopVal = PWM_LIGHT_CNTTOPVALUE;	
 	  pwm_light_green_ch.cmpVal = color_data.light_green;
-	  hal_pwm_ch_start_config(pwm_light_green_ch);
+	  hal_pwm_ch_start(pwm_light_green_ch);
 	
 	  pwm_light_blue_ch.pwmN=PWM_CH2;
 	  pwm_light_blue_ch.pwmPin=PWM_LIGHT_BLUE_PIN;
@@ -92,7 +92,7 @@ void pwm_light_init(void)
 	  pwm_light_blue_ch.pwmPolarity=PWM_POLARITY_FALLING;
 	  pwm_light_blue_ch.cntTopVal = PWM_LIGHT_CNTTOPVALUE;	
 	  pwm_light_blue_ch.cmpVal = color_data.light_blue;
-	  hal_pwm_ch_start_config(pwm_light_blue_ch);
+	  hal_pwm_ch_start(pwm_light_blue_ch);
 		
 	  pwm_light_white_ch.pwmN=PWM_CH3;
 	  pwm_light_white_ch.pwmPin=PWM_LIGHT_WHITE_PIN;
@@ -100,8 +100,8 @@ void pwm_light_init(void)
 	  pwm_light_white_ch.pwmPolarity=PWM_POLARITY_FALLING;
 	  pwm_light_white_ch.cntTopVal = PWM_LIGHT_CNTTOPVALUE;	
 	  pwm_light_white_ch.cmpVal = color_data.light_white;
-	  hal_pwm_ch_start_config(pwm_light_white_ch);		  
-		hal_pwm_start();	
+	  hal_pwm_ch_start(pwm_light_white_ch);		  
+//		hal_pwm_start();	
 		
    PWM_LIGHT_Set_work_mode(color_data.work_mode,color_data.light_speed,color_data.color_num,color_data.light_red,color_data.light_green,color_data.light_blue,color_data.light_white);		
 	 LOG("PWM init workmode=%x\n",color_data.work_mode);

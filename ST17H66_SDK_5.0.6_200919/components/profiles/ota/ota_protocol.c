@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 #include "bcomdef.h"
 #include "OSAL.h"
 #include "linkdb.h"
@@ -428,7 +429,7 @@ void process_ctrl_cmd(uint8_t* cmdbuf, uint8_t size){
   {
     s_ota_ctx.reboot_flag = FALSE;
     if(size == 1){
-      NVIC_SystemReset();
+      hal_system_soft_reset();
     }
     else if(size == 2){
       if(cmd.p.reboot_flag == 1)
@@ -732,7 +733,7 @@ void process_service_evt(ota_Evt_t* pev)
     LOG("[OTA_EVT_DISCONNECTED]Disconnected!\n");
     if(s_ota_ctx.reboot_flag){
       LOG("Reboot!\n");
-      NVIC_SystemReset();
+      hal_system_soft_reset();
     }
     reset_ctx();
     break;

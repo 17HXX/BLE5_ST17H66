@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 #ifndef __SPIFLASH_H__
 #define __SPIFLASH_H__
 
@@ -32,16 +33,8 @@ extern "C" {
 
 #define FLASH_PES												0x75
 #define FLASH_PER												0x7A
-//#define FLASH_BE_128KB									0xD2
-//#define FLASH_CRS												0xFF
-//#define FLASH_DUAL_FAST_READ						0x3B
-//#define FLASH_DUAD_FAST_READ						0x6B
-//#define FLASH_DUAL_IO_FAST_READ					0xBB
-//#define FLASH_DUAD_IO_FAST_READ					0xEB
-//#define FALSH_QUAD_IO_WORD_FAST_READ		0xE7
-//#define FLASH_HPM												0xA3
-//#define FLASH_FAST_READ									0x0B
-//#define FLASH_REMS						0x90
+
+extern uint32_t spiflash_space;
 
 typedef enum{	
 	FLASH_ERROR = 0,
@@ -77,10 +70,10 @@ void spiflash_read(uint32_t addr,uint8_t* rx_buf,uint16_t rx_len);
 int spiflash_init(void);
 
 /*gd25q16 api for user develop*/
-int GD25_init(void);
-int GD25_read(uint32_t addr,uint8_t *data,uint16_t len);
-int GD25_erase(uint32_t addr,uint32_t len);
-int GD25_write(uint32_t addr,const uint8_t *data,uint16_t len);
+int vendorflash_init(void);
+int vendorflash_read(uint32_t addr,uint8_t *data,uint16_t len);
+int vendorflash_erase(uint32_t addr,uint32_t len);
+int vendorflash_write(uint32_t addr,const uint8_t *data,uint16_t len);
 
 #ifdef __cplusplus
 }

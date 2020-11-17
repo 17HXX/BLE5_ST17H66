@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 /**************************************************************************************************
   Filename:       gapgattserver.c
   Revised:         
@@ -106,7 +107,7 @@ static uint8 reconnectAddr[B_ADDR_LEN] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 static uint8 periConnParamCharProps = GATT_PROP_READ;
 
 // Peripheral Preferred Connection Parameters attribute (8 octets)
-static gapPeriConnectParams_t periConnParameters = { 80, 160, 0, 1000 };
+static gapPeriConnectParams_t periConnParameters = { 15, 15, 0, 1000 };
 
 #endif // PERIPHERAL_CFG
 

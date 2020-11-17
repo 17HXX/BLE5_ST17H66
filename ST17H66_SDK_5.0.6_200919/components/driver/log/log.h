@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 /*******************************************************************************
 * @file		log.h
 * @brief	Contains all functions support for uart driver
@@ -48,6 +49,7 @@ extern "C" {
         #define LOG_INIT() dbg_printf_init()
     #else
         #define AT_LOG(...)
+        #define LOG_DEBUG(...)
         #define LOG(...)
         #define LOG_INIT()  //{clk_gate_enable(MOD_UART);clk_reset(MOD_UART);clk_gate_disable(MOD_UART);}
     #endif

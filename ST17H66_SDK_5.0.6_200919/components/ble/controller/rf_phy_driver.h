@@ -2,9 +2,10 @@
 *******
 **************************************************************************************************/
 
+
 /*******************************************************************************
 * @file		rf_phy_driver.h
-* @brief	Contains all functions support for RF_PHY_DRIVER
+* @brief	Contains all functions support for LENZE RF_PHY_DRIVER
 * @version	1.0
 * @date		24. Aug. 2017
 * @author	Zhongqi Yang
@@ -26,7 +27,7 @@
 #include "clock.h"
 #include "ll_hw_drv.h"
 #include "jump_function.h"
-
+#include "version.h"
 
 
 typedef enum  _RF_PHY_CLK_SEL {
@@ -61,6 +62,32 @@ typedef enum  _RF_PHY_CLK_SEL {
  extern volatile sysclk_t g_system_clk;
  extern volatile rfphy_clk_t g_rfPhyClkSel;
  extern volatile rxadc_clk_t g_rxAdcClkSel;
+
+ extern volatile uint8_t   g_rfPhyDtmCmd[];
+ extern volatile uint8_t   g_rfPhyDtmEvt[];
+ extern volatile uint8_t   g_dtmModeType ;
+ extern volatile uint8_t   g_dtmCmd      ;
+ extern volatile uint8_t   g_dtmFreq     ;
+ extern volatile uint8_t   g_dtmLength   ;
+ extern volatile uint8_t   g_dtmExtLen   ;
+ extern volatile uint16_t  g_dtmPktIntv  ;
+ extern volatile uint8_t   g_dtmPKT      ;
+ extern volatile uint8_t   g_dtmCtrl     ;
+ extern volatile uint8_t   g_dtmPara     ;
+ extern volatile uint8_t   g_dtmEvt      ;
+ extern volatile uint8_t   g_dtmStatus   ;
+ extern volatile uint16_t  g_dtmPktCount ;
+ extern volatile uint16_t  g_dtmRxCrcNum ;
+ extern volatile uint16_t  g_dtmRxTONum  ;
+ extern volatile uint16_t  g_dtmRsp      ;
+ extern volatile uint8_t   g_dtmTxPower  ;//RF_PHY_TX_POWER_EXTRA_MAX;//according to the rfdrv
+ extern volatile uint16_t  g_dtmFoff     ;
+ extern volatile uint8_t   g_dtmRssi     ;
+ extern volatile uint8_t   g_dtmCarrSens ;
+ extern volatile uint8_t   g_dtmTpCalEnable  ;  //default enable tpcal 
+ extern volatile uint32_t  g_dtmTick         ;
+ extern volatile uint32_t  g_dtmPerAutoIntv  ;
+ extern volatile uint32_t  g_dtmAccessCode   ;
 /*******************************************************************************
  * MACRO
  */
@@ -68,11 +95,18 @@ typedef enum  _RF_PHY_CLK_SEL {
 
 #define PHY_REG_RD(x)                               *(volatile uint32_t *)(x)   
 #define PHY_REG_WT(x,y)                             *(volatile uint32_t *)(x) = (y)  
-#define RF_CHN_TO_FREQ(x)                  
+#define RF_CHN_TO_FREQ(x)                 
+
+#define DCDC_REF_CLK_SETTING(x)                     subWriteReg(0x4000f014,25,25, (0x01&(x))) 
 #define DCDC_CONFIG_SETTING(x)                      subWriteReg(0x4000f014,18,15, (0x0f&(x)))
 #define XTAL16M_CAP_SETTING(x)                      subWriteReg(0x4000f0bc, 4, 0, (0x1f&(x)))
 #define XTAL16M_CURRENT_SETTING(x)                  subWriteReg(0x4000f0bc, 6, 5, (0x03&(x)))
 #define DIG_LDO_CURRENT_SETTING(x)                  subWriteReg(0x4000f014,22,21, (0x03&(x)))
+
+#define RF_PHY_LO_LDO_SETTING(x)                    subWriteReg(0x400300cc,11,10, (0x03&(x)))
+#define RF_PHY_PA_VTRIM_SETTING(x)                  subWriteReg(0x400300dc, 9, 7, (0x03&(x)))
+#define RF_PHY_LNA_LDO_SETTING(x)                   subWriteReg(0x400300dc, 6, 5, (0x03&(x)))
+
     
 #define RF_PHY_TPCAL_CALC(tp0,tp1,chn)              ((tp0)>(tp1) ?(((tp0<<5)-(tp0-tp1)*(chn)+16)>>5) : tp0 )
 //DTM STATE
@@ -149,6 +183,19 @@ typedef enum  _RF_PHY_CLK_SEL {
 #define PKT_FMT_BLR500K                             3
 #define PKT_FMT_BLR125K                             4
 
+
+#if (SDK_VER_CHIP==__DEF_CHIP_QFN32__)
+#define RF_PHY_TX_POWER_EXTRA_MAX                   0x3f
+#define RF_PHY_TX_POWER_MAX                         0x1f
+#define RF_PHY_TX_POWER_MIN                         0x00
+
+#define RF_PHY_TX_POWER_5DBM                        0x3f
+#define RF_PHY_TX_POWER_0DBM                        0x1f
+#define RF_PHY_TX_POWER_N2DBM                       0x0f
+#define RF_PHY_TX_POWER_N5DBM                       0x0a
+#define RF_PHY_TX_POWER_N20DBM                      0x01
+
+#elif(SDK_VER_CHIP==__DEF_CHIP_TSOP16__)
 #define RF_PHY_TX_POWER_EXTRA_MAX                   0x3f
 #define RF_PHY_TX_POWER_MAX                         0x1f
 #define RF_PHY_TX_POWER_MIN                         0x00
@@ -164,6 +211,9 @@ typedef enum  _RF_PHY_CLK_SEL {
 #define RF_PHY_TX_POWER_N10DBM                      0x03
 #define RF_PHY_TX_POWER_N15DBM                      0x02
 #define RF_PHY_TX_POWER_N20DBM                      0x01
+#else
+#warning" CHECK Chip Version "
+#endif
 
 #define RF_PHY_FREQ_FOFF_00KHZ                      0
 #define RF_PHY_FREQ_FOFF_20KHZ                      5
@@ -187,6 +237,14 @@ typedef enum  _RF_PHY_CLK_SEL {
 #define RF_PHY_FREQ_FOFF_N180KHZ                    -45
 #define RF_PHY_FREQ_FOFF_N200KHZ                    -50
 
+
+#define RF_PHY_DTM_MANUL_NULL                        0x00
+#define RF_PHY_DTM_MANUL_FOFF                        0x01
+#define RF_PHY_DTM_MANUL_TXPOWER                     0x02
+#define RF_PHY_DTM_MANUL_XTAL_CAP                    0x04
+#define RF_PHY_DTM_MANUL_MAX_GAIN                    0x08
+
+#define RF_PHY_DTM_MANUL_ALL                         0xFF
 /*******************************************************************************
  * FUNCION DEFINE
  */

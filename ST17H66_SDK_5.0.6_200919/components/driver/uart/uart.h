@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 /*******************************************************************************
 * @file		uart.h
 * @brief	Contains all functions support for uart driver
@@ -21,9 +22,6 @@ extern "C" {
 	
 #include "types.h"
 #include "gpio.h"
-	
-#define UART_TX_BUFFER_SIZE   255
-#define UART_RX_BUFFER_SIZE   255	
 
 #define UART_TX_FIFO_SIZE    16
 #define UART_RX_FIFO_SIZE    16
@@ -70,7 +68,7 @@ extern "C" {
 #define USR_TFNF  0x02
 #define USR_BUSY  0x01
 
-#define UART_FIFO_RX_TRIGGER	FCR_RX_TRIGGER_11//FCR_RX_TRIGGER_10//FCR_RX_TRIGGER_11
+#define UART_FIFO_RX_TRIGGER	FCR_RX_TRIGGER_10//FCR_RX_TRIGGER_10//FCR_RX_TRIGGER_11
 #define UART_FIFO_TX_TRIGGER	FCR_TX_TRIGGER_00//FCR_TX_TRIGGER_00//FCR_TX_TRIGGER_01
 
 typedef enum{

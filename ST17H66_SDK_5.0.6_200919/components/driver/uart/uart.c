@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 /*******************************************************************************
 * @file		uart.c
 * @brief	Contains all functions support for uart driver
@@ -9,7 +10,6 @@
 * @date		19. Oct. 2017
 * @author	qing.han
 * 
-
 *
 *******************************************************************************/
 #include "rom_sym_def.h"
@@ -23,6 +23,7 @@
 #include "error.h"
 #include "jump_function.h"
 
+#define UART_TX_BUFFER_SIZE   256
 
 typedef struct _uart_Context{
     bool          enable;
@@ -71,14 +72,14 @@ static int txmit_buf_use_tx_buf(UART_INDEX_e uart_index,uint8_t *buf,uint16_t le
     while(len--){
         cur_uart->THR = p_data[p_txbuf->tx_data_offset++];    
 	}
-   
-    
+	
     if(uart_index == UART0)
         hal_pwrmgr_lock(MOD_UART0);
     else
         hal_pwrmgr_lock(MOD_UART1);
-    cur_uart->IER |= IER_ETBEI;
-		
+
+	cur_uart->IER |= IER_ETBEI;
+	
     return PPlus_SUCCESS;
 }
 
@@ -199,7 +200,6 @@ static int uart_hw_init(UART_INDEX_e uart_index)
         irq_type    = UART1_IRQn;
         fmux_tx     = FMUX_UART1_TX;
         fmux_rx     = FMUX_UART1_RX;
-			//JUMP_FUNCTION(V17_IRQ_HANDLER)   =   (uint32_t)&hal_UART1_IRQHandler;
     }
     
     if((m_uartCtx[uart_index].cfg.tx_pin == GPIO_DUMMY) && (m_uartCtx[uart_index].cfg.rx_pin == GPIO_DUMMY))
@@ -246,14 +246,17 @@ static int uart_hw_init(UART_INDEX_e uart_index)
 	
     if(pcfg->use_tx_buf)    
         cur_uart->IER |= IER_ETBEI;    
-//    if(uart_index==UART1)
-//		  LOG("1\n");
+    
+	if(uart_index== UART0){
+		JUMP_FUNCTION(V11_IRQ_HANDLER)   =   (uint32_t)&hal_UART0_IRQHandler;
+	}
+	else{
+		JUMP_FUNCTION(V17_IRQ_HANDLER)   =   (uint32_t)&hal_UART1_IRQHandler;
+	}
+	
     NVIC_SetPriority(irq_type, IRQ_PRIO_HAL);
-//		if(uart_index==UART1)
-//		  LOG("IRQ_PRIO_HAL\n");
     NVIC_EnableIRQ(irq_type);
-//    if(uart_index==UART1)
-//		  LOG("NVIC_EnableIRQ\n");
+    
     return PPlus_SUCCESS;
 }
 
@@ -283,6 +286,14 @@ static int uart_hw_deinit(UART_INDEX_e uart_index)
     //hal_clk_gate_enable(mod);
     hal_clk_reset(mod);
     hal_clk_gate_disable(mod);
+	
+	if(uart_index== UART0){
+		JUMP_FUNCTION(V11_IRQ_HANDLER)   =   0;
+	}
+	else{
+		JUMP_FUNCTION(V17_IRQ_HANDLER)   =   0;
+	}
+	
     return PPlus_SUCCESS;
 }
 /**************************************************************************************
@@ -377,7 +388,7 @@ int hal_uart_init(uart_Cfg_t cfg,UART_INDEX_e uart_index)
     if(cfg.hw_fwctrl)
         return PPlus_ERR_NOT_SUPPORTED;
     
-    memset(&(m_uartCtx[uart_index]), 0, sizeof(m_uartCtx));    
+    memset(&(m_uartCtx[uart_index]), 0, sizeof(uart_Ctx_t));    
     memcpy(&(m_uartCtx[uart_index].cfg), &cfg, sizeof(uart_Cfg_t));
     uart_hw_init(uart_index);
     m_uartCtx[uart_index].enable = TRUE;

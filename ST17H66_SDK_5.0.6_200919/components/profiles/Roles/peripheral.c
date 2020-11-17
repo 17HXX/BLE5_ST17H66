@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 /**************************************************************************************************
   Filename:       peripheral.c
   Revised:         
@@ -899,8 +900,7 @@ static void gapRole_ProcessOSALMsg( osal_event_hdr_t *pMsg )
         if ( pPkt->cmdOpcode == HCI_LE_SET_PHY )
         {
            
-//           LOG_DEBUG("[HCI PHY] %2x \n",pPkt->cmdStatus);
-			LOG("[HCI PHY] %2x \n",pPkt->cmdStatus);
+           LOG_DEBUG("[HCI PHY] %2x \n",pPkt->cmdStatus);
         }
 
       }
@@ -1201,8 +1201,7 @@ static void gapRole_ProcessGAPMsg( gapEventHdr_t *pMsg )
           gapRole_state = GAPROLE_WAITING;
         }
 
-//        LOG_DEBUG("[DISC].reason %02x\n",pPkt->reason);
-		LOG("[DISC].reason %02x\n",pPkt->reason);
+        LOG_DEBUG("[DISC].reason %02x\n",pPkt->reason);
 
         notify = TRUE;
         //LOG("disconnected reason[%d]!\n", pPkt->reason);

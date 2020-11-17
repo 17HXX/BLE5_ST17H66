@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 /*******************************************************************************
 * @file		spi.h
 * @brief	Contains all functions support for spi driver
@@ -50,6 +51,12 @@ typedef enum{
 }SPI_SCMOD_e;
 
 typedef enum{
+	SPI_1BYTE=0x07,         //1byte
+	SPI_2BYTE=0x0f,         //2byte
+}SPI_DFS_e;
+
+
+typedef enum{
 	SPI_TRXD=0,        //Transmit & Receive
 	SPI_TXD,         //Transmit Only
 	SPI_RXD,         //Receive Only
@@ -79,16 +86,21 @@ typedef struct _spi_evt_t{
 typedef void (*spi_hdl_t)(spi_evt_t* pevt);
 
 typedef struct _spi_Cfg_t{
-	GPIO_Pin_e    sclk_pin;
-	GPIO_Pin_e    ssn_pin;
-	GPIO_Pin_e    MOSI;
-	GPIO_Pin_e    MISO;
-	uint32_t      baudrate;
-	SPI_TMOD_e    spi_tmod;
-	SPI_SCMOD_e   spi_scmod;
-	bool          int_mode;
-	bool          force_cs;
-	spi_hdl_t     evt_handler;
+	GPIO_Pin_e      sclk_pin;
+	GPIO_Pin_e      ssn_pin;
+	GPIO_Pin_e      MOSI;
+	GPIO_Pin_e      MISO;
+	uint32_t        baudrate;
+	SPI_TMOD_e      spi_tmod;
+	SPI_SCMOD_e     spi_scmod;
+    SPI_DFS_e       spi_dfsmod;
+#if DMAC_USE
+    bool            dma_tx_enable;
+    bool            dma_rx_enable;
+#endif    
+	bool            int_mode;
+	bool            force_cs;
+	spi_hdl_t       evt_handler;
 }spi_Cfg_t;
 
 typedef enum{
@@ -104,20 +116,21 @@ typedef struct _hal_spi_t{
 }hal_spi_t;
 
 typedef struct{
-	bool busy;
-	uint16_t xmit_len;
-	uint16_t buf_len; 
-	uint8_t* tx_buf;
-	uint8_t* rx_buf;
-	uint16_t tx_offset;
-	uint16_t rx_offset;
+	bool        busy;
+	uint16_t    xmit_len;
+	uint16_t    buf_len; 
+	uint8_t*   tx_buf;
+	uint8_t*   rx_buf;
+	uint16_t    tx_offset;
+	uint16_t    rx_offset;
 }spi_xmit_t;
 
 void __attribute__((weak)) hal_SPI0_IRQHandler(void);
 
 void __attribute__((weak)) hal_SPI1_IRQHandler(void);
 
-void hal_spi_dfs_set(hal_spi_t* spi_ptr,SPI_TMOD_e mod);
+void hal_spi_tmod_set(hal_spi_t* spi_ptr,SPI_TMOD_e mod);
+void hal_spi_dfs_set(hal_spi_t* spi_ptr,SPI_DFS_e mod);
 
 int hal_spis_clear_rx(hal_spi_t* spi_ptr);
 uint32_t hal_spis_rx_len(hal_spi_t* spi_ptr);
@@ -129,19 +142,6 @@ int hal_spi_bus_deinit(hal_spi_t* spi_ptr);
 
 int hal_spi_init(SPI_INDEX_e channel);
 
-#if DMAC_USE
-int hal_spi_transmit
-	(
-		hal_spi_t* 	spi_ptr,
-		SPI_TMOD_e 	mod,
-		uint8_t     dma_tx_control,
-        uint8_t     dma_rx_control,
-		uint8_t* 	tx_buf,
-		uint8_t* 	rx_buf,
-		uint16_t 	tx_len,
-		uint16_t 	rx_len
-	);
-#else
 int hal_spi_transmit
 	(
 		hal_spi_t* 	spi_ptr,
@@ -151,7 +151,6 @@ int hal_spi_transmit
 		uint16_t 	tx_len,
 		uint16_t 	rx_len
 	);
-#endif
 
 int hal_spi_set_tx_buffer(hal_spi_t* spi_ptr,uint8_t* tx_buf,uint16_t len);
 int hal_spi_set_int_mode(hal_spi_t* spi_ptr,bool en);
@@ -160,5 +159,10 @@ int hal_spi_set_force_cs(hal_spi_t* spi_ptr,bool en);
 bool hal_spi_get_transmit_bus_state(hal_spi_t* spi_ptr);
 int hal_spi_TxComplete(hal_spi_t* spi_ptr);
 int hal_spi_send_byte(hal_spi_t* spi_ptr,uint8_t data);
+
+#if DMAC_USE
+int hal_spi_dma_set(hal_spi_t* spi_ptr,bool ten,bool ren);
+#endif
+
 
 #endif

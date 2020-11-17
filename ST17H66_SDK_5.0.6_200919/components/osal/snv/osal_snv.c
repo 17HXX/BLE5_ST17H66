@@ -2,19 +2,23 @@
 *******
 **************************************************************************************************/
 
+
 #include <stdint.h>
 #include "osal.h"
 #include "flash.h"
 #include "error.h"
 #include "osal_snv.h"
 #include "log.h"
+
+#ifndef USE_FS
+#define USE_FS 1
+#endif
+
 #ifdef USE_FS
 #include "fs.h"
 #endif
 
-#ifndef USE_FS
-#define USE_FS 0
-#endif
+
 static void print_hex (const uint8 *data, uint16 len)
 {
     uint16 i;

@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 /**************************************************************************************************
   Filename:       jump_table.c
   Revised:        
@@ -93,7 +94,7 @@ const uint32_t* const jump_table_base[256] __attribute__((section("jump_table_me
     0, 0, 0, 0, 0,  // 230 - 234       
     (const uint32_t*)hal_UART0_IRQHandler,      // 235 uart irq handler
     0, 0, 0, 0, 0,    // 236 - 240
-    (const uint32_t*)hal_UART1_IRQHandler, 0, 0, 0, 0, 0, 0, 0, 0,     // 241 - 249, for ISR entry
+    0, 0, 0, 0, 0, 0, 0, 0, 0,     // 241 - 249, for ISR entry
     0, 0, 0, 0, 0, 0                  // 250 - 255, for ISR entry
 };
 

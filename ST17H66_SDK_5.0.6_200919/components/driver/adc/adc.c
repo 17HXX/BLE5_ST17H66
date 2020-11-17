@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 /*******************************************************************************
 * @file   adc.c
 * @brief  Contains all functions support for adc driver
@@ -30,13 +31,13 @@ static uint16_t adc_cal_negtive = 0x0fff;
 gpio_pin_e s_pinmap[ADC_CH_NUM] = {
     GPIO_DUMMY, //ADC_CH0 =0,
     GPIO_DUMMY, //ADC_CH1 =1,
-		P11, //ADC_CH1N =2,
-		P23, //ADC_CH1P =3,  ADC_CH1DIFF = 3,
-		P24, //ADC_CH2N =4,
-		P14, //ADC_CH2P =5,  ADC_CH2DIFF = 5,
-		P15, //ADC_CH3N =6,
-		P20, //ADC_CH3P =7,  ADC_CH3DIFF = 7,
-		GPIO_DUMMY,  //ADC_CH_VOICE =8,
+	P11, //ADC_CH1N =2,
+	P23, //ADC_CH1P =3,  ADC_CH1DIFF = 3,
+	P24, //ADC_CH2N =4,
+	P14, //ADC_CH2P =5,  ADC_CH2DIFF = 5,
+	P15, //ADC_CH3N =6,
+	P20, //ADC_CH3P =7,  ADC_CH3DIFF = 7,
+	GPIO_DUMMY,  //ADC_CH_VOICE =8,
 };
 
 static void set_sampling_resolution(adc_CH_t channel, bool is_high_resolution,bool is_differential_mode)
@@ -106,8 +107,8 @@ static void set_sampling_resolution_auto(uint8_t channel, uint8_t is_high_resolu
         {
             a_channel = (adc_CH_t)i_channel;
             set_sampling_resolution(a_channel,
-																		(is_high_resolution & BIT(i_channel)),
-																		(is_differential_mode & BIT(i_channel)));
+							    (is_high_resolution & BIT(i_channel)),
+					            (is_differential_mode & BIT(i_channel)));
         }
     }
 }
@@ -120,19 +121,19 @@ static void set_differential_mode(void)
 
 static void disable_analog_pin(adc_CH_t channel)
 {
-  int index = (int)channel;
-  gpio_pin_e pin = s_pinmap[index];
-  if(pin == GPIO_DUMMY)
-    return;
-    
-	hal_gpio_cfg_analog_io(pin,Bit_DISABLE);
-	hal_gpio_pin_init(pin,GPIO_INPUT);       //ie=0,oen=1 set to imput
-	hal_gpio_pull_set(pin,GPIO_FLOATING);    //
+    int index = (int)channel;
+    gpio_pin_e pin = s_pinmap[index];
+    if(pin == GPIO_DUMMY)
+        return;
+
+    hal_gpio_cfg_analog_io(pin,Bit_DISABLE);
+    hal_gpio_pin_init(pin,GPIO_INPUT);       //ie=0,oen=1 set to imput
+    hal_gpio_pull_set(pin,GPIO_FLOATING);    //
 }
 
 static void clear_adcc_cfg(void)
 {
-  memset(&mAdc_Ctx, 0, sizeof(mAdc_Ctx));
+    memset(&mAdc_Ctx, 0, sizeof(mAdc_Ctx));
 }
 
 /////////////// adc ////////////////////////////
@@ -151,7 +152,7 @@ static void clear_adcc_cfg(void)
  *
  * @return      None.
  **************************************************************************************/
- void __attribute__((used)) hal_ADC_IRQHandler(void)
+void __attribute__((used)) hal_ADC_IRQHandler(void)
 {
 	int ch,status,ch2,n;
 	uint16_t adc_data[MAX_ADC_SAMPLE_SIZE];
@@ -159,30 +160,30 @@ static void clear_adcc_cfg(void)
 	
 	MASK_ADC_INT;	
 	if(status == mAdc_Ctx.all_channel)
-	{
-			for (ch = 2; ch <= ADC_CH7; ch++) {
-				 if (status & BIT(ch)) {
-						AP_ADCC->intr_mask &= ~BIT(ch);
-						for (n = 0; n < (MAX_ADC_SAMPLE_SIZE-3); n++) {						
-								adc_data[n] = (uint16_t)(read_reg(ADC_CH_BASE + (ch * 0x80) + ((n+2) * 4))&0xfff);
-								adc_data[n+1] = (uint16_t)((read_reg(ADC_CH_BASE + (ch * 0x80) + ((n+2) * 4))>>16)&0xfff);
-						}						
-						AP_ADCC->intr_clear = BIT(ch);								
-						if(mAdc_Ctx.enable == FALSE)
-								continue;		
-														
-						ch2=(ch%2)?(ch-1):(ch+1);
-						if (mAdc_Ctx.evt_handler[ch2]){
-								adc_Evt_t evt;
-								evt.type = HAL_ADC_EVT_DATA;
-								evt.ch = (adc_CH_t)ch2;
-								evt.data = adc_data;
-								evt.size = MAX_ADC_SAMPLE_SIZE-3;
-								mAdc_Ctx.evt_handler[ch2](&evt);
-						}
-						AP_ADCC->intr_mask |= BIT(ch);
-					}
-			}
+	{				
+		for (ch = 2; ch <= ADC_CH9; ch++) {
+			 if (status & BIT(ch)) {
+                AP_ADCC->intr_mask &= ~BIT(ch);
+                for (n = 0; n < (MAX_ADC_SAMPLE_SIZE-3); n++) {						
+                    adc_data[n] = (uint16_t)(read_reg(ADC_CH_BASE + (ch * 0x80) + ((n+2) * 4))&0xfff);
+                    adc_data[n+1] = (uint16_t)((read_reg(ADC_CH_BASE + (ch * 0x80) + ((n+2) * 4))>>16)&0xfff);
+                }						
+                AP_ADCC->intr_clear = BIT(ch);								
+                if(mAdc_Ctx.enable == FALSE)
+                		continue;		
+                								
+                ch2=(ch%2)?(ch-1):(ch+1);
+                if (mAdc_Ctx.evt_handler[ch2]){
+                    adc_Evt_t evt;
+                    evt.type = HAL_ADC_EVT_DATA;
+                    evt.ch = (adc_CH_t)ch2;
+                    evt.data = adc_data;
+                    evt.size = MAX_ADC_SAMPLE_SIZE-3;
+                    mAdc_Ctx.evt_handler[ch2](&evt);
+                }
+                AP_ADCC->intr_mask |= BIT(ch);
+            }
+		}
 			
 		if(mAdc_Ctx.continue_mode == FALSE){
 			hal_adc_stop();
@@ -191,6 +192,7 @@ static void clear_adcc_cfg(void)
 	
 	ENABLE_ADC_INT;	
 }
+
 
 static void adc_wakeup_hdl(void)
 {

@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 #include "phy_console.h"
 #include "uart.h"
 #include "error.h"
@@ -215,7 +216,7 @@ int console_init(const cons_cmd_t* cmdlist, cons_callback_t callback)
     
   hal_pwrmgr_register(MOD_CONSOLE, console_sleep_handler, console_wakeup_handler);
   
-  hal_uart_init(cfg);//uart init
+  hal_uart_init(cfg,UART0);//uart init
 
   
   s_cons_ctx.cmd_list = cmdlist;

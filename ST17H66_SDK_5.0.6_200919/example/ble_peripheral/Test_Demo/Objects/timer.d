@@ -7,10 +7,11 @@
 .\objects\timer.o: ..\..\..\components\inc\bus_dev.h
 .\objects\timer.o: ..\..\..\components\inc\mcu.h
 .\objects\timer.o: ..\..\..\components\arch\cm0\core_bumbee_m0.h
-.\objects\timer.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cm0.h
-.\objects\timer.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmInstr.h
-.\objects\timer.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmFunc.h
-.\objects\timer.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h
+.\objects\timer.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h
+.\objects\timer.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h
+.\objects\timer.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h
+.\objects\timer.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h
+.\objects\timer.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h
 .\objects\timer.o: ..\..\..\components\inc\mcu_phy_bumbee.h
 .\objects\timer.o: ..\..\..\components\inc\error.h
 .\objects\timer.o: ..\..\..\components\driver\clock\clock.h

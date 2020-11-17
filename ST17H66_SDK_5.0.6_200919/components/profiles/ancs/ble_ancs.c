@@ -2,9 +2,10 @@
 *******
 **************************************************************************************************/
 
+
 #include "bcomdef.h"
 #include "linkdb.h"
-#include "hal_defs.h"
+#include "types.h"
 #include "gatt.h"
 #include "gapgattserver.h"
 #include "gattservapp.h"

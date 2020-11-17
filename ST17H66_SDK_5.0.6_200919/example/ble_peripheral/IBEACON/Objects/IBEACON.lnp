@@ -22,7 +22,6 @@
 ".\objects\jump_table.o"
 "..\..\..\lib\rf.lib"
 "..\..\..\lib\ble_host.lib"
-"..\..\..\lib\cksys.lib"
 ".\objects\osal_simplebleperipheral.o"
 ".\objects\sbpprofile_ota.o"
 ".\objects\simplebleperipheral.o"

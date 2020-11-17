@@ -37,5 +37,5 @@
 .\objects\main.o: ..\..\..\components\ble\controller\rf_phy_driver.h
 .\objects\main.o: ..\..\..\components\ble\controller\ll_hw_drv.h
 .\objects\main.o: ..\..\..\components\ble\controller\rf_phy_driver.h
-.\objects\main.o: ..\..\..\components\driver\flash\flash.h
 .\objects\main.o: ..\..\..\components\inc\version.h
+.\objects\main.o: ..\..\..\components\driver\flash\flash.h

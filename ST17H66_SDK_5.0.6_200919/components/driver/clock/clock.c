@@ -96,8 +96,8 @@ void hal_clk_reset(MODULE_e module)
 	}
 	else if(module < MOD_USR0)
 	{
-		AP_PCR->CACHE_RST &= ~BIT(1-(module-MOD_PCLK_CACHE));
-		AP_PCR->CACHE_RST |= BIT(1-(module-MOD_PCLK_CACHE));
+		AP_PCR->CACHE_RST &= ~BIT(1-(module-MOD_HCLK_CACHE));
+		AP_PCR->CACHE_RST |= BIT(1-(module-MOD_HCLK_CACHE));
 	}
 }
 
@@ -191,3 +191,11 @@ void WaitUs(uint32_t wtTime)
             break;
     }
 }
+
+void hal_system_soft_reset(void)
+{
+    HAL_ENTER_CRITICAL_SECTION(); 
+    AP_PCR->SW_RESET1 = 0;  
+    while(1);
+}  
+

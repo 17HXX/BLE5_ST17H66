@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 /**************************************************************************************************
   Filename:       l2cap.h
   Revised:         
@@ -433,7 +434,12 @@ extern void *L2CAP_bm_alloc( uint16 size );
  * or off for data packets sent from the Controller to the Host.
  */
 extern void L2CAP_SetControllerToHostFlowCtrl( uint16 hostBuffSize, uint8 flowCtrlMode );
-
+/*
+ * This API is used by the upper layer to turn flow control on
+ * or off for data packets sent from the Controller to the Host.
+ * support DLE update
+ */
+extern void L2CAP_SetControllerToHostFlowCtrl_DLE( uint16 hostBuffSize, uint8 flowCtrlMode );
 /*
  * This API is used by the upper layer to notify L2CAP of the
  * number of data packets that have been completed for connection

@@ -40,9 +40,9 @@
 .\objects\bleuart_protocol.o: ..\..\..\components\ble\controller\ll.h
 .\objects\bleuart_protocol.o: ..\..\..\components\driver\timer\timer.h
 .\objects\bleuart_protocol.o: ..\..\..\components\ble\include\hci.h
+.\objects\bleuart_protocol.o: ..\..\..\components\inc\version.h
 .\objects\bleuart_protocol.o: source\bleuart_protocol.h
 .\objects\bleuart_protocol.o: ..\..\..\components\osal\include\osal_snv.h
 .\objects\bleuart_protocol.o: ..\..\..\components\driver\flash\flash.h
-.\objects\bleuart_protocol.o: ..\..\..\components\inc\version.h
 .\objects\bleuart_protocol.o: ..\..\..\components\driver\log\log.h
 .\objects\bleuart_protocol.o: source\bleuart_service.h

@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 #ifndef _HAL_PWRMGR_HD
 #define _HAL_PWRMGR_HD
 
@@ -32,7 +33,11 @@ extern "C" {
 typedef struct{
   gpio_pin_e pin;
   gpio_polarity_e type;
+  uint16_t on_time;
 }pwroff_cfg_t;
+
+
+extern uint32_t g_system_reset_cause;
 
 typedef void (*pwrmgr_Hdl_t)(void);
 
@@ -51,8 +56,8 @@ int hal_pwrmgr_RAM_retention_set(void);
 int hal_pwrmgr_LowCurrentLdo_enable(void);
 int hal_pwrmgr_LowCurrentLdo_disable(void);
 
-int hal_pwrmgr_poweroff(pwroff_cfg_t* pcfg, uint8_t wakeup_pin_num);
-
+void hal_pwrmgr_poweroff(pwroff_cfg_t* pcfg, uint8_t wakeup_pin_num);
+void hal_pwrmgr_enter_standby(pwroff_cfg_t* pcfg);
 #ifdef __cplusplus
 }
 #endif

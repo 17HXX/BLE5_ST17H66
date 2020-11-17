@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 /*******************************************************************************
 * @file   spi.c
 * @brief  Contains all functions support for spi driver
@@ -445,21 +446,36 @@ static void hal_spi_master_init(hal_spi_t* spi_ptr,uint32_t baud,SPI_SCMOD_e scm
 static void config_dma_channel4spitx(hal_spi_t*  spi_ptr,uint8_t* tx_buf,uint16_t tx_len)
 {    
     DMA_CH_CFG_t cfgc;
+//    uint16_t* size16_tx_buf;
 
     AP_SSI_TypeDef *Ssix = NULL;
     Ssix = (spi_ptr->spi_index == SPI0) ? AP_SPI0 : AP_SPI1;
 
     Ssix->DMACR &= 0x01;
 
+    spi_Ctx_t* pctx;
+    pctx = &m_spiCtx[spi_ptr->spi_index];
+
+//    if(pctx->cfg.spi_dfsmod == SPI_2BYTE)
+//        size16_tx_buf = (uint16_t *)tx_buf;
+    
     cfgc.transf_size = tx_len;
 				
-	cfgc.sinc = DMA_INC_INC;
-	cfgc.src_tr_width = DMA_WIDTH_BYTE;
+	cfgc.sinc = DMA_INC_NCHG;
+    if(pctx->cfg.spi_dfsmod == SPI_1BYTE)
+    {
+	    cfgc.src_tr_width = DMA_WIDTH_BYTE;
+        cfgc.dst_tr_width = DMA_WIDTH_BYTE;
+    }
+    else
+    {
+        cfgc.src_tr_width = DMA_WIDTH_HALFWORD;
+        cfgc.dst_tr_width = DMA_WIDTH_HALFWORD;
+    }
 	cfgc.src_msize = DMA_BSIZE_1;
 	cfgc.src_addr = (uint32_t)tx_buf;
 	
 	cfgc.dinc = DMA_INC_NCHG;
-	cfgc.dst_tr_width = DMA_WIDTH_BYTE;
 	cfgc.dst_msize = DMA_BSIZE_1;
 	cfgc.dst_addr = (uint32_t)&(Ssix->DataReg);  
 
@@ -483,6 +499,7 @@ static void config_dma_channel4spirx(hal_spi_t*  spi_ptr,uint8_t* rx_buf,uint16_
     cfgc.transf_size = rx_len;
 				
 	cfgc.sinc = DMA_INC_NCHG;
+    
 	cfgc.src_tr_width = DMA_WIDTH_BYTE;
 	cfgc.src_msize = DMA_BSIZE_1;
 	cfgc.src_addr = (uint32_t)&(Ssix->DataReg);
@@ -499,19 +516,8 @@ static void config_dma_channel4spirx(hal_spi_t*  spi_ptr,uint8_t* rx_buf,uint16_
     Ssix->DMACR |= 0x01;
  	Ssix->DMARDLR = 0;
 }
+#endif
 
-
-static int hal_spi_xmit_polling
-        (
-            hal_spi_t*  spi_ptr,
-            uint8_t     dma_tx_control,
-            uint8_t     dma_rx_control, 
-            uint8_t*    tx_buf,
-            uint8_t*    rx_buf,
-            uint16_t    tx_len,
-            uint16_t    rx_len
-        )
-#else
 static int hal_spi_xmit_polling
         (
             hal_spi_t*  spi_ptr, 
@@ -520,28 +526,32 @@ static int hal_spi_xmit_polling
             uint16_t    tx_len,
             uint16_t    rx_len
         )
-#endif
 {
     uint32_t rx_size = rx_len, tx_size = tx_len;
     uint32_t tmp_len,i;
-    AP_SSI_TypeDef *Ssix = NULL; 
+    AP_SSI_TypeDef *Ssix = NULL;
+#if DMAC_USE    
+    spi_Ctx_t* pctx;
+    pctx = &m_spiCtx[spi_ptr->spi_index];
+#endif
   
     Ssix = (spi_ptr->spi_index == SPI0) ? AP_SPI0 : AP_SPI1;
     SPI_INIT_TOUT(to);
+    
 
 #if DMAC_USE
-    if(rx_len && dma_rx_control)
+    if(rx_len && pctx->cfg.dma_rx_enable)
     {
         config_dma_channel4spirx(spi_ptr,rx_buf,rx_len);
     }
-    else if(tx_len && dma_tx_control)
+    else if(tx_len && pctx->cfg.dma_tx_enable)
     {
         config_dma_channel4spitx(spi_ptr,tx_buf,tx_len);
     }
 #endif    
     while(1){
 #if DMAC_USE        
-        if(Ssix->SR & TX_FIFO_NOT_FULL && tx_size && !dma_tx_control)
+        if(Ssix->SR & TX_FIFO_NOT_FULL && tx_size && !(pctx->cfg.dma_tx_enable))
 #else
         if(Ssix->SR & TX_FIFO_NOT_FULL && tx_size)
 #endif            
@@ -549,20 +559,36 @@ static int hal_spi_xmit_polling
             tmp_len = 8-Ssix->TXFLR;
             if(tmp_len > tx_size)
                 tmp_len = tx_size;
-            for(i = 0; i< tmp_len; i++){
-                if(tx_buf)
-                    Ssix->DataReg = *tx_buf++;
+            if(tx_buf)
+            {
+                if(tmp_len > 1)
+                {
+                    Ssix->DataReg = *tx_buf;
+                    Ssix->DataReg = *(tx_buf+1);
+                    for(i = 0; i< tmp_len-2; i++){
+                        Ssix->DataReg = *(tx_buf+2+i);
+                    }
+                }
                 else
-                    Ssix->DataReg = 0;
+                {
+                    Ssix->DataReg = *tx_buf;
+                }
             }
+            else
+            {
+                for(i = 0; i< tmp_len; i++){
+                    Ssix->DataReg = 0;
+                }                
+            }
+            
             tx_size -= tmp_len;                    
         }
 
 #if DMAC_USE        
-        if(((rx_len == 0) && ((tx_size == 0)||(tx_size && dma_tx_control))) ||
-            (rx_len && (tx_size == 0) && dma_rx_control))
+        if(((rx_len == 0) && ((tx_size == 0)||(tx_size && (pctx->cfg.dma_tx_enable)))) ||
+            (rx_len && (tx_size == 0) && (pctx->cfg.dma_rx_enable)))
             break;
-        else if(rx_len && !dma_rx_control)
+        else if(rx_len && !(pctx->cfg.dma_rx_enable))
 #else
         if(((rx_len == 0) && ((tx_size == 0))) ||
             (rx_len && (tx_size == 0)))
@@ -584,7 +610,7 @@ static int hal_spi_xmit_polling
 	}
 
 #if DMAC_USE
-    if(dma_rx_control || dma_tx_control)
+    if((pctx->cfg.dma_rx_enable) || (pctx->cfg.dma_tx_enable))
         hal_dma_status_control(DMA_CH_0);
 #endif    
     
@@ -618,7 +644,7 @@ static void spi1_wakeup_handler(void)
     NVIC_SetPriority((IRQn_Type)SPI1_IRQn, IRQ_PRIO_HAL);
 }
 
-void hal_spi_dfs_set(hal_spi_t* spi_ptr,SPI_TMOD_e mod)
+void hal_spi_tmod_set(hal_spi_t* spi_ptr,SPI_TMOD_e mod)
 {
     AP_SSI_TypeDef *Ssix = NULL;
     Ssix = (spi_ptr->spi_index == SPI0) ? AP_SPI0 : AP_SPI1;
@@ -627,6 +653,24 @@ void hal_spi_dfs_set(hal_spi_t* spi_ptr,SPI_TMOD_e mod)
     subWriteReg(&Ssix->CR0,9,8,mod);
     Ssix->SSIEN = 1;
 }
+
+void hal_spi_dfs_set(hal_spi_t* spi_ptr,SPI_DFS_e mod)
+{
+    AP_SSI_TypeDef *Ssix = NULL;
+    spi_Ctx_t* pctx;
+    
+    Ssix = (spi_ptr->spi_index == SPI0) ? AP_SPI0 : AP_SPI1;
+
+    pctx = &m_spiCtx[spi_ptr->spi_index];
+
+    Ssix->SSIEN = 0;
+    subWriteReg(&Ssix->CR0,3,0,mod);
+    Ssix->SSIEN = 1;
+
+    pctx->cfg.spi_dfsmod = SPI_2BYTE;
+}
+
+
 
 static void hal_spi_ndf_set(hal_spi_t* spi_ptr,uint16_t len)
 {
@@ -642,19 +686,6 @@ static void hal_spi_ndf_set(hal_spi_t* spi_ptr,uint16_t len)
     Ssix->SSIEN = 1;
 }
 
-#if DMAC_USE
-int hal_spi_transmit
-    (
-        hal_spi_t*  spi_ptr,
-        SPI_TMOD_e  mod,
-        uint8_t     dma_tx_control,
-        uint8_t     dma_rx_control,
-        uint8_t*    tx_buf,
-        uint8_t*    rx_buf,
-        uint16_t    tx_len,
-        uint16_t    rx_len
-    )
-#else
 int hal_spi_transmit
     (
         hal_spi_t*  spi_ptr,
@@ -664,7 +695,6 @@ int hal_spi_transmit
         uint16_t    tx_len,
         uint16_t    rx_len
     )
-#endif
 {
     int ret;
     spi_Ctx_t* pctx;
@@ -683,8 +713,8 @@ int hal_spi_transmit
         return PPlus_ERR_BUSY;
 
 #if DMAC_USE
-    if((dma_rx_control && (rx_len==0)) ||
-        (dma_tx_control && (tx_len==0)))       
+    if((pctx->cfg.dma_rx_enable && (rx_len==0)) ||
+        (pctx->cfg.dma_tx_enable && (tx_len==0)))       
     {
         return PPlus_ERR_INVALID_PARAM;
     }
@@ -692,7 +722,7 @@ int hal_spi_transmit
    
     Ssix = (spi_ptr->spi_index == SPI0) ? AP_SPI0 : AP_SPI1;
 
-    hal_spi_dfs_set(spi_ptr,mod);
+    hal_spi_tmod_set(spi_ptr,mod);
 
     if(mod > SPI_TXD)  //spi receive only or eeprom read,should set read data len(ndf)
     {
@@ -707,11 +737,7 @@ int hal_spi_transmit
 
     if(pctx->cfg.int_mode == false)
     {
-#if DMAC_USE        
-        ret = hal_spi_xmit_polling(spi_ptr,dma_tx_control,dma_rx_control,tx_buf, rx_buf, tx_len,rx_len);
-#else
-        ret = hal_spi_xmit_polling(spi_ptr,tx_buf, rx_buf, tx_len,rx_len);
-#endif        
+        ret = hal_spi_xmit_polling(spi_ptr,tx_buf, rx_buf, tx_len,rx_len);       
       
         if(pctx->cfg.force_cs == true  && pctx->is_slave_mode == FALSE)
             hal_gpio_fmux(pctx->cfg.ssn_pin,Bit_ENABLE);
@@ -876,9 +902,6 @@ int hal_spi_bus_init(hal_spi_t* spi_ptr,spi_Cfg_t cfg)
     return PPlus_SUCCESS;
 }
 
-//#define SPI_INIT_TOUT(to) int to = hal_systick()
-//#define PSI_CHECK_TOUT(to, timeout, loginfo) {if(hal_ms_intv(to) > timeout){LOG(loginfo);return PPlus_ERR_TIMEOUT;}}
-
 int hal_spis_clear_rx(hal_spi_t* spi_ptr)
 {
     AP_SSI_TypeDef *Ssix = NULL;
@@ -1019,4 +1042,19 @@ int hal_spi_init(SPI_INDEX_e channel)
     }
     return PPlus_ERR_INVALID_PARAM;
 }
+
+#if DMAC_USE
+int hal_spi_dma_set(hal_spi_t* spi_ptr,bool ten,bool ren)
+{
+    spi_Ctx_t* pctx = NULL;
+    if((spi_ptr == NULL) || (spi_ptr->spi_index > 1))
+        return PPlus_ERR_INVALID_PARAM;
+
+    pctx = &m_spiCtx[spi_ptr->spi_index];
+
+    pctx->cfg.dma_rx_enable = ren;
+    pctx->cfg.dma_tx_enable = ten;
+    return PPlus_SUCCESS;
+}
+#endif
 

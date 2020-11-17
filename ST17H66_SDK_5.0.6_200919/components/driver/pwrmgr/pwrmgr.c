@@ -25,6 +25,10 @@ static uint8_t mPwrMode = PWR_MODE_PWROFF_NO_SLEEP;
 #error "CFG_SLEEP_MODE define incorrect"
 #endif
 
+//#define CFG_FLASH_ENABLE_DEEP_SLEEP
+#ifdef CFG_FLASH_ENABLE_DEEP_SLEEP
+#warning "CONFIG FLASH ENABLE DEEP SLEEP !!!"
+#endif
 
 typedef struct _pwrmgr_Context_t{
   MODULE_e     moudle_id;
@@ -196,6 +200,12 @@ int hal_pwrmgr_unregister(MODULE_e mod)
 int __attribute__((used)) hal_pwrmgr_wakeup_process(void)
 {
   int i;
+
+#ifdef CFG_FLASH_ENABLE_DEEP_SLEEP
+    extern void spif_release_deep_sleep(void);
+    spif_release_deep_sleep();
+    WaitRTCCount(8);
+#endif
   
   AP_PCR->SW_CLK  = s_config_swClk0;
   AP_PCR->SW_CLK1 = s_config_swClk1|0x01;//force set M0 CPU
@@ -221,13 +231,18 @@ int __attribute__((used)) hal_pwrmgr_sleep_process(void)
     //LOG("Sleep\n");
   for(i = 0; i< HAL_PWRMGR_TASK_MAX_NUM; i++){
     if(mCtx[i].moudle_id == MOD_NONE){
-      return PPlus_ERR_NOT_REGISTED;
+      //return PPlus_ERR_NOT_REGISTED;
+      //found last module
+      break;
     }
     if(mCtx[i].sleep_handler)
       mCtx[i].sleep_handler();
   }
 
-
+#ifdef CFG_FLASH_ENABLE_DEEP_SLEEP
+    extern void spif_set_deep_sleep(void);
+    spif_set_deep_sleep();
+#endif
   
   return PPlus_SUCCESS;
 }
@@ -282,22 +297,87 @@ int hal_pwrmgr_LowCurrentLdo_disable(void)
     subWriteReg(0x4000f014,26,26, 0);
     return PPlus_SUCCESS;
 }
+extern void gpio_wakeup_set(gpio_pin_e pin, gpio_polarity_e type);
+extern void gpio_pull_set(gpio_pin_e pin, gpio_pupd_e type);
 
-int hal_pwrmgr_poweroff(pwroff_cfg_t* pcfg, uint8_t wakeup_pin_num)
+void hal_pwrmgr_poweroff(pwroff_cfg_t* pcfg, uint8_t wakeup_pin_num)
 { 
+    HAL_ENTER_CRITICAL_SECTION();
+    subWriteReg(0x4000f01c,6,6,0x00);   //disable software control
+    (void)(wakeup_pin_num);
+    if(pcfg[0].type==POL_FALLING)
+        gpio_pull_set(pcfg[0].pin ,GPIO_PULL_UP_S);
+    else
+        gpio_pull_set(pcfg[0].pin,GPIO_PULL_DOWN);
+    gpio_wakeup_set(pcfg[0].pin, pcfg[0].type);
+    /**
+    *  config reset casue as RSTC_OFF_MODE
+    *  reset path walkaround dwc
+    */
+    AP_AON->SLEEP_R[0] = 2;
+    write_reg(0x4000f000,0x5a5aa5a5);
+    while(1);
 
-  subWriteReg(0x4000f01c,6,6,0x00);   //disable software control
-
-  uint8_t i = 0;
-  for(i = 0; i < wakeup_pin_num; i++){
-    hal_gpio_wakeup_set(pcfg[i].pin, pcfg[i].type);
-  }
-  //system off
-//  #warning need check cache spif status
-  write_reg(0x4000f000,0x5a5aa5a5);
-	return PPlus_SUCCESS;
 }
 
+#define STANDBY_WAIT_MS(a)  WaitRTCCount((a)<<5) // 32us * 32  around 1ms
+__attribute__((section("_section_standby_code_"))) pwroff_cfg_t s_pwroff_cfg; 
+__attribute__((section("_section_standby_code_"))) void wakeupProcess_standby(void)
+{
+    subWriteReg(0x4000f014,29,27,0x07);
+    STANDBY_WAIT_MS(5);
+#ifdef CFG_FLASH_ENABLE_DEEP_SLEEP
+    extern void spif_release_deep_sleep(void);
+    spif_release_deep_sleep();
+    STANDBY_WAIT_MS(15);
+#endif
+    uint32_t volatile cnt=0;
+    while(1)
+    {
+        extern bool gpio_read(gpio_pin_e pin);
+        if(gpio_read(s_pwroff_cfg.pin)==s_pwroff_cfg.type)
+        {
+            cnt++;
+            STANDBY_WAIT_MS(32);
+            if(cnt>(s_pwroff_cfg.on_time>>5))
+                break;
+        }
+        else
+            hal_pwrmgr_enter_standby(&s_pwroff_cfg);
+    }
+    set_sleep_flag(0);
+    HAL_ENTER_CRITICAL_SECTION(); 
+    AP_PCR->SW_RESET1 = 0;  
+    while(1);
+}
+__attribute__((section("_section_standby_code_"))) void hal_pwrmgr_enter_standby(pwroff_cfg_t* pcfg) 
+{ 
+    HAL_ENTER_CRITICAL_SECTION();
+    subWriteReg(0x4000f01c,6,6,0x00);   //disable software control
+    if(pcfg[0].type==POL_FALLING)
+        gpio_pull_set(pcfg[0].pin ,GPIO_PULL_UP_S);
+    else
+        gpio_pull_set(pcfg[0].pin,GPIO_PULL_DOWN);
+    gpio_wakeup_set(pcfg[0].pin, pcfg[0].type);
+    //copy the first io
+    osal_memcpy(&s_pwroff_cfg,&(pcfg[0]),sizeof(pwroff_cfg_t));
+
+    JUMP_FUNCTION(WAKEUP_PROCESS)=   (uint32_t)&wakeupProcess_standby;
+
+#ifdef CFG_FLASH_ENABLE_DEEP_SLEEP
+    extern void spif_set_deep_sleep(void);
+    spif_set_deep_sleep();
+    WaitRTCCount(50);
+#endif
+
+    subWriteReg(0x4000f014,29,27,0);
+    set_sleep_flag(1);
+    AP_AON->SLEEP_R[0] = 2;
+    subWriteReg(0x4000f01c,21,17,RET_SRAM0);
+    enter_sleep_off_mode(SYSTEM_SLEEP_MODE);
+    while(1);
+
+}
 
 
 

@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 /*******************************************************************************
 * @file   gpio.c
 * @brief  Contains all functions support for gpio and iomux driver
@@ -171,13 +172,16 @@ void hal_gpio_fmux_set(gpio_pin_e pin,gpio_fmux_e type)
     uint8_t h = 0,l = 0;
     uint32_t reg_index;
     uint32_t bit_index;
-    
-    reg_index = pin / 4;
-    bit_index = pin % 4;
-    l = 8 * bit_index;
-    h = l + 5;
-    subWriteReg(&(AP_IOMUX->gpio_sel[reg_index]),h,l,type);
-    hal_gpio_fmux(pin, Bit_ENABLE);
+
+    if(pin != GPIO_DUMMY)
+    {
+        reg_index = pin / 4;
+        bit_index = pin % 4;
+        l = 8 * bit_index;
+        h = l + 5;
+        subWriteReg(&(AP_IOMUX->gpio_sel[reg_index]),h,l,type);
+        hal_gpio_fmux(pin, Bit_ENABLE);
+    }    
 }
 
 int hal_gpio_pin_init(gpio_pin_e pin,gpio_dir_t type)
@@ -189,9 +193,9 @@ int hal_gpio_pin_init(gpio_pin_e pin,gpio_dir_t type)
     hal_gpio_fmux(pin,Bit_DISABLE);
     if((pin == P2) || (pin == P3))
         hal_gpio_pin2pin3_control(pin,1);
+    hal_gpio_cfg_analog_io(pin,Bit_DISABLE);
     if(type == GPIO_OUTPUT)
     {
-//        AP_GPIO->swporta_dr &= ~BIT(pin);
         AP_GPIO->swporta_ddr |= BIT(pin);
     }
     else
@@ -317,7 +321,7 @@ void hal_gpio_pin2pin3_control(gpio_pin_e pin, uint8_t en)//0:sw,1:other func
 }
 
 
-void hal_gpio_retention_enable(gpio_pin_e pin,uint8_t en)
+static void hal_gpio_retention_enable(gpio_pin_e pin,uint8_t en)
 {	
     if(en)
     {

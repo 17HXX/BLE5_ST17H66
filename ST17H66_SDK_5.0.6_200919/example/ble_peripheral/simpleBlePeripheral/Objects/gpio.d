@@ -7,11 +7,11 @@
 .\objects\gpio.o: ..\..\..\components\driver\clock\clock.h
 .\objects\gpio.o: ..\..\..\components\inc\bus_dev.h
 .\objects\gpio.o: ..\..\..\components\arch\cm0\core_bumbee_m0.h
-.\objects\gpio.o: C:\Users\jzli\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm0.h
-.\objects\gpio.o: C:\Users\jzli\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h
-.\objects\gpio.o: C:\Users\jzli\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h
-.\objects\gpio.o: C:\Users\jzli\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h
-.\objects\gpio.o: C:\Users\jzli\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h
+.\objects\gpio.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h
+.\objects\gpio.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h
+.\objects\gpio.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h
+.\objects\gpio.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h
+.\objects\gpio.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h
 .\objects\gpio.o: ..\..\..\components\inc\mcu_phy_bumbee.h
 .\objects\gpio.o: ..\..\..\components\driver\gpio\gpio.h
 .\objects\gpio.o: ..\..\..\components\inc\error.h

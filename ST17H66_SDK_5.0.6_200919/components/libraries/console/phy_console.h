@@ -2,10 +2,11 @@
 *******
 **************************************************************************************************/
 
+
 #ifndef _PHY_CONSOLE_H
 #define _PHY_CONSOLE_H
 
-#include "hal_mcu.h"
+#include "bus_dev.h"
 
 #define CONS_CMD_NUM_MAX  32
 #define CONS_CMD_RXBUF_MAX  1024

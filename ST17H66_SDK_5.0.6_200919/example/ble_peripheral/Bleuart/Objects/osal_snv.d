@@ -24,3 +24,4 @@
 .\objects\osal_snv.o: ..\..\..\components\osal\include\osal_snv.h
 .\objects\osal_snv.o: ..\..\..\components\driver\log\log.h
 .\objects\osal_snv.o: ..\..\..\components\driver\uart\uart.h
+.\objects\osal_snv.o: ..\..\..\components\libraries\fs\fs.h

@@ -2,17 +2,6 @@
 *******
 **************************************************************************************************/
 
-/************************************************************** 
- *
- * Module Name:	RTC module
- * File name:	app_datetime.c 
- * Brief description:
- *    RCT function for nrf52 platform
- * Author:	Eagle.Lao
- * Data:	2017-06-12
- * Revision:V0.01
-****************************************************************/
-
 
 #include <stdlib.h>
 #include "OSAL.h"
@@ -84,7 +73,7 @@ void timer_cnt_get(uint32_t* tick)
 #if(USE_SYS_TICK)
   *tick = hal_systick();         // read current RTC counter
 #else
-  *tick = clock_time_rtc();         // read current RTC counter
+  *tick = rtc_get_counter();         // read current RTC counter
 #endif
 }
 

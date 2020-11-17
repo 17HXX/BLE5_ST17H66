@@ -103,18 +103,18 @@ typedef enum{
 /*                Device Specific Peripheral registers structures             */
 /******************************************************************************/
 typedef struct{	
-	__IO uint32_t  CH0_AP_MBOX;
-	__IO uint32_t  CH0_CP_MBOX;
-	__IO uint32_t  CH1_AP_MBOX;
-	__IO uint32_t  CH1_CP_MBOX;
-	__IO uint32_t  AP_STATUS;
-	__IO uint32_t  CP_STATUS;
-	__IO uint32_t  AP_INTEN;
-	__IO uint32_t  CP_INTEN;
-	__IO uint32_t   remap;
-	__IO uint32_t   RXEV_EN;
-	__IO uint32_t   STCALIB;
-	__IO uint32_t  PERI_MASTER_SELECT;	
+	__IO uint32_t  CH0_AP_MBOX;         //0x00
+	__IO uint32_t  CH0_CP_MBOX;         //0x04
+	__IO uint32_t  CH1_AP_MBOX;         //0x08
+	__IO uint32_t  CH1_CP_MBOX;         //0x0c
+	__IO uint32_t  AP_STATUS;           //0x10
+	__IO uint32_t  CP_STATUS;           //0x14
+	__IO uint32_t  AP_INTEN;            //0x18
+	__IO uint32_t  CP_INTEN;            //0x1c
+	__IO uint32_t   remap;              //0x20
+	__IO uint32_t   RXEV_EN;            //0x24
+	__IO uint32_t   STCALIB;            //0x28
+	__IO uint32_t  PERI_MASTER_SELECT;  //0x2c
 }AP_COM_TypeDef;
 
 typedef struct{	

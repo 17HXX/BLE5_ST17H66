@@ -78,12 +78,12 @@ const pTaskEventHandlerFn tasksArr[] =
 	lxl_ui_all_func,
 	//lxl_uart_all_func,
 	//lxl_snesor_all_func,
-	lxl_adc_all_func,
+//	lxl_adc_all_func,
 	lxl_key_all_func,
 };
 
-const signed char tasksCnt = sizeof( tasksArr ) / sizeof( tasksArr[0] );
-u16 *tasksEvents;
+const uint8 tasksCnt = sizeof( tasksArr ) / sizeof( tasksArr[0] );
+uint16 *tasksEvents;
 
 
 /*********************************************************************
@@ -141,7 +141,7 @@ void osalInitTasks( void )
 	lxl_ui_init_task_func(taskID++) ; 	  
 	//lxl_uart_init_task_func(taskID++) ; 	 
 	//lxl_sensor_init_task_func(taskID++) ;	 
-	lxl_adc_init_task_func(taskID++) ;	  
+//	lxl_adc_init_task_func(taskID++) ;	  
 	lxl_key_init_task_func(taskID++) ;	
 
 	//HalPeripheral_Init(taskID);

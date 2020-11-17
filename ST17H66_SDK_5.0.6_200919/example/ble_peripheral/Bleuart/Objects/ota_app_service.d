@@ -31,6 +31,11 @@
 .\objects\ota_app_service.o: ..\..\..\components\ble\host\gatt_profile_uuid.h
 .\objects\ota_app_service.o: ..\..\..\components\Profiles\Roles\peripheral.h
 .\objects\ota_app_service.o: ..\..\..\components\ble\host\gattservapp.h
+.\objects\ota_app_service.o: ..\..\..\components\driver\clock\clock.h
 .\objects\ota_app_service.o: ..\..\..\components\profiles\ota_app\ota_app_service.h
 .\objects\ota_app_service.o: ..\..\..\components\inc\version.h
 .\objects\ota_app_service.o: ..\..\..\components\driver\log\log.h
+.\objects\ota_app_service.o: ..\..\..\components\ble\controller\ll.h
+.\objects\ota_app_service.o: ..\..\..\components\driver\timer\timer.h
+.\objects\ota_app_service.o: ..\..\..\components\ble\controller\ll_def.h
+.\objects\ota_app_service.o: ..\..\..\components\ble\controller\ll_buf.h

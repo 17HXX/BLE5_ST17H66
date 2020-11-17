@@ -37,6 +37,7 @@
 .\objects\bleuart.o: ..\..\..\components\ble\controller\ll.h
 .\objects\bleuart.o: ..\..\..\components\driver\timer\timer.h
 .\objects\bleuart.o: ..\..\..\components\ble\include\hci.h
+.\objects\bleuart.o: ..\..\..\components\inc\version.h
 .\objects\bleuart.o: ..\..\..\components\ble\include\gatt.h
 .\objects\bleuart.o: ..\..\..\components\ble\host\gapgattserver.h
 .\objects\bleuart.o: ..\..\..\components\ble\host\gattservapp.h
@@ -49,5 +50,4 @@
 .\objects\bleuart.o: source\bleuart_protocol.h
 .\objects\bleuart.o: ..\..\..\components\osal\include\osal_snv.h
 .\objects\bleuart.o: ..\..\..\components\driver\flash\flash.h
-.\objects\bleuart.o: ..\..\..\components\inc\version.h
 .\objects\bleuart.o: ..\..\..\components\driver\log\log.h

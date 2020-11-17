@@ -11,10 +11,11 @@
 .\objects\gapbondmgr.o: ..\..\..\components\inc\bus_dev.h
 .\objects\gapbondmgr.o: ..\..\..\components\inc\mcu.h
 .\objects\gapbondmgr.o: ..\..\..\components\arch\cm0\core_bumbee_m0.h
-.\objects\gapbondmgr.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cm0.h
-.\objects\gapbondmgr.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmInstr.h
-.\objects\gapbondmgr.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmFunc.h
-.\objects\gapbondmgr.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h
+.\objects\gapbondmgr.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h
+.\objects\gapbondmgr.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h
+.\objects\gapbondmgr.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h
+.\objects\gapbondmgr.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h
+.\objects\gapbondmgr.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h
 .\objects\gapbondmgr.o: ..\..\..\components\inc\mcu_phy_bumbee.h
 .\objects\gapbondmgr.o: ..\..\..\components\inc\error.h
 .\objects\gapbondmgr.o: ..\..\..\components\osal\include\OSAL.h

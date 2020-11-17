@@ -37,5 +37,6 @@
 .\objects\jump_table.o: ..\..\..\components\driver\clock\clock.h
 .\objects\jump_table.o: ..\..\..\components\ble\controller\ll_hw_drv.h
 .\objects\jump_table.o: ..\..\..\components\ble\controller\rf_phy_driver.h
+.\objects\jump_table.o: ..\..\..\components\inc\version.h
 .\objects\jump_table.o: ..\..\..\components\driver\pwrmgr\pwrmgr.h
 .\objects\jump_table.o: ..\..\..\components\driver\log\log.h

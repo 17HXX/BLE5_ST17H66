@@ -26,7 +26,6 @@
 ".\objects\jump_table.o"
 "..\..\..\lib\rf.lib"
 "..\..\..\lib\ble_host.lib"
-"..\..\..\lib\cksys.lib"
 ".\objects\hidkbd.o"
 ".\objects\hidkbd_main.o"
 ".\objects\osal_hidkbd.o"

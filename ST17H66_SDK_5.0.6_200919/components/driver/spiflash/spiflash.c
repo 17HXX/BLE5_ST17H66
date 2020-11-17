@@ -9,6 +9,8 @@
 #include "dma.h"
 
 
+uint32_t spiflash_space = 0x80000;
+
 hal_spi_t spiflash_spi ={
 	.spi_index = SPI0,
 };
@@ -23,14 +25,20 @@ void dma_cb(DMA_CH_t ch)
 
 
 spi_Cfg_t spi_cfg = {
-	.sclk_pin = GPIO_P18,
-	.ssn_pin = GPIO_P11,
-	.MOSI = GPIO_P14,
-	.MISO = GPIO_P15,
+	.sclk_pin = GPIO_P02,
+	.ssn_pin = GPIO_P00,
+	.MOSI = GPIO_P10,
+	.MISO = GPIO_P03,
 	
-	.baudrate = 2000000,
+	.baudrate = 8000000,
 	.spi_tmod = SPI_TRXD,
 	.spi_scmod = SPI_MODE0,
+	.spi_dfsmod = SPI_1BYTE,
+
+#if DMAC_USE
+    .dma_tx_enable = false,
+    .dma_rx_enable = false,
+#endif
 	
 	.int_mode = false,
 	.force_cs = true,
@@ -43,17 +51,17 @@ HAL_DMA_t dma_cfg = {
 };
 
 
-
-#define spiflash_cmd_tx_and_rx(mode,dmatx,dmarx,tx_buf,rx_buf,tx_len,rx_len)   \
-		hal_spi_transmit(&spiflash_spi,mode,dmatx,dmarx,tx_buf,rx_buf,tx_len,rx_len)
+#define spiflash_cmd_tx_and_rx(mode,tx_buf,rx_buf,tx_len,rx_len)   \
+		hal_spi_transmit(&spiflash_spi,mode,tx_buf,rx_buf,tx_len,rx_len)
 
 //gd25q16 driver
 uint32_t spiflash_read_identification(void)//check
 {
 	uint8_t buf_send[1] = {FLASH_RDID};
 	uint8_t buf_rece[3] = {0x00,0x00,0x00};
-	
-	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_EEPROM,0,0,buf_send,buf_rece,1,3))
+
+    hal_spi_dma_set(&spiflash_spi,0,0);
+	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_EEPROM,buf_send,buf_rece,1,3))
 		return (buf_rece[0] << 16)|(buf_rece[1] << 8) | (buf_rece[2]);
 	else
 		return 0xFFFFFF;
@@ -68,8 +76,10 @@ uint16_t spiflash_read_status_register(uint8_t bitsSel)//0~low other~high
 		buf_send[0] = FLASH_RDSR_LOW;
 	else
 		buf_send[0] = FLASH_RDSR_HIGH;
+
+    hal_spi_dma_set(&spiflash_spi,0,0);
 	
-	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_EEPROM,0,0,buf_send,buf_rece,1,2))
+	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_EEPROM,buf_send,buf_rece,1,2))
 		return (buf_rece[0] << 8) | (buf_rece[1]);
 	else
 		return 0xFFFF;
@@ -84,8 +94,9 @@ bool spiflash_bus_busy(void)
 void spiflash_program_erase_suspend(void)
 {
 	uint8_t buf_send[1] = {FLASH_PES};
-	
-	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,0,0,buf_send,NULL,1,0))
+
+    hal_spi_dma_set(&spiflash_spi,0,0);
+	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,buf_send,NULL,1,0))
 	{
 		;
 	}
@@ -94,8 +105,9 @@ void spiflash_program_erase_suspend(void)
 void spiflash_program_erase_resume(void)
 {
 	uint8_t buf_send[1] = {FLASH_PER};
-	
-	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,0,0,buf_send,NULL,1,0))
+
+    hal_spi_dma_set(&spiflash_spi,0,0);
+	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,buf_send,NULL,1,0))
 	{
 		;
 	}
@@ -104,8 +116,9 @@ void spiflash_program_erase_resume(void)
 void spiflash_deep_powerdown(void)
 {
 	uint8_t buf_send[1] = {FLASH_DP};
-	
-	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,0,0,buf_send,NULL,1,0))
+
+    hal_spi_dma_set(&spiflash_spi,0,0);
+	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,buf_send,NULL,1,0))
 	{
 		;
 	}
@@ -114,8 +127,9 @@ void spiflash_deep_powerdown(void)
 void spiflash_release_from_powerdown(void)
 {
 	uint8_t buf_send[1] = {FLASH_RDI};
-	
-	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,0,0,buf_send,NULL,1,0))
+
+    hal_spi_dma_set(&spiflash_spi,0,0);
+	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,buf_send,NULL,1,0))
 	{
 		;
 	}
@@ -126,7 +140,8 @@ void spiflash_write_enable(void)
 	uint8_t buf_send[1] = {FLASH_WREN};
 	
 	while(spiflash_bus_busy());
-	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,0,0,buf_send,NULL,1,0))
+    hal_spi_dma_set(&spiflash_spi,0,0);
+	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,buf_send,NULL,1,0))
 	{
 		;
 	}
@@ -137,7 +152,8 @@ void spiflash_write_disable(void)
 	uint8_t buf_send[1] = {FLASH_WRDIS};
 	
 	//while(spiflash_bus_busy());
-	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,0,0,buf_send,NULL,1,0))
+	hal_spi_dma_set(&spiflash_spi,0,0);
+	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,buf_send,NULL,1,0))
 	{
 		;
 	}
@@ -149,7 +165,8 @@ void spiflash_chip_erase(void)
 	
 	buf_send[0] = FLASH_CE;
 	spiflash_write_enable();
-	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,0,0,buf_send,NULL,1,0))
+    hal_spi_dma_set(&spiflash_spi,0,0);
+	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,buf_send,NULL,1,0))
 	{
 		;
 	}
@@ -164,7 +181,8 @@ void spiflash_sector_erase(uint32_t addr)
 	buf_send[3] = addr & 0xff;
 
 	spiflash_write_enable();
-	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,0,0,buf_send,NULL,4,0))
+    hal_spi_dma_set(&spiflash_spi,0,0);
+	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,buf_send,NULL,4,0))
 	{
 		;
 	}
@@ -179,7 +197,8 @@ void spiflash_block_erase_32KB(uint32_t addr)
 	buf_send[3] = addr & 0xff;
 
 	spiflash_write_enable();
-	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,0,0,buf_send,NULL,4,0))
+    hal_spi_dma_set(&spiflash_spi,0,0);
+	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,buf_send,NULL,4,0))
 	{
 		;
 	}
@@ -194,7 +213,8 @@ void spiflash_block_erase_64KB(uint32_t addr)
 	buf_send[3] = addr & 0xff;
 
 	spiflash_write_enable();
-	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,0,0,buf_send,NULL,4,0))
+    hal_spi_dma_set(&spiflash_spi,0,0);
+	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,buf_send,NULL,4,0))
 	{
 		;
 	}
@@ -207,8 +227,9 @@ void spiflash_write_status_register(uint8_t data)
 	
 	buf_send[1] = data;
 	while(spiflash_bus_busy());
-	spiflash_write_enable();	
-	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,0,0,buf_send,NULL,2,0))
+	spiflash_write_enable();
+    hal_spi_dma_set(&spiflash_spi,0,0);
+	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,buf_send,NULL,2,0))
 	{
 		;
 	}
@@ -245,7 +266,8 @@ static void spiflash_write_unit(uint32_t addr,uint8_t* tx_buf,uint8_t tx_len)//t
 		break;
 	}
 	spiflash_write_enable();
-	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,0,0,buf_send,NULL,(tx_len + 4),0))
+    hal_spi_dma_set(&spiflash_spi,0,0);
+	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,buf_send,NULL,(tx_len + 4),0))
 	{
 		;
 	}
@@ -259,7 +281,7 @@ void spiflash_write(uint32_t addr,uint8_t* tx_buf,uint16_t tx_len)
 	if(ret16 != 0)
 	{
 		spiflash_write_status_register(0x00);
-		while(spiflash_bus_busy() == TRUE);
+		while(spiflash_bus_busy());
 	}
 					
 	while(tx_len > 0)
@@ -275,7 +297,7 @@ void spiflash_write(uint32_t addr,uint8_t* tx_buf,uint16_t tx_len)
 			spiflash_write_unit((addr + offset),(tx_buf + offset),tx_len);
 			tx_len = 0;
 		}
-        while(spiflash_bus_busy() == TRUE);
+        while(spiflash_bus_busy());
 	}
 
 //you can process the protect with your requirenment	
@@ -305,12 +327,12 @@ void spiflash_write_eeprom(uint32_t addr,uint8_t* tx_buf,uint16_t tx_len)
 
 	spiflash_write_enable();
 
-//	hal_spi_dfs_set(&spiflash_spi,SPI_TXD);
-	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,1,0,buf_send,NULL,(tx_len + 4),0))
+    hal_spi_dma_set(&spiflash_spi,1,0);
+	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_TXD,buf_send,NULL,(tx_len + 4),0))
 	{
 		;
 	}
-	while(spiflash_bus_busy() == TRUE);
+	while(spiflash_bus_busy());
 }
 
 
@@ -322,8 +344,9 @@ static void spiflash_read_unit(uint32_t addr,uint8_t* rx_buf,uint8_t rx_len)//rx
 	buf_send[1] = (addr>>16)&0xff;
 	buf_send[2] = (addr>>8)&0xff;
 	buf_send[3] = addr & 0xff;
-	
-	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_EEPROM,0,0,buf_send,buf_rece,4,rx_len))
+
+    hal_spi_dma_set(&spiflash_spi,0,0);
+	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_EEPROM,buf_send,buf_rece,4,rx_len))
 	{
 		switch(rx_len)
 		{
@@ -354,13 +377,13 @@ static void spiflash_read_unit(uint32_t addr,uint8_t* rx_buf,uint8_t rx_len)//rx
 static void spiflash_read_eeprom(uint32_t addr,uint8_t* rx_buf,uint16_t rx_len)//rx_len in [1,4]
 {
 	uint8_t buf_send[4] = {FLASH_READ,0x00,0x00,0x00};
-//	uint8_t buf_rece[4] = {0x00,0x00,0x00,0x00};
 
 	buf_send[1] = (addr>>16)&0xff;
 	buf_send[2] = (addr>>8)&0xff;
 	buf_send[3] = addr & 0xff;
-	
-	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_EEPROM,0,1,buf_send,rx_buf,4,rx_len))
+
+    hal_spi_dma_set(&spiflash_spi,0,1);
+	if(PPlus_SUCCESS == spiflash_cmd_tx_and_rx(SPI_EEPROM,buf_send,rx_buf,4,rx_len))
 	{
 		;
 	}
@@ -409,9 +432,41 @@ int spiflash_init(void)
     return retval;
 }
 
+static void check_flash_space(uint8_t rev)
+{   
+    if(rev == 0x11)		//128k flash
+	{
+		spiflash_space = 0x20000;
+	}
+	else if(rev == 0x12)	//256k flash
+	{
+        spiflash_space = 0x40000;
+	}
+	else if(rev == 0x13)	//512k flash
+	{
+        spiflash_space = 0x80000;
+	}
+	else if(rev == 0x14)	//1m flash
+	{
+        spiflash_space = 0x100000;
+	}
+	else if(rev == 0x15)	//2m flash
+	{
+        spiflash_space = 0x200000;
+	}
+    else if(rev == 0x16)	//4m flash
+	{
+        spiflash_space = 0x400000;
+	}
+	else
+	{
+        spiflash_space = 0x80000; //default value
+	}
+}
+
 
 //gd25q16
-int GD25_init(void)
+int vendorflash_init(void)
 {
 	//if(hal_spi_bus_init(&spi,cfg) == PPlus_SUCCESS)//config and init spi first
 	//	LOG("spi init success!\n");
@@ -419,33 +474,34 @@ int GD25_init(void)
 
 	if((!dev) || (dev==0xFFFFFF)){
 		LOG("read flash id error %X\n",dev);
-		return false;
+		return PPlus_ERR_INVALID_PARAM;
 	}
 	LOG("flash id:0x%x\n",dev);
-	return true;
+    check_flash_space(dev&0xff);
+	return PPlus_SUCCESS;
 }
 
-int GD25_read(uint32_t addr,uint8_t *data,uint16_t len)
+int vendorflash_read(uint32_t addr,uint8_t *data,uint16_t len)
 {
-	if((addr < 0x200000) && (data != NULL) && (len > 0)){
+	if((addr < spiflash_space) && (data != NULL) && (len > 0)){
 		spiflash_read_eeprom(addr,data,len);
-		return true;
+		return PPlus_SUCCESS;
 	}
-	return false;
+	return PPlus_ERR_SPI_FLASH;
 }
 
-int GD25_erase(uint32_t addr,uint32_t len)
+int vendorflash_erase(uint32_t addr,uint32_t len)
 {
 	uint8_t lockinfo = 0;
 	uint32_t remainder = 0;
 
-	if((addr >= 0x200000) || (len == 0))
-		return false;
+	if((addr >= spiflash_space) || (len == 0))
+		return PPlus_ERR_INVALID_PARAM;
 	
 	lockinfo = spiflash_read_status_register(0);
 	spiflash_write_status_register(0x00);
 	
-	if((addr == 0) && (len == 0x200000))
+	if((addr == 0) && (len == spiflash_space))
 		spiflash_chip_erase();
 	else
 	{
@@ -463,7 +519,6 @@ int GD25_erase(uint32_t addr,uint32_t len)
 		len = len/0x1000;
 		
 		while(len > 0){
-			//LOG("addr:%d len:%d\n",addr,len);
 			if(((addr %16) == 0) && (len >= 16)){
                 while(spiflash_bus_busy());
 			    spiflash_block_erase_64KB(addr*0x1000);
@@ -493,14 +548,14 @@ int GD25_erase(uint32_t addr,uint32_t len)
 	spiflash_write_status_register(lockinfo);
 	while(spiflash_bus_busy());
 
-	return true;
+	return PPlus_SUCCESS;
 }
 
-int GD25_write(uint32_t addr,const uint8_t *data,uint16_t len)
+int vendorflash_write(uint32_t addr,const uint8_t *data,uint16_t len)
 {
-	if((addr < 0x200000) && (data != NULL) && (len > 0)){
+	if((addr < spiflash_space) && (data != NULL) && (len > 0)){
 		spiflash_write_eeprom(addr,(uint8_t *)data,len);
-		return true;
+		return PPlus_SUCCESS;
 	}
-	return false;
+	return PPlus_ERR_SPI_FLASH;
 }

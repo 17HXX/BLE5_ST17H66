@@ -8,10 +8,11 @@
 .\objects\adc.o: ..\..\..\components\inc\bus_dev.h
 .\objects\adc.o: ..\..\..\components\inc\mcu.h
 .\objects\adc.o: ..\..\..\components\arch\cm0\core_bumbee_m0.h
-.\objects\adc.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cm0.h
-.\objects\adc.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmInstr.h
-.\objects\adc.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmFunc.h
-.\objects\adc.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h
+.\objects\adc.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h
+.\objects\adc.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h
+.\objects\adc.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h
+.\objects\adc.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h
+.\objects\adc.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h
 .\objects\adc.o: ..\..\..\components\inc\mcu_phy_bumbee.h
 .\objects\adc.o: ..\..\..\components\driver\pwrmgr\pwrmgr.h
 .\objects\adc.o: ..\..\..\components\driver\clock\clock.h

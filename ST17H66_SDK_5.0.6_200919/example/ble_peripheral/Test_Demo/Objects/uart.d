@@ -7,10 +7,11 @@
 .\objects\uart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\uart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\uart.o: ..\..\..\components\arch\cm0\core_bumbee_m0.h
-.\objects\uart.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cm0.h
-.\objects\uart.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmInstr.h
-.\objects\uart.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmFunc.h
-.\objects\uart.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h
+.\objects\uart.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h
+.\objects\uart.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h
+.\objects\uart.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h
+.\objects\uart.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h
+.\objects\uart.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h
 .\objects\uart.o: ..\..\..\components\inc\mcu_phy_bumbee.h
 .\objects\uart.o: ..\..\..\components\driver\gpio\gpio.h
 .\objects\uart.o: ..\..\..\components\inc\error.h

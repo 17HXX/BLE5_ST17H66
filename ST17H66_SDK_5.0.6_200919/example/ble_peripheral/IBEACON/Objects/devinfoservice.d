@@ -11,10 +11,11 @@
 .\objects\devinfoservice.o: ..\..\..\components\inc\bus_dev.h
 .\objects\devinfoservice.o: ..\..\..\components\inc\mcu.h
 .\objects\devinfoservice.o: ..\..\..\components\arch\cm0\core_bumbee_m0.h
-.\objects\devinfoservice.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cm0.h
-.\objects\devinfoservice.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmInstr.h
-.\objects\devinfoservice.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cmFunc.h
-.\objects\devinfoservice.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h
+.\objects\devinfoservice.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0.h
+.\objects\devinfoservice.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h
+.\objects\devinfoservice.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h
+.\objects\devinfoservice.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h
+.\objects\devinfoservice.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include\system_ARMCM0.h
 .\objects\devinfoservice.o: ..\..\..\components\inc\mcu_phy_bumbee.h
 .\objects\devinfoservice.o: ..\..\..\components\inc\error.h
 .\objects\devinfoservice.o: ..\..\..\components\osal\include\OSAL.h

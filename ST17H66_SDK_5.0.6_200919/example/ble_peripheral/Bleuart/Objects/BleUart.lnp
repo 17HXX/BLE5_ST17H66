@@ -24,7 +24,6 @@
 ".\objects\jump_table.o"
 "..\..\..\lib\rf.lib"
 "..\..\..\lib\ble_host.lib"
-"..\..\..\lib\cksys.lib"
 ".\objects\bleuart.o"
 ".\objects\bleuart_main.o"
 ".\objects\bleuart_protocol.o"

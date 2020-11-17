@@ -45,8 +45,8 @@
 .\objects\bleuart_service.o: ..\..\..\components\ble\controller\ll.h
 .\objects\bleuart_service.o: ..\..\..\components\driver\timer\timer.h
 .\objects\bleuart_service.o: ..\..\..\components\ble\include\hci.h
+.\objects\bleuart_service.o: ..\..\..\components\inc\version.h
 .\objects\bleuart_service.o: source\bleuart_protocol.h
 .\objects\bleuart_service.o: ..\..\..\components\osal\include\osal_snv.h
 .\objects\bleuart_service.o: ..\..\..\components\driver\flash\flash.h
-.\objects\bleuart_service.o: ..\..\..\components\inc\version.h
 .\objects\bleuart_service.o: source\bleuart_service.h

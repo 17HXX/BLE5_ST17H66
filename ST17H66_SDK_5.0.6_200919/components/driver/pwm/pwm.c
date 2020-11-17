@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 /*******************************************************************************
 * @file		pwm.c
 * @brief	Contains all functions support for pwm driver
@@ -276,30 +277,6 @@ void hal_pwm_ch_start(pwm_ch_t ch)
 		hal_pwm_start();
 	}
 }
-
-
-
-void hal_pwm_ch_start_config(pwm_ch_t ch)
-{
-	if(pwmCtx.enable == FALSE)
-		return;
-	
-	if(pwmCtx.ch_en[ch.pwmN] == TRUE)
-	{
-		hal_pwm_set_count_val(ch.pwmN,ch.cmpVal,ch.cntTopVal);
-		PWM_SET_DIV(ch.pwmN, ch.pwmDiv);
-	}
-	else
-	{
-		hal_pwm_init(ch.pwmN,ch.pwmDiv,ch.pwmMode,ch.pwmPolarity);
-		hal_pwm_set_count_val(ch.pwmN,ch.cmpVal,ch.cntTopVal);
-		hal_pwm_open_channel(ch.pwmN,ch.pwmPin);
-		pwmCtx.ch_en[ch.pwmN] = TRUE;
-
-	//	hal_pwm_start();
-	}
-}
-
 
 void hal_pwm_ch_stop(pwm_ch_t ch)
 {

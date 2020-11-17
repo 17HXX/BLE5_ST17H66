@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 #ifndef _TYPES_H_
 #define _TYPES_H_
 
@@ -140,7 +141,8 @@ typedef struct _comm_evt_t{
 
 typedef void (*comm_cb_t)(comm_evt_t* pev);
 
-
+#define __ATTR_SECTION_SRAM__   __attribute__((section("_section_sram_code_")))
+#define __ATTR_SECTION_XIP__    __attribute__((section("_section_xip_code_")))
 
 #endif
 

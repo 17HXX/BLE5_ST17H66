@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 #include "flash.h"
 #include "ota_flash.h"
 #include "ota_app_service.h"
@@ -164,7 +165,7 @@ int __attribute__((section("ota_app_loader_area"))) ota_flash_load_app(void)
       if(ota_load_crc != (uint16)ota_load_checksum){
         //if crc incorrect, reboot to OTA mode
         write_reg(OTA_MODE_SELECT_REG, OTA_MODE_OTA);
-        NVIC_SystemReset();
+        hal_system_soft_reset();
       }
 
       flash_load_parition((uint8_t*)(ota_load_flash_addr + bank_addr), (int)ota_load_size, (uint8_t*)ota_load_run_addr);
@@ -177,7 +178,7 @@ int __attribute__((section("ota_app_loader_area"))) ota_flash_load_app(void)
       if(ota_load_crc != (uint16)ota_load_checksum){
         //if crc incorrect, reboot to OTA mode
         write_reg(OTA_MODE_SELECT_REG, OTA_MODE_OTA);
-        NVIC_SystemReset();
+        hal_system_soft_reset();
       }
     }
   }
@@ -251,7 +252,7 @@ int ota_flash_write_partition(uint32 addr, uint32_t* p_sect, uint32_t size)
   }
   return PPlus_SUCCESS;
   #endif
-  return(hal_flash_write(addr, (uint8_t *) p_sect, size));
+  return(hal_flash_write_by_dma(addr, (uint8_t *) p_sect, size));
 }
 
 int ota_flash_write_boot_sector(uint32_t* p_sect, uint32_t size, uint32_t offset)
@@ -278,7 +279,7 @@ int ota_flash_write_boot_sector(uint32_t* p_sect, uint32_t size, uint32_t offset
   }
   return PPlus_SUCCESS;
   #endif
-  return(hal_flash_write(OTAF_2nd_BOOTINFO_ADDR+offset, (uint8_t *) p_sect, size));
+  return(hal_flash_write_by_dma(OTAF_2nd_BOOTINFO_ADDR+offset, (uint8_t *) p_sect, size));
 }
 
 int ota_flash_erase(uint32_t bank_addr)

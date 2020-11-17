@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 /*********************************************************************
  * INCLUDES
  */
@@ -931,30 +932,15 @@ void hidDevGapStateCB( gaprole_States_t newState )
     // get connection handle
     GAPRole_GetParameter( GAPROLE_CONNHANDLE, &gapConnHandle );
 
-
-		uint8 bleupdateConnParams = TRUE;
-		uint8 enable_update_request= TRUE;
-
-
-		GAPRole_SetParameter( GAPROLE_PARAM_UPDATE_ENABLE, sizeof( uint8 ), &enable_update_request );
-		GAPRole_SetParameter( GAPROLE_PARAM_UPDATE_REQ, sizeof( uint8 ), &bleupdateConnParams );
-
     // connection not secure yet
     hidDevConnSecure = FALSE;
-
-    // don't start advertising when connection is closed
-    uint8 param = FALSE;
-    GAPRole_SetParameter( GAPROLE_ADVERT_ENABLED, sizeof( uint8 ), &param );
 
 	   uint8 peerAddress[B_ADDR_LEN];
 
     GAPRole_GetParameter(GAPROLE_CONN_BD_ADDR, peerAddress);
 		
-		
 
 	  LOG("Master Mac:%02X,%02X,%02X,%02X,%02X,%02X\n\r",peerAddress[5],peerAddress[4],peerAddress[3],peerAddress[2],peerAddress[1],peerAddress[0]);
-	
-	
 
     // start idle timer
     hidDevStartIdleTimer();
@@ -1010,7 +996,7 @@ void hidDevPairStateCB( uint16 connHandle, uint8 state, uint8 status )
       hidDevConnSecure = TRUE;
 			LOG("Pair Success\n\r");
 	     osal_start_timerEx(hidKbdTaskId, HID_TEST_EVT, 5000);		
-			// osal_start_timerEx(hidDevTaskId, HID_UPPARAM_EVT, 800);//3000
+			 //osal_start_timerEx(hidDevTaskId, HID_UPPARAM_EVT, 15000);//3000
 			
 			
 
@@ -1030,7 +1016,7 @@ void hidDevPairStateCB( uint16 connHandle, uint8 state, uint8 status )
       hidDevConnSecure = TRUE;
 			
 	  // osal_start_timerEx(hidKbdTaskId, HID_TEST_EVT, 5000);	
-		//	osal_start_timerEx(hidDevTaskId, HID_UPPARAM_EVT, 800);//3000
+		//	osal_start_timerEx(hidDevTaskId, HID_UPPARAM_EVT, 15000);//3000
 			osal_start_timerEx(hidKbdTaskId, HID_TEST_EVT, 5000);		
 			LOG("bond Success\n\r");
 			

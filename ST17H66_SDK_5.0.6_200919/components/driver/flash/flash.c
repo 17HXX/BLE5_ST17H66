@@ -2,6 +2,7 @@
 *******
 **************************************************************************************************/
 
+
 /*******************************************************************************
 * @file		flash.c
 * @brief	Contains all functions support for flash driver
@@ -59,19 +60,17 @@ static void hal_cache_tag_flush(void)
     uint32_t cb = AP_PCR->CACHE_BYPASS;
     volatile int dly = 8;
     if(cb==0)
-	{
-		AP_CACHE->CTRL0 = 0x02;
+	{		
         AP_PCR->CACHE_BYPASS = 1;
 	}
+	AP_CACHE->CTRL0 = 0x02; 
     while (dly--){;}; 
- 
     AP_CACHE->CTRL0 = 0x03;             
     dly = 8;while (dly--){;};  
-			
+	AP_CACHE->CTRL0 = 0x00;   
     if(cb==0)
 	{
-		AP_PCR->CACHE_BYPASS = 0;
-		AP_CACHE->CTRL0 = 0;       	
+        AP_PCR->CACHE_BYPASS = 0;
 	}
 	
     HAL_EXIT_CRITICAL_SECTION();
@@ -95,6 +94,10 @@ static int _spif_wait_nobusy_x(uint8_t flg, uint32_t tout_ns)
     status = _spif_read_status_reg_x();
     if((status & flg) == 0)
       return PPlus_SUCCESS;
+
+    //insert polling interval
+    //5*32us
+    WaitRTCCount(5);
   }
   return PPlus_ERR_BUSY;
 }
@@ -106,8 +109,8 @@ static void hal_cache_init(void)
     hal_clk_gate_enable(MOD_HCLK_CACHE);
     hal_clk_gate_enable(MOD_PCLK_CACHE);
 
-    //cache rst
-    AP_PCR->CACHE_RST=0x00;
+    //cache rst ahp
+    AP_PCR->CACHE_RST=0x02;
     while(dly--){};
     AP_PCR->CACHE_RST=0x03;
     hal_cache_tag_flush();
@@ -117,8 +120,8 @@ static void hal_cache_init(void)
 
 static void hw_spif_cache_config(void)
 {
-    clk_spif_ref_clk(s_xflashCtx.spif_ref_clk);
-    AP_SPIF->read_instr = s_xflashCtx.rd_instr;
+    spif_config(s_xflashCtx.spif_ref_clk,/*div*/1,s_xflashCtx.rd_instr,0,0);
+    AP_SPIF->wr_completion_ctrl=0xff010005;//set longest polling interval
     NVIC_DisableIRQ(SPIF_IRQn);              
     NVIC_SetPriority((IRQn_Type)SPIF_IRQn, IRQ_PRIO_HAL);              
     hal_cache_init();
@@ -140,7 +143,7 @@ int hal_flash_read(uint32_t addr, uint8_t *data, uint32_t size)
     volatile uint8_t *u8_spif_addr = (volatile uint8_t *)((addr & 0x7ffff) | FLASH_BASE_ADDR);
     uint32_t cb = AP_PCR->CACHE_BYPASS;
         
-#if(SPIF_FLASH_SZIE==FLASH_SIZE_1MB)    
+#if(SPIF_FLASH_SIZE==FLASH_SIZE_1MB)    
     uint32_t remap = addr & 0xf80000;
     if (remap)
     {
@@ -176,8 +179,6 @@ int hal_flash_read(uint32_t addr, uint8_t *data, uint32_t size)
     return PPlus_SUCCESS;
 }
 
-
-
 int hal_flash_write(uint32_t addr, uint8_t* data, uint32_t size)
 {
 	uint8_t retval;
@@ -189,6 +190,23 @@ int hal_flash_write(uint32_t addr, uint8_t* data, uint32_t size)
 
     retval = spif_write(addr,data,size);
 	
+    SPIF_STATUS_WAIT_IDLE(SPIF_WAIT_IDLE_CYC);
+    spif_wait_nobusy(SFLG_WIP, SPIF_TIMEOUT, PPlus_ERR_BUSY);
+    
+	HAL_CACHE_EXIT_BYPASS_SECTION();
+    return retval;
+}
+int hal_flash_write_by_dma(uint32_t addr, uint8_t* data, uint32_t size)
+{
+	uint8_t retval;
+
+	HAL_CACHE_ENTER_BYPASS_SECTION();
+	
+    SPIF_STATUS_WAIT_IDLE(SPIF_WAIT_IDLE_CYC);
+    spif_wait_nobusy(SFLG_WIP, SPIF_TIMEOUT, PPlus_ERR_BUSY);
+
+    retval = spif_write_dma(addr,data,size);
+ 
     SPIF_STATUS_WAIT_IDLE(SPIF_WAIT_IDLE_CYC);
     spif_wait_nobusy(SFLG_WIP, SPIF_TIMEOUT, PPlus_ERR_BUSY);
     
@@ -249,4 +267,3 @@ int flash_write_word(unsigned int offset, uint32_t  value)
     offset &= 0x00ffffff;
     return (hal_flash_write (offset, (uint8_t *) &temp, 4)); 	
 }
-
