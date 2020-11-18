@@ -1,0 +1,125 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.25.3.0
+Copyright (C) 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: aaa bbb, Microsoft, LIC=HF82Z-JY0RV-GQ70H-WIMTJ-H9EMN-TYGAX
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Professional  Version: 5.14.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.05 update 1 (build 106)
+Assembler:       Armasm.exe V5.05 update 1 (build 106)
+Linker/Locator:  ArmLink.exe V5.05 update 1 (build 106)
+Library Manager: ArmAr.exe V5.05 update 1 (build 106)
+Hex Converter:   FromElf.exe V5.05 update 1 (build 106)
+CPU DLL:         SARMCM3.DLL V5.14.0.0
+Dialog DLL:      DARMCM1.DLL V1.12.0.0
+Target DLL:      UL2CM3.DLL V1.155.0.0
+Dialog DLL:      TARMCM1.DLL V1.9.0.0
+ 
+<h2>Project:</h2>
+G:\ST17H66_Code\BLE5_ST17H66\ST17H66_SDK_3.0.6_201116\example\ble_peripheral\IBEACON\ibeacon.uvprojx
+Project File Date:  11/18/2020
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.05 update 1 (build 106)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
+Rebuild target 'Target 1'
+compiling gap.c...
+compiling cliface.c...
+compiling flash.c...
+compiling clock.c...
+compiling pwm.c...
+compiling osal_snv.c...
+compiling timer.c...
+compiling uart.c...
+compiling main.c...
+compiling fs.c...
+compiling my_printf.c...
+compiling pwrmgr.c...
+compiling central.c...
+compiling gpio.c...
+compiling gapgattserver.c...
+assembling startup_ARMCM0.s...
+compiling SimpleBLEPeripheral_Main.c...
+compiling gapbondmgr.c...
+compiling ota_app_service.c...
+compiling devinfoservice.c...
+compiling jump_table.c...
+compiling system_ARMCM0.c...
+compiling peripheral.c...
+compiling OSAL_SimpleBLEPeripheral.c...
+compiling sbpProfile_ota.c...
+source\sbpProfile_ota.c(450): warning:  #177-D: variable "sum_index" was declared but never referenced
+  					uint8 sum_index	=	0;					
+source\sbpProfile_ota.c(427): warning:  #177-D: variable "notifyApp" was declared but never referenced
+  	uint8 notifyApp = 0xFF;
+source\sbpProfile_ota.c(611): warning:  #177-D: variable "notfEnable" was declared but never referenced
+  	uint16 notfEnable;
+source\sbpProfile_ota.c(98): warning:  #550-D: variable "simpleProfile_AppCBs" was set but never used
+  static simpleProfileCBs_t *simpleProfile_AppCBs = NULL;
+source\sbpProfile_ota.c(112): warning:  #177-D: variable "simpleProfileChar1UserDesp" was declared but never referenced
+  static uint8 simpleProfileChar1UserDesp[]		=	"Set param\0";
+source\sbpProfile_ota.c(120): warning:  #177-D: variable "simpleProfileChar2UserDesp" was declared but never referenced
+  static uint8 simpleProfileChar2UserDesp[]		=	"notify\0";
+source\sbpProfile_ota.c: 6 warnings, 0 errors
+compiling gattservapp.c...
+compiling simpleBLEPeripheral.c...
+source\simpleBLEPeripheral.c(221): warning:  #177-D: variable "temp" was declared but never referenced
+  	uint8 temp;
+source\simpleBLEPeripheral.c(268): warning:  #177-D: variable "fs_read_len" was declared but never referenced
+  	uint16 fs_read_len=0;
+source\simpleBLEPeripheral.c(269): warning:  #177-D: variable "snv_ret" was declared but never referenced
+  	int snv_ret=0;
+source\simpleBLEPeripheral.c(519): warning:  #177-D: variable "str_addr" was declared but never referenced
+  			uint8 str_addr[14]={0}; 
+source\simpleBLEPeripheral.c(593): warning:  #177-D: variable "newValue" was declared but never referenced
+  	uint8 newValue[IBEACON_ATT_LONG_PKT];
+source\simpleBLEPeripheral.c(615): warning:  #177-D: variable "new_uuid" was declared but never referenced
+  	uint8  new_uuid[IBEACON_UUID_LEN];
+source\simpleBLEPeripheral.c(616): warning:  #177-D: variable "major" was declared but never referenced
+  	uint16  major;
+source\simpleBLEPeripheral.c(617): warning:  #177-D: variable "minor" was declared but never referenced
+  	uint16  minor;
+source\simpleBLEPeripheral.c(618): warning:  #177-D: variable "power" was declared but never referenced
+  	uint8   power;
+source\simpleBLEPeripheral.c(181): warning:  #177-D: variable "simpleBLEPeripheral_SimpleProfileCBs" was declared but never referenced
+  static simpleProfileCBs_t simpleBLEPeripheral_SimpleProfileCBs =
+source\simpleBLEPeripheral.c: 10 warnings, 0 errors
+linking...
+.\scatter_load.sct(43): warning: L6329W: Pattern ota_app_service.O(RO) only matches removed unused sections.
+Program Size: Code=44368 RO-data=2012 RW-data=2220 ZI-data=14508  
+Finished: 0 information, 1 warning and 0 error messages.
+FromELF: creating hex file...
+After Build - User command #1: fromelf.exe .\Objects\IBEACON.axf --i32combined --output .\bin\IBEACON.hex
+After Build - User command #2: fromelf -c -a -d -e -v -o IBEACON.asm ./Objects/IBEACON.axf
+".\Objects\IBEACON.axf" - 0 Error(s), 17 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.4.5.0.pack
+                ARM.CMSIS.4.5.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 4.3.0
+   * Component: Startup Version: 1.0.1
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_Target_1
+  C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include
+  C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:4.3.0
+
+   * Component: ARM::Device:Startup:1.0.1
+      Include file:  Device\ARM\ARMCM0\Include\ARMCM0.h
+      Source file:   Device\ARM\ARMCM0\Source\ARM\startup_ARMCM0.s
+      Source file:   Device\ARM\ARMCM0\Source\system_ARMCM0.c
+Build Time Elapsed:  00:00:02
+</pre>
+</body>
+</html>

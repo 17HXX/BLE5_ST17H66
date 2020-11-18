@@ -1,0 +1,319 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: μVision V5.25.3.0
+Copyright (C) 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: aaa bbb, Microsoft, LIC=HF82Z-JY0RV-GQ70H-WIMTJ-H9EMN-TYGAX
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Professional  Version: 5.14.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.05 update 1 (build 106)
+Assembler:       Armasm.exe V5.05 update 1 (build 106)
+Linker/Locator:  ArmLink.exe V5.05 update 1 (build 106)
+Library Manager: ArmAr.exe V5.05 update 1 (build 106)
+Hex Converter:   FromElf.exe V5.05 update 1 (build 106)
+CPU DLL:         SARMCM3.DLL V5.14.0.0
+Dialog DLL:      DARMCM1.DLL V1.12.0.0
+Target DLL:      UL2CM3.DLL V1.155.0.0
+Dialog DLL:      TARMCM1.DLL V1.9.0.0
+ 
+<h2>Project:</h2>
+G:\ST17H66_Code\BLE5_ST17H66\ST17H66_SDK_3.0.6_201116\example\ble_peripheral\Test_Demo\demo.uvprojx
+Project File Date:  11/18/2020
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.05 update 1 (build 106)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
+Rebuild target 'Target 1'
+compiling main.c...
+compiling cliface.c...
+compiling pwm.c...
+compiling osal_snv.c...
+compiling clock.c...
+compiling key.c...
+compiling led_light.c...
+compiling uart.c...
+compiling flash.c...
+compiling gpio.c...
+compiling my_printf.c...
+compiling pwrmgr.c...
+compiling timer.c...
+compiling fs.c...
+compiling adc.c...
+compiling gap.c...
+compiling central.c...
+compiling gapgattserver.c...
+compiling sbpProfile_ota.c...
+source\lxl_gpio_all_init.h(143): warning:  #1295-D: Deprecated declaration my_gpio_all_init_func - give arg types
+  extern void my_gpio_all_init_func() ;   //引脚初始化
+source\lxl_gpio_all_init.h(155): warning:  #1295-D: Deprecated declaration lxl_power_time_count_time_func - give arg types
+  extern void lxl_power_time_count_time_func() ;  //定时关机函数
+source\lxl_gpio_all_init.h(191): warning:  #1295-D: Deprecated declaration lxl_buzzer_led_ui - give arg types
+  extern u32 lxl_buzzer_led_ui () ;   //传入数据，循环函数
+source\lxl_gpio_all_init.h(245): warning:  #1295-D: Deprecated declaration lxl_gpio_charge_count_func - give arg types
+  extern void lxl_gpio_charge_count_func() ;   //充电判断
+source\lxl_gpio_all_init.h(290): warning:  #1295-D: Deprecated declaration lxl_pwm1_count_value_func - give arg types
+  extern void lxl_pwm1_count_value_func() ;   //电机功能模式控制"1"
+source\lxl_gpio_all_init.h(291): warning:  #1295-D: Deprecated declaration lxl_warm_count_onoff_func - give arg types
+  void lxl_warm_count_onoff_func();    //加热控制函数
+source\sbpProfile_ota.c(130): warning:  #177-D: variable "simpleProfileChar1UserDesp" was declared but never referenced
+  static uint8 simpleProfileChar1UserDesp[] = "READ_NOTIFY_PROP\0";
+source\sbpProfile_ota.c(140): warning:  #177-D: variable "simpleProfileChar2UserDesp" was declared but never referenced
+  static uint8 simpleProfileChar2UserDesp[] = "WRITE_PROP\0";
+source\sbpProfile_ota.c(144): warning:  #177-D: variable "simpleProfileChar3Props" was declared but never referenced
+  static uint8 simpleProfileChar3Props = GATT_PROP_READ | GATT_PROP_WRITE;
+source\sbpProfile_ota.c(147): warning:  #177-D: variable "simpleProfileChar3" was declared but never referenced
+  static uint16 simpleProfileChar3 = 0;
+source\sbpProfile_ota.c(150): warning:  #177-D: variable "simpleProfileChar3UserDesp" was declared but never referenced
+  static uint8 simpleProfileChar3UserDesp[] = "Minor\0";
+source\sbpProfile_ota.c(154): warning:  #177-D: variable "simpleProfileChar4Props" was declared but never referenced
+  static uint8 simpleProfileChar4Props = GATT_PROP_READ | GATT_PROP_WRITE;
+source\sbpProfile_ota.c(157): warning:  #177-D: variable "simpleProfileChar4" was declared but never referenced
+  static uint8 simpleProfileChar4 = 0;
+source\sbpProfile_ota.c(166): warning:  #177-D: variable "simpleProfileChar4UserDesp" was declared but never referenced
+  static uint8 simpleProfileChar4UserDesp[] = "Power\0";
+source\sbpProfile_ota.c(170): warning:  #177-D: variable "simpleProfileChar5Props" was declared but never referenced
+  static uint8 simpleProfileChar5Props = GATT_PROP_READ | GATT_PROP_WRITE |GATT_PROP_WRITE_NO_RSP;   // to change to write only, HZF
+source\sbpProfile_ota.c(173): warning:  #177-D: variable "simpleProfileChar5" was declared but never referenced
+  static uint8 simpleProfileChar5[IBEACON_ATT_LONG_PKT];
+source\sbpProfile_ota.c(176): warning:  #177-D: variable "simpleProfileChar5UserDesp" was declared but never referenced
+  static uint8 simpleProfileChar5UserDesp[] = "Reset\0";
+source\sbpProfile_ota.c(179): warning:  #177-D: variable "simpleProfileChar6Props" was declared but never referenced
+  static uint8 simpleProfileChar6Props = GATT_PROP_READ | GATT_PROP_NOTIFY;   
+source\sbpProfile_ota.c(182): warning:  #177-D: variable "simpleProfileChar6" was declared but never referenced
+  static uint8 simpleProfileChar6[IBEACON_ATT_LONG_PKT];
+source\sbpProfile_ota.c(185): warning:  #177-D: variable "simpleProfileChar6UserDesp" was declared but never referenced
+  static uint8 simpleProfileChar6UserDesp[] = "NOTIFY\0";
+source\sbpProfile_ota.c(194): warning:  #177-D: variable "simpleProfileChar7Props" was declared but never referenced
+  static uint8 simpleProfileChar7Props = GATT_PROP_READ | GATT_PROP_WRITE_NO_RSP;   // to change to write only, HZF
+source\sbpProfile_ota.c(197): warning:  #177-D: variable "simpleProfileChar7" was declared but never referenced
+  static uint8 simpleProfileChar7[IBEACON_ATT_LONG_PKT];
+source\sbpProfile_ota.c(200): warning:  #177-D: variable "simpleProfileChar7UserDesp" was declared but never referenced
+  static uint8 simpleProfileChar7UserDesp[] = "WT_NO_RSP\0";
+source\sbpProfile_ota.c: 23 warnings, 0 errors
+compiling lxl_gpio_lcd_fun.c...
+source\lxl_gpio_all_init.h(143): warning:  #1295-D: Deprecated declaration my_gpio_all_init_func - give arg types
+  extern void my_gpio_all_init_func() ;   //引脚初始化
+source\lxl_gpio_all_init.h(155): warning:  #1295-D: Deprecated declaration lxl_power_time_count_time_func - give arg types
+  extern void lxl_power_time_count_time_func() ;  //定时关机函数
+source\lxl_gpio_all_init.h(191): warning:  #1295-D: Deprecated declaration lxl_buzzer_led_ui - give arg types
+  extern u32 lxl_buzzer_led_ui () ;   //传入数据，循环函数
+source\lxl_gpio_all_init.h(245): warning:  #1295-D: Deprecated declaration lxl_gpio_charge_count_func - give arg types
+  extern void lxl_gpio_charge_count_func() ;   //充电判断
+source\lxl_gpio_all_init.h(290): warning:  #1295-D: Deprecated declaration lxl_pwm1_count_value_func - give arg types
+  extern void lxl_pwm1_count_value_func() ;   //电机功能模式控制"1"
+source\lxl_gpio_all_init.h(291): warning:  #1295-D: Deprecated declaration lxl_warm_count_onoff_func - give arg types
+  void lxl_warm_count_onoff_func();    //加热控制函数
+source\lxl_gpio_lcd_fun.c(5): warning:  #9-D: nested comment is not allowed
+  /*****************************************************************************/
+source\lxl_gpio_lcd_fun.c(20): warning:  #9-D: nested comment is not allowed
+  /*****************************************************************************/
+source\lxl_gpio_lcd_fun.c: 8 warnings, 0 errors
+compiling ota_app_service.c...
+compiling lxl_gpio_adc_count.c...
+source\lxl_gpio_all_init.h(143): warning:  #1295-D: Deprecated declaration my_gpio_all_init_func - give arg types
+  extern void my_gpio_all_init_func() ;   //引脚初始化
+source\lxl_gpio_all_init.h(155): warning:  #1295-D: Deprecated declaration lxl_power_time_count_time_func - give arg types
+  extern void lxl_power_time_count_time_func() ;  //定时关机函数
+source\lxl_gpio_all_init.h(191): warning:  #1295-D: Deprecated declaration lxl_buzzer_led_ui - give arg types
+  extern u32 lxl_buzzer_led_ui () ;   //传入数据，循环函数
+source\lxl_gpio_all_init.h(245): warning:  #1295-D: Deprecated declaration lxl_gpio_charge_count_func - give arg types
+  extern void lxl_gpio_charge_count_func() ;   //充电判断
+source\lxl_gpio_all_init.h(290): warning:  #1295-D: Deprecated declaration lxl_pwm1_count_value_func - give arg types
+  extern void lxl_pwm1_count_value_func() ;   //电机功能模式控制"1"
+source\lxl_gpio_all_init.h(291): warning:  #1295-D: Deprecated declaration lxl_warm_count_onoff_func - give arg types
+  void lxl_warm_count_onoff_func();    //加热控制函数
+source\lxl_gpio_adc_count.c(205): warning:  #550-D: variable "left_abs" was set but never used
+      uint32 left_abs=0;                       /* 左位的值与目标值之间的差的绝对值 */
+source\lxl_gpio_adc_count.c(206): warning:  #550-D: variable "right_abs" was set but never used
+      uint32 right_abs=0;                      /* 右位的值与目标值之间的差的绝对值 */
+source\lxl_gpio_adc_count.c: 8 warnings, 0 errors
+compiling lxl_gpio_sensor_func.c...
+source\lxl_gpio_all_init.h(143): warning:  #1295-D: Deprecated declaration my_gpio_all_init_func - give arg types
+  extern void my_gpio_all_init_func() ;   //引脚初始化
+source\lxl_gpio_all_init.h(155): warning:  #1295-D: Deprecated declaration lxl_power_time_count_time_func - give arg types
+  extern void lxl_power_time_count_time_func() ;  //定时关机函数
+source\lxl_gpio_all_init.h(191): warning:  #1295-D: Deprecated declaration lxl_buzzer_led_ui - give arg types
+  extern u32 lxl_buzzer_led_ui () ;   //传入数据，循环函数
+source\lxl_gpio_all_init.h(245): warning:  #1295-D: Deprecated declaration lxl_gpio_charge_count_func - give arg types
+  extern void lxl_gpio_charge_count_func() ;   //充电判断
+source\lxl_gpio_all_init.h(290): warning:  #1295-D: Deprecated declaration lxl_pwm1_count_value_func - give arg types
+  extern void lxl_pwm1_count_value_func() ;   //电机功能模式控制"1"
+source\lxl_gpio_all_init.h(291): warning:  #1295-D: Deprecated declaration lxl_warm_count_onoff_func - give arg types
+  void lxl_warm_count_onoff_func();    //加热控制函数
+source\lxl_gpio_sensor_func.c(52): warning:  #177-D: variable "lxl_pwm1_mode_timeout_tick" was declared but never referenced
+  	static u32 lxl_pwm1_mode_timeout_tick ;      //当前大模式下的小模式超时时间
+source\lxl_gpio_sensor_func.c(53): warning:  #177-D: variable "lxl_pwm1_mode_numable_temp" was declared but never referenced
+  	static u8 lxl_pwm1_mode_numable_temp = 0 ;   //当前大模式下的小模式标志位
+source\lxl_gpio_sensor_func.c(54): warning:  #177-D: variable "lxl_pwm1_mode_duty_temp" was declared but never referenced
+  	static u8 lxl_pwm1_mode_duty_temp = 0 ;      //当前大模式下的小模式的占空比
+source\lxl_gpio_sensor_func.c: 9 warnings, 0 errors
+compiling lxl_gpio_all_init.c...
+source\lxl_gpio_all_init.h(143): warning:  #1295-D: Deprecated declaration my_gpio_all_init_func - give arg types
+  extern void my_gpio_all_init_func() ;   //引脚初始化
+source\lxl_gpio_all_init.h(155): warning:  #1295-D: Deprecated declaration lxl_power_time_count_time_func - give arg types
+  extern void lxl_power_time_count_time_func() ;  //定时关机函数
+source\lxl_gpio_all_init.h(191): warning:  #1295-D: Deprecated declaration lxl_buzzer_led_ui - give arg types
+  extern u32 lxl_buzzer_led_ui () ;   //传入数据，循环函数
+source\lxl_gpio_all_init.h(245): warning:  #1295-D: Deprecated declaration lxl_gpio_charge_count_func - give arg types
+  extern void lxl_gpio_charge_count_func() ;   //充电判断
+source\lxl_gpio_all_init.h(290): warning:  #1295-D: Deprecated declaration lxl_pwm1_count_value_func - give arg types
+  extern void lxl_pwm1_count_value_func() ;   //电机功能模式控制"1"
+source\lxl_gpio_all_init.h(291): warning:  #1295-D: Deprecated declaration lxl_warm_count_onoff_func - give arg types
+  void lxl_warm_count_onoff_func();    //加热控制函数
+source\lxl_gpio_all_init.c(458): warning:  #223-D: function "simpleProfile_Notify" declared implicitly
+  	simpleProfile_Notify(param,len,value) ;
+source\lxl_gpio_all_init.c: 7 warnings, 0 errors
+compiling lxl_log_uart_func.c...
+source\lxl_gpio_all_init.h(143): warning:  #1295-D: Deprecated declaration my_gpio_all_init_func - give arg types
+  extern void my_gpio_all_init_func() ;   //引脚初始化
+source\lxl_gpio_all_init.h(155): warning:  #1295-D: Deprecated declaration lxl_power_time_count_time_func - give arg types
+  extern void lxl_power_time_count_time_func() ;  //定时关机函数
+source\lxl_gpio_all_init.h(191): warning:  #1295-D: Deprecated declaration lxl_buzzer_led_ui - give arg types
+  extern u32 lxl_buzzer_led_ui () ;   //传入数据，循环函数
+source\lxl_gpio_all_init.h(245): warning:  #1295-D: Deprecated declaration lxl_gpio_charge_count_func - give arg types
+  extern void lxl_gpio_charge_count_func() ;   //充电判断
+source\lxl_gpio_all_init.h(290): warning:  #1295-D: Deprecated declaration lxl_pwm1_count_value_func - give arg types
+  extern void lxl_pwm1_count_value_func() ;   //电机功能模式控制"1"
+source\lxl_gpio_all_init.h(291): warning:  #1295-D: Deprecated declaration lxl_warm_count_onoff_func - give arg types
+  void lxl_warm_count_onoff_func();    //加热控制函数
+source\lxl_log_uart_func.c(145): warning:  #177-D: variable "cfg1" was declared but never referenced
+  		uart_Cfg_t cfg1 = {
+source\lxl_log_uart_func.c(164): warning:  #177-D: variable "cfg2" was declared but never referenced
+  		uart_Cfg_t cfg2 = {
+source\lxl_log_uart_func.c: 8 warnings, 0 errors
+compiling lxl_simple_profile_func.c...
+source\lxl_gpio_all_init.h(143): warning:  #1295-D: Deprecated declaration my_gpio_all_init_func - give arg types
+  extern void my_gpio_all_init_func() ;   //引脚初始化
+source\lxl_gpio_all_init.h(155): warning:  #1295-D: Deprecated declaration lxl_power_time_count_time_func - give arg types
+  extern void lxl_power_time_count_time_func() ;  //定时关机函数
+source\lxl_gpio_all_init.h(191): warning:  #1295-D: Deprecated declaration lxl_buzzer_led_ui - give arg types
+  extern u32 lxl_buzzer_led_ui () ;   //传入数据，循环函数
+source\lxl_gpio_all_init.h(245): warning:  #1295-D: Deprecated declaration lxl_gpio_charge_count_func - give arg types
+  extern void lxl_gpio_charge_count_func() ;   //充电判断
+source\lxl_gpio_all_init.h(290): warning:  #1295-D: Deprecated declaration lxl_pwm1_count_value_func - give arg types
+  extern void lxl_pwm1_count_value_func() ;   //电机功能模式控制"1"
+source\lxl_gpio_all_init.h(291): warning:  #1295-D: Deprecated declaration lxl_warm_count_onoff_func - give arg types
+  void lxl_warm_count_onoff_func();    //加热控制函数
+source\lxl_simple_profile_func.c: 6 warnings, 0 errors
+compiling lxl_gpio_pwm_count.c...
+.\source\lxl_gpio_all_init.h(143): warning:  #1295-D: Deprecated declaration my_gpio_all_init_func - give arg types
+  extern void my_gpio_all_init_func() ;   //引脚初始化
+.\source\lxl_gpio_all_init.h(155): warning:  #1295-D: Deprecated declaration lxl_power_time_count_time_func - give arg types
+  extern void lxl_power_time_count_time_func() ;  //定时关机函数
+.\source\lxl_gpio_all_init.h(191): warning:  #1295-D: Deprecated declaration lxl_buzzer_led_ui - give arg types
+  extern u32 lxl_buzzer_led_ui () ;   //传入数据，循环函数
+.\source\lxl_gpio_all_init.h(245): warning:  #1295-D: Deprecated declaration lxl_gpio_charge_count_func - give arg types
+  extern void lxl_gpio_charge_count_func() ;   //充电判断
+.\source\lxl_gpio_all_init.h(290): warning:  #1295-D: Deprecated declaration lxl_pwm1_count_value_func - give arg types
+  extern void lxl_pwm1_count_value_func() ;   //电机功能模式控制"1"
+.\source\lxl_gpio_all_init.h(291): warning:  #1295-D: Deprecated declaration lxl_warm_count_onoff_func - give arg types
+  void lxl_warm_count_onoff_func();    //加热控制函数
+source\lxl_gpio_pwm_count.c(77): warning:  #188-D: enumerated type mixed with another type
+  			hal_pwm_open_channel(PWM_CH1, 255);
+source\lxl_gpio_pwm_count.c: 7 warnings, 0 errors
+compiling peripheral.c...
+compiling jump_table.c...
+compiling lxl_ui_count_func.c...
+source\lxl_gpio_all_init.h(143): warning:  #1295-D: Deprecated declaration my_gpio_all_init_func - give arg types
+  extern void my_gpio_all_init_func() ;   //引脚初始化
+source\lxl_gpio_all_init.h(155): warning:  #1295-D: Deprecated declaration lxl_power_time_count_time_func - give arg types
+  extern void lxl_power_time_count_time_func() ;  //定时关机函数
+source\lxl_gpio_all_init.h(191): warning:  #1295-D: Deprecated declaration lxl_buzzer_led_ui - give arg types
+  extern u32 lxl_buzzer_led_ui () ;   //传入数据，循环函数
+source\lxl_gpio_all_init.h(245): warning:  #1295-D: Deprecated declaration lxl_gpio_charge_count_func - give arg types
+  extern void lxl_gpio_charge_count_func() ;   //充电判断
+source\lxl_gpio_all_init.h(290): warning:  #1295-D: Deprecated declaration lxl_pwm1_count_value_func - give arg types
+  extern void lxl_pwm1_count_value_func() ;   //电机功能模式控制"1"
+source\lxl_gpio_all_init.h(291): warning:  #1295-D: Deprecated declaration lxl_warm_count_onoff_func - give arg types
+  void lxl_warm_count_onoff_func();    //加热控制函数
+source\lxl_ui_count_func.c(38): warning:  #177-D: variable "push_data_app" was declared but never referenced
+  		uint8 push_data_app[20] = {0x00} ;	  //上传数据到app中
+source\lxl_ui_count_func.c(166): warning:  #177-D: variable "push_data_app" was declared but never referenced
+  	u8 push_data_app[20] = {0x00};
+source\lxl_ui_count_func.c(205): warning:  #177-D: variable "key_dowm_tick_temp" was declared but never referenced
+      static u8 key_dowm_tick_temp = 0 ;
+source\lxl_ui_count_func.c: 9 warnings, 0 errors
+compiling gapbondmgr.c...
+compiling gattservapp.c...
+compiling OSAL_SimpleBLEPeripheral.c...
+source\lxl_gpio_all_init.h(143): warning:  #1295-D: Deprecated declaration my_gpio_all_init_func - give arg types
+  extern void my_gpio_all_init_func() ;   //引脚初始化
+source\lxl_gpio_all_init.h(155): warning:  #1295-D: Deprecated declaration lxl_power_time_count_time_func - give arg types
+  extern void lxl_power_time_count_time_func() ;  //定时关机函数
+source\lxl_gpio_all_init.h(191): warning:  #1295-D: Deprecated declaration lxl_buzzer_led_ui - give arg types
+  extern u32 lxl_buzzer_led_ui () ;   //传入数据，循环函数
+source\lxl_gpio_all_init.h(245): warning:  #1295-D: Deprecated declaration lxl_gpio_charge_count_func - give arg types
+  extern void lxl_gpio_charge_count_func() ;   //充电判断
+source\lxl_gpio_all_init.h(290): warning:  #1295-D: Deprecated declaration lxl_pwm1_count_value_func - give arg types
+  extern void lxl_pwm1_count_value_func() ;   //电机功能模式控制"1"
+source\lxl_gpio_all_init.h(291): warning:  #1295-D: Deprecated declaration lxl_warm_count_onoff_func - give arg types
+  void lxl_warm_count_onoff_func();    //加热控制函数
+source\OSAL_SimpleBLEPeripheral.c: 6 warnings, 0 errors
+compiling SimpleBLEPeripheral_Main.c...
+assembling startup_ARMCM0.s...
+compiling halPeripheral.c...
+compiling simpleBLEPeripheral.c...
+source\simpleBLEPeripheral.c(286): warning:  #223-D: function "hal_flash_read" declared implicitly
+  		hal_flash_read(0x4004,adv_mac_data,2);   //读取mac地址
+source\simpleBLEPeripheral.c(331): warning:  #177-D: variable "passkey" was declared but never referenced
+          uint32 passkey = DEFAULT_PASSCODE;
+source\simpleBLEPeripheral.c(332): warning:  #177-D: variable "pairMode" was declared but never referenced
+          uint8 pairMode = GAPBOND_PAIRING_MODE_WAIT_FOR_REQ;
+source\simpleBLEPeripheral.c(333): warning:  #177-D: variable "mitm" was declared but never referenced
+          uint8 mitm = TRUE;
+source\simpleBLEPeripheral.c(334): warning:  #177-D: variable "ioCap" was declared but never referenced
+          uint8 ioCap = GAPBOND_IO_CAP_NO_INPUT_NO_OUTPUT;
+source\simpleBLEPeripheral.c(335): warning:  #177-D: variable "bonding" was declared but never referenced
+          uint8 bonding = TRUE;
+source\simpleBLEPeripheral.c(665): warning:  #550-D: variable "pHciMsg" was set but never used
+      hciEvt_CmdComplete_t *pHciMsg;
+source\simpleBLEPeripheral.c(724): warning:  #177-D: variable "str_addr" was declared but never referenced
+              uint8 str_addr[14]={0}; 
+source\simpleBLEPeripheral.c(1058): warning:  #177-D: variable "new_uuid" was declared but never referenced
+      uint8  new_uuid[IBEACON_UUID_LEN];
+source\simpleBLEPeripheral.c(1059): warning:  #177-D: variable "major" was declared but never referenced
+      uint16  major;
+source\simpleBLEPeripheral.c(1060): warning:  #177-D: variable "minor" was declared but never referenced
+      uint16  minor;
+source\simpleBLEPeripheral.c(1061): warning:  #177-D: variable "power" was declared but never referenced
+      uint8   power;
+source\simpleBLEPeripheral.c(227): warning:  #177-D: variable "simpleBLEPeripheral_SimpleProfileCBs" was declared but never referenced
+  static simpleProfileCBs_t simpleBLEPeripheral_SimpleProfileCBs =
+source\simpleBLEPeripheral.c: 13 warnings, 0 errors
+compiling system_ARMCM0.c...
+linking...
+Program Size: Code=48612 RO-data=1752 RW-data=2164 ZI-data=15392  
+FromELF: creating hex file...
+After Build - User command #1: fromelf.exe .\Objects\simpleBlePeripheral.axf --i32combined --output .\bin\simpleBlePeripheral.hex
+After Build - User command #2: fromelf -c -a -d -e -v -o simpleBlePeripheral.asm ./Objects/simpleBlePeripheral.axf
+".\Objects\simpleBlePeripheral.axf" - 0 Error(s), 104 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.4.5.0.pack
+                ARM.CMSIS.4.5.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 4.3.0
+   * Component: Startup Version: 1.0.1
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_Target_1
+  C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include
+  C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM0\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:4.3.0
+
+   * Component: ARM::Device:Startup:1.0.1
+      Source file:   Device\ARM\ARMCM0\Source\ARM\startup_ARMCM0.s
+      Source file:   Device\ARM\ARMCM0\Source\system_ARMCM0.c
+      Include file:  Device\ARM\ARMCM0\Include\ARMCM0.h
+Build Time Elapsed:  00:00:02
+</pre>
+</body>
+</html>
