@@ -127,6 +127,6 @@ http://www2.keil.com/mdk5  或者 https://www.keil.com/download/product/
 
     邮箱: <yangqi@lenzetech.com>
 
-    技术支持QQ:2475484279，添加请注明公司及问题。
+    技术支持可联系销售业务提供。
 
 
