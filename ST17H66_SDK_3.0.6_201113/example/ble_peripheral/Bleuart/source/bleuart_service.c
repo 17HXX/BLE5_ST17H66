@@ -48,16 +48,17 @@
  * GLOBAL VARIABLES
  */
 // Rawpass GATT Profile Service UUID
-CONST uint8 bleuart_ServiceUUID[ATT_UUID_SIZE] =
-{0x55, 0xe4,0x05,0xd2,0xaf,0x9f,0xa9,0x8f,0xe5,0x4a,0x7d,0xfe,0x43,0x53,0x53,0x49};
+CONST uint8 bleuart_ServiceUUID[ATT_BT_UUID_SIZE] ={0xf0,0xff};
+//{0x55, 0xe4,0x05,0xd2,0xaf,0x9f,0xa9,0x8f,0xe5,0x4a,0x7d,0xfe,0x43,0x53,0x53,0x49};
+
 
 // Characteristic rx uuid
-CONST uint8 bleuart_RxCharUUID[ATT_UUID_SIZE] =
-{0xb3,0x9b,0x72,0x34,0xbe,0xec, 0xd4,0xa8,0xf4,0x43,0x41,0x88,0x43,0x53,0x53,0x49};
+CONST uint8 bleuart_RxCharUUID[ATT_BT_UUID_SIZE] ={0xf1,0xff};
+//{0xb3,0x9b,0x72,0x34,0xbe,0xec, 0xd4,0xa8,0xf4,0x43,0x41,0x88,0x43,0x53,0x53,0x49};
 
 // Characteristic tx uuid
-CONST uint8 bleuart_TxCharUUID[ATT_UUID_SIZE] =
-{0x16,0x96,0x24,0x47,0xc6,0x23, 0x61,0xba,0xd9,0x4b,0x4d,0x1e,0x43,0x53,0x53,0x49};
+CONST uint8 bleuart_TxCharUUID[ATT_BT_UUID_SIZE] ={0xf2,0xff};
+//{0x16,0x96,0x24,0x47,0xc6,0x23, 0x61,0xba,0xd9,0x4b,0x4d,0x1e,0x43,0x53,0x53,0x49};
 
 /*********************************************************************
  * EXTERNAL VARIABLES
@@ -78,7 +79,7 @@ static bleuart_ProfileChangeCB_t bleuart_AppCBs = NULL;
  */
 
 // Profile Service attribute
-static CONST gattAttrType_t bleuart_Service = { ATT_UUID_SIZE, bleuart_ServiceUUID };
+static CONST gattAttrType_t bleuart_Service = { ATT_BT_UUID_SIZE, bleuart_ServiceUUID };
 
 
 // Profile Characteristic 1 Properties
@@ -121,7 +122,7 @@ static gattAttribute_t bleuart_ProfileAttrTbl[] =
 
       // Characteristic Value 1
       { 
-        { ATT_UUID_SIZE, bleuart_RxCharUUID },
+        { ATT_BT_UUID_SIZE, bleuart_RxCharUUID },
         GATT_PERMIT_WRITE, 
         0, 
         &bleuart_RxCharValue[0] 
@@ -137,7 +138,7 @@ static gattAttribute_t bleuart_ProfileAttrTbl[] =
 
       // Characteristic Value 2
       { 
-        { ATT_UUID_SIZE, bleuart_TxCharUUID },
+        { ATT_BT_UUID_SIZE, bleuart_TxCharUUID },
         0, 
         0, 
         (uint8 *)&bleuart_TxCharValue 
@@ -243,24 +244,27 @@ static uint8 bleuart_ReadAttrCB( uint16 connHandle, gattAttribute_t *pAttr,
     }
 
     // Make sure it's not a blob operation (no attributes in the profile are long) 
-    if ( pAttr->type.len == ATT_BT_UUID_SIZE )
+    if ( pAttr->type.len == ATT_UUID_SIZE )
     {
-        // 16-bit UUID
+       //128-bit UUID
+		
+    }
+    else
+    {
+		 // 16-bit UUID
         uint16 uuid = BUILD_UINT16( pAttr->type.uuid[0], pAttr->type.uuid[1]);
         if(uuid == GATT_CLIENT_CHAR_CFG_UUID)
         {
             *pLen = 2;
             osal_memcpy(pValue, pAttr->pValue, 2);
         }
-    }
-    else
-    {
-        if(!osal_memcmp(pAttr->type.uuid, bleuart_TxCharUUID, 16))
+		
+        if(!osal_memcmp(pAttr->type.uuid, bleuart_TxCharUUID, 2))
         {
             *pLen = 1;
             pValue[0] = '1';
         }
-        else if(!osal_memcmp(pAttr->type.uuid, bleuart_RxCharUUID, 16))
+        else if(!osal_memcmp(pAttr->type.uuid, bleuart_RxCharUUID, 2))
         {
             LOG("read tx char\n");
         }
@@ -295,9 +299,15 @@ static bStatus_t bleuart_WriteAttrCB( uint16 connHandle, gattAttribute_t *pAttr,
         return ( ATT_ERR_INSUFFICIENT_AUTHOR );
     }
   
-    if ( pAttr->type.len == ATT_BT_UUID_SIZE )
+    if ( pAttr->type.len == ATT_UUID_SIZE )
     {
-        // 16-bit UUID
+       // 128-bit UUID
+
+    }
+    else
+    {
+		
+		 // 16-bit UUID
         uint16 uuid = BUILD_UINT16( pAttr->type.uuid[0], pAttr->type.uuid[1]);
         if(uuid == GATT_CLIENT_CHAR_CFG_UUID)
         {
@@ -313,11 +323,8 @@ static bStatus_t bleuart_WriteAttrCB( uint16 connHandle, gattAttribute_t *pAttr,
             bleuart_AppCBs(&evt);
           }
         }
-
-    }
-    else
-    {
-        // 128-bit UUID
+		
+        
         if(pAttr->handle == bleuart_ProfileAttrTbl[RAWPASS_RX_VALUE_HANDLE].handle)
         {
           if(bleuart_AppCBs){

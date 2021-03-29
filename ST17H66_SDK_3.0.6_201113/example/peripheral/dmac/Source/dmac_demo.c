@@ -26,19 +26,13 @@
 #include "dma.h"
 #include "flash.h"
 
-//#define MEM2MEM             0
-//#define MEM2FLASH           1
-//#define FLASH2MEM           2
-//#define MEM2UART1           3
-//#define UART12MEM           4
-//#define UART12UART2         5
-
-enum{
-	MEM2MEM,		
-	MEM2FLASH,
-	FLASH2MEM,
-	MEM2UART1,
-	TRAN_COUNT
+enum
+{
+    MEM2MEM,
+    MEM2FLASH,
+    FLASH2MEM,
+    MEM2UART1,
+    TRAN_COUNT
 } ;
 
 
@@ -76,7 +70,7 @@ void demo_dma_test(uint8 list)
 {
     uint8_t mode;
     uint32_t i;
-
+    uint8_t retval;
     mode = list % TRAN_COUNT;
 
     hal_dma_stop_channel(DMA_CH_0); //for dma demo test
@@ -96,13 +90,6 @@ void demo_dma_test(uint8 list)
             cfg.dst_addr = (uint32_t)g_dma_dst_buffer_u8;
             
             cfg.enable_int = false;
-            hal_dma_config_channel(DMA_CH_0,&cfg);
-            hal_dma_start_channel(DMA_CH_0);
-            if(cfg.enable_int == false)
-            {
-                hal_dma_wait_channel_complete(DMA_CH_0);
-                LOG("dma success\n");
-            }             
             break;
         case MEM2FLASH:
             for(i = 0; i< 0x100; i++)
@@ -123,14 +110,6 @@ void demo_dma_test(uint8 list)
 			cfg.dst_addr = (uint32_t)0x11004000;
 			
 			cfg.enable_int = true;
-
-            hal_dma_config_channel(DMA_CH_0,&cfg);
-            hal_dma_start_channel(DMA_CH_0);
-            if(cfg.enable_int == false)
-            {
-                hal_dma_wait_channel_complete(DMA_CH_0);
-                LOG("dma success\n");
-            }               
             break;
         case FLASH2MEM:
             memset(g_dma_dst_buffer_u8,0,0x400*2);
@@ -148,13 +127,6 @@ void demo_dma_test(uint8 list)
 			
 			cfg.enable_int = true;
 
-            hal_dma_config_channel(DMA_CH_0,&cfg);
-            hal_dma_start_channel(DMA_CH_0);
-            if(cfg.enable_int == false)
-            {
-                hal_dma_wait_channel_complete(DMA_CH_0);
-                LOG("dma success\n");
-            }  
             break;
         case MEM2UART1:
             for(i = 0; i< 100; i++)
@@ -172,18 +144,26 @@ void demo_dma_test(uint8 list)
 			cfg.dst_addr = (uint32_t)0x40004000;
 			
 			cfg.enable_int = true;
-			
-			hal_dma_config_channel(DMA_CH_0,&cfg);
-            hal_dma_start_channel(DMA_CH_0);
-            if(cfg.enable_int == false)
-            {
-                hal_dma_wait_channel_complete(DMA_CH_0);
-                LOG("dma success\n");
-            }
-            break;
-        default:
-            break;
+        break;
+
+    default:
+        break;
     }
+
+    retval = hal_dma_config_channel(DMA_CH_0,&cfg);
+
+    if(retval == PPlus_SUCCESS)
+    {
+        hal_dma_start_channel(DMA_CH_0);
+
+        if(cfg.enable_int == false)
+        {
+            hal_dma_wait_channel_complete(DMA_CH_0);
+            LOG("dma success\n");
+        }
+    }
+    else
+        LOG("[DMAC]Config channel Failed,Error code is %d\n",retval);
 }
 
 

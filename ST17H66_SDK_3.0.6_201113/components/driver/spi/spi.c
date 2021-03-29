@@ -66,11 +66,11 @@ void spi_int_enable(hal_spi_t* spi_ptr, uint32_t mask)
     
     if(Ssix == AP_SPI0)
     {
-        JUMP_FUNCTION(V14_IRQ_HANDLER)                  =   (uint32_t)&hal_SPI0_IRQHandler;
+        JUMP_FUNCTION(SPI0_IRQ_HANDLER)                  =   (uint32_t)&hal_SPI0_IRQHandler;
     }
     else
     {
-        JUMP_FUNCTION(V15_IRQ_HANDLER)                  =   (uint32_t)&hal_SPI1_IRQHandler;
+        JUMP_FUNCTION(SPI1_IRQ_HANDLER)                  =   (uint32_t)&hal_SPI1_IRQHandler;
     }
 
     NVIC_EnableIRQ((IRQn_Type)(SPI0_IRQn + spi_ptr->spi_index));
@@ -461,7 +461,7 @@ static void config_dma_channel4spitx(hal_spi_t*  spi_ptr,uint8_t* tx_buf,uint16_
     
     cfgc.transf_size = tx_len;
 				
-	cfgc.sinc = DMA_INC_NCHG;
+    cfgc.sinc = DMA_INC_INC;
     if(pctx->cfg.spi_dfsmod == SPI_1BYTE)
     {
 	    cfgc.src_tr_width = DMA_WIDTH_BYTE;
@@ -549,34 +549,89 @@ static int hal_spi_xmit_polling
         config_dma_channel4spitx(spi_ptr,tx_buf,tx_len);
     }
 #endif    
-    while(1){
-#if DMAC_USE        
-        if(Ssix->SR & TX_FIFO_NOT_FULL && tx_size && !(pctx->cfg.dma_tx_enable))
-#else
-        if(Ssix->SR & TX_FIFO_NOT_FULL && tx_size)
-#endif            
+    while(1)
+    {
+        if(Ssix->SR & TX_FIFO_NOT_FULL && tx_size
+            #if DMAC_USE
+                && !(pctx->cfg.dma_tx_enable)
+            #endif
+          )
         {
             tmp_len = 8-Ssix->TXFLR;
             if(tmp_len > tx_size)
                 tmp_len = tx_size;
             if(tx_buf)
             {
-                if(tmp_len > 1)
+                //support divider 2
+                switch (tmp_len)
                 {
+                case 1:
+                    Ssix->DataReg = *tx_buf;
+                    break;
+                case 2:
                     Ssix->DataReg = *tx_buf;
                     Ssix->DataReg = *(tx_buf+1);
-                    for(i = 0; i< tmp_len-2; i++){
-                        Ssix->DataReg = *(tx_buf+2+i);
-                    }
-                }
-                else
-                {
+                    break;
+
+                case 3:
                     Ssix->DataReg = *tx_buf;
+                    Ssix->DataReg = *(tx_buf+1);
+                    Ssix->DataReg = *(tx_buf+2);
+                    break;
+
+                case 4:
+                    Ssix->DataReg = *tx_buf;
+                    Ssix->DataReg = *(tx_buf+1);
+                    Ssix->DataReg = *(tx_buf+2);
+                    Ssix->DataReg = *(tx_buf+3);
+                    break;
+
+                case 5:
+                    Ssix->DataReg = *tx_buf;
+                    Ssix->DataReg = *(tx_buf+1);
+                    Ssix->DataReg = *(tx_buf+2);
+                    Ssix->DataReg = *(tx_buf+3);
+                    Ssix->DataReg = *(tx_buf+4);
+                    break;
+
+                case 6:
+                    Ssix->DataReg = *tx_buf;
+                    Ssix->DataReg = *(tx_buf+1);
+                    Ssix->DataReg = *(tx_buf+2);
+                    Ssix->DataReg = *(tx_buf+3);
+                    Ssix->DataReg = *(tx_buf+4);
+                    Ssix->DataReg = *(tx_buf+5);
+                    break;
+
+                case 7:
+                    Ssix->DataReg = *tx_buf;
+                    Ssix->DataReg = *(tx_buf+1);
+                    Ssix->DataReg = *(tx_buf+2);
+                    Ssix->DataReg = *(tx_buf+3);
+                    Ssix->DataReg = *(tx_buf+4);
+                    Ssix->DataReg = *(tx_buf+5);
+                    Ssix->DataReg = *(tx_buf+6);
+                    break;
+
+                case 8:
+                    Ssix->DataReg = *tx_buf;
+                    Ssix->DataReg = *(tx_buf+1);
+                    Ssix->DataReg = *(tx_buf+2);
+                    Ssix->DataReg = *(tx_buf+3);
+                    Ssix->DataReg = *(tx_buf+4);
+                    Ssix->DataReg = *(tx_buf+5);
+                    Ssix->DataReg = *(tx_buf+6);
+                    Ssix->DataReg = *(tx_buf+7);
+                    break;
+
+                default:
+                    break;
                 }
             }
             else
             {
-                for(i = 0; i< tmp_len; i++){
+                for(i = 0; i< tmp_len; i++)
+                {
                     Ssix->DataReg = 0;
                 }                
             }
@@ -590,8 +645,7 @@ static int hal_spi_xmit_polling
             break;
         else if(rx_len && !(pctx->cfg.dma_rx_enable))
 #else
-        if(((rx_len == 0) && ((tx_size == 0))) ||
-            (rx_len && (tx_size == 0)))
+        if((rx_len == 0) && ((tx_size == 0)))
             break;
         else if(rx_len)
 #endif            
@@ -706,7 +760,7 @@ int hal_spi_transmit
     pctx = &m_spiCtx[spi_ptr->spi_index];
     trans_ptr = &(pctx->transmit);
 
-    if(((tx_len == 0)&&(rx_len == 0))||(mod > SPI_EEPROM))
+    if(((tx_len == 0)&&(rx_len == 0))||(mod > SPI_EEPROM)||(tx_buf == NULL))
         return PPlus_ERR_INVALID_PARAM;
 
     if(pctx->transmit.busy == true)

@@ -553,7 +553,7 @@ int hal_gpioin_register(gpio_pin_e pin, gpioin_Hdl_t posedgeHdl, gpioin_Hdl_t ne
     p_irq_ctx[pin].negedgeHdl = negedgeHdl;
     ret = hal_gpioin_enable(pin);
 
-    JUMP_FUNCTION(V16_IRQ_HANDLER)   =   (uint32_t)&hal_GPIO_IRQHandler;
+    JUMP_FUNCTION(GPIO_IRQ_HANDLER)   =   (uint32_t)&hal_GPIO_IRQHandler;
     
     if (ret != PPlus_SUCCESS)
         hal_gpioin_disable(pin);
@@ -591,4 +591,9 @@ void hal_gpio_debug_mux(Freq_Type_e fre,bool en)
         AP_IOMUX->debug_mux_en |= BIT(fre);
     else	
         AP_IOMUX->debug_mux_en &= ~BIT(fre);
+}
+
+void hal_gpioin_set_flag(gpio_pin_e pin)
+{
+    m_gpioCtx.pin_assignments[pin] = GPIO_PIN_ASSI_IN;
 }

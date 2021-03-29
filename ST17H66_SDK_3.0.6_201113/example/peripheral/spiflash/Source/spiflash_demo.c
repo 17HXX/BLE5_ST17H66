@@ -55,9 +55,13 @@ void spi_demo_Init( uint8 task_id ){
 	spi_TaskID = task_id;
 	hal_dma_init();
     spiflash_init();
-	GD25_init();
+    vendorflash_init();
 //	osal_set_event( spi_TaskID, TIMER_1S_ONCE);
 	osal_start_reload_timer( spi_TaskID, TIMER_1S_ONCE , 2000);
+    for(uint16_t i=0; i<256; i++)
+        tx_buf[i] = i;
+
+    vendorflash_write(0x00,tx_buf,4);
 }
 
 #if 0
@@ -618,88 +622,86 @@ void spi_test_on_gd25q16(void)
 	//LOG("test spi on gd25q16b,there may be some differences between differenct slaves\n");
 	//LOG("when use int mode to transmit data,please assign buffer first\n");
 
-	for(uint16_t i=0;i<256;i++)
-		tx_buf[i] = i;
+    vendorflash_read(0x00,rx_buf,4);
+    LOG("%02x %02x %02x %02x\n",tx_buf[0],tx_buf[1],tx_buf[2],tx_buf[3]);
+    LOG("%02x %02x %02x %02x\n",rx_buf[0],rx_buf[1],rx_buf[2],rx_buf[3]);
+//  LOG("%02x %02x %02x %02x\n",rx_buf[252],rx_buf[253],rx_buf[254],rx_buf[255]);
+    spiflash_sector_erase(0x00);
+    vendorflash_read(0x00,rx_buf,4);
+    LOG("%02x %02x %02x %02x\n",rx_buf[0],rx_buf[1],rx_buf[2],rx_buf[3]);
+    // LOG("%02x %02x %02x %02x\n",rx_buf[252],rx_buf[253],rx_buf[254],rx_buf[255]);
+    #if 0
 
-	GD25_write(0,tx_buf,256);
+    while(testCase < 5)
+    {
+        LOG("testCase:%d\n",testCase);
 
-	GD25_read(0,rx_buf,0x100);
-	  
-	LOG("%02x %02x %02x %02x\n",rx_buf[0],rx_buf[1],rx_buf[2],rx_buf[3]);
-	LOG("%02x %02x %02x %02x\n",rx_buf[252],rx_buf[253],rx_buf[254],rx_buf[255]); 
+        switch(testCase)
+        {
+        case 0:
+            vendorflash_init();
+            vendorflash_erase(0,2*1024*1024);
+            spi_spi_gd25q16_read_chip(true,0);
+            LOG("erase_ok\n\n\n");
+            break;
 
-	GD25_erase(0,0x200000);
-	GD25_read(0,rx_buf,0x100);
-	  
-	LOG("%02x %02x %02x %02x\n",rx_buf[0],rx_buf[1],rx_buf[2],rx_buf[3]);
-	LOG("%02x %02x %02x %02x\n",rx_buf[252],rx_buf[253],rx_buf[254],rx_buf[255]);
-	
-#if 0
-	while(testCase < 5)
-	{
-		LOG("testCase:%d\n",testCase);
-		switch(testCase)
-		{
-			case 0:
-                GD25_init();
-				GD25_erase(0,2*1024*1024);
-				spi_spi_gd25q16_read_chip(true,0);
-				LOG("erase_ok\n\n\n");
-				break;
-			
-			case 1:
-				LOG("write_test(mode 1):");
-				spi_write_read_test_1(0x100*0,1);//1 page
-				spi_write_read_test_2(0x100*1,1);//8 page
-				LOG("case 1 ok\n\n\n");
-				break;
-				
-			case 2:
-				LOG("write_test(mode 2):");
-				addr = 0x100*9;
-				spi_gd25q16_write_test(addr,4,2);
-				spi_spi_gd25q16_read_chip(false,addr);
-				LOG("\ncase 2 ok\n\n\n");
-				break;
-				
-			case 3:
-				LOG("write_test(mode 3)\n");
-				spi_write_read_test_1(0x100*10,3);//1 page
-				spi_write_read_test_2(0x100*11,3);//8 page
-				LOG("case 3 ok\n\n\n");
-				break;
-			
-			case 4:
-				LOG("write_test(mode 4):");
-				addr = 0x100*19;
-				spi_gd25q16_write_test(addr,4,4);
-				spi_spi_gd25q16_read_chip(false,addr);
-				LOG("\ncase 4 ok\n\n\n");
-				break;
-			
-			default:
-				break;
-		}
-		
-		testCase++;
-	}
-		
-	if((testCase>=5) && (testCase<100))
-	{
-		LOG("testCase:%d\n",testCase);//read a page which data is 00~ff
-		addr = 0x100*8;
-		for(len=1;len<256;len++)
-		spi_gd25q16_read_test(addr,len);
-		testCase++;
-	}
-	else
-	{
-		LOG("test end,no problem\n");
-		while(1);;
-	}
-#endif
-	// hal_spis_clear_rx(&spiflash_spi);
-	// hal_spi_bus_deinit(&spiflash_spi);
+        case 1:
+            LOG("write_test(mode 1):");
+            spi_write_read_test_1(0x100*0,1);//1 page
+            spi_write_read_test_2(0x100*1,1);//8 page
+            LOG("case 1 ok\n\n\n");
+            break;
+
+        case 2:
+            LOG("write_test(mode 2):");
+            addr = 0x100*9;
+            spi_gd25q16_write_test(addr,4,2);
+            spi_spi_gd25q16_read_chip(false,addr);
+            LOG("\ncase 2 ok\n\n\n");
+            break;
+
+        case 3:
+            LOG("write_test(mode 3)\n");
+            spi_write_read_test_1(0x100*10,3);//1 page
+            spi_write_read_test_2(0x100*11,3);//8 page
+            LOG("case 3 ok\n\n\n");
+            break;
+
+        case 4:
+            LOG("write_test(mode 4):");
+            addr = 0x100*19;
+            spi_gd25q16_write_test(addr,4,4);
+            spi_spi_gd25q16_read_chip(false,addr);
+            LOG("\ncase 4 ok\n\n\n");
+            break;
+
+        default:
+            break;
+        }
+
+        testCase++;
+    }
+
+    if((testCase>=5) && (testCase<100))
+    {
+        LOG("testCase:%d\n",testCase);//read a page which data is 00~ff
+        addr = 0x100*8;
+
+        for(len=1; len<256; len++)
+            spi_gd25q16_read_test(addr,len);
+
+        testCase++;
+    }
+    else
+    {
+        LOG("test end,no problem\n");
+
+        while(1);;
+    }
+
+    #endif
+    // hal_spis_clear_rx(&spiflash_spi);
+    // hal_spi_bus_deinit(&spiflash_spi);
 }
 
 uint16 spi_demo_ProcessEvent( uint8 task_id, uint16 events )

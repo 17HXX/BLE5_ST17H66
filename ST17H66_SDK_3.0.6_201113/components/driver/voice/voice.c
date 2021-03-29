@@ -67,28 +67,26 @@ void hal_voice_dmic_open(gpio_pin_e dmicDataPin, gpio_pin_e dmicClkPin)
 }
 
 // Set PGA gain for AMIC
+/*
+    PGA second stage gain control bits
+    pga_1st_gain        Gain (v/v)
+    0         5
+    1        15
+
+    PGA second stage gain control bits
+    pga_2nd_gain<2:0>        Gain (v/v)
+    000                 37/4
+    001                 36/5
+    010                 35/6
+    011                 34/7
+    100                 33/8
+    101                 32/9
+    110                 31/10
+    111                 30/11
+*/
 void hal_voice_amic_gain(uint8_t amicGain)
 {
-	uint8_t pgaGain1;
-	uint8_t pgaGain2;
-	
-	if (amicGain > 14)
-		amicGain = 14;
-	
-	if (amicGain > 8) {
-		pgaGain1 = 2;
-		pgaGain2 = amicGain - 8;
-	}
-	else if (amicGain > 4) {
-		pgaGain1 = 1;
-		pgaGain2 = amicGain - 4;
-	}
-	else {
-		pgaGain1 = 0;
-		pgaGain2 = amicGain;
-	}
-	subWriteReg(0x4000f048,18,17,(uint32_t)pgaGain1);
-	subWriteReg(0x4000f048,21,19,(uint32_t)pgaGain2);
+    subWriteReg(0x4000F048, 22, 19,(amicGain&0x0F));//bit3:pga_1st_gain_t,bit2~0:pga_2nd_gain_t
 }
 
 // Set voice process gain
@@ -265,6 +263,10 @@ int hal_voice_config(voice_Cfg_t cfg, voice_Hdl_t evt_handler)
 	else {
 		hal_voice_amic_mode();
 		hal_voice_amic_gain(cfg.amicGain);
+        hal_gpio_pull_set(P18,GPIO_FLOATING);//pga in+
+        hal_gpio_pull_set(P20,GPIO_FLOATING);//pga in-
+        hal_gpio_pull_set(P15,GPIO_FLOATING);//micphone bias
+        //hal_gpio_pull_set(P23,GPIO_FLOATING);//micphone bias reference voltage
 		hal_gpio_cfg_analog_io(P15,Bit_ENABLE);//config micphone bias
 	}
 	
@@ -340,7 +342,7 @@ int hal_voice_start(void)
 	//Enable voice core
 	hal_voice_enable();
 	
-	JUMP_FUNCTION(V29_IRQ_HANDLER)                  =   (uint32_t)&hal_ADC_IRQHandler;
+    JUMP_FUNCTION(ADCC_IRQ_HANDLER)                  =   (uint32_t)&hal_ADC_IRQHandler;
 	//Enable VOICE IRQ
 	ENABLE_VOICE_INT;
 	
@@ -365,7 +367,7 @@ int hal_voice_stop(void)
 	hal_pwrmgr_unlock(MOD_VOC);
 	hal_pwrmgr_unlock(MOD_ADCC);
 
-	JUMP_FUNCTION(V29_IRQ_HANDLER)                  = 0;
+    JUMP_FUNCTION(ADCC_IRQ_HANDLER)                  = 0;
 	mVoiceCtx.enable = FALSE;
 	
 	return 0;

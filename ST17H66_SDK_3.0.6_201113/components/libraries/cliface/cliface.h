@@ -39,7 +39,11 @@
         }
 
 #define CLI_IS_WHITE_SPACE(ch)   ((' ' == (ch)) || ('\t' == (ch)))
-#define CLI_IS_CMD_SEPARATOR(ch) ((' ' == (ch)) || ('\t' == (ch)) || ('\r' == (ch)) || ('\n' == (ch)))
+#ifdef AT_CMD
+    #define CLI_IS_CMD_SEPARATOR(ch) (('=' == (ch)) || (',' == (ch)) || ('\r' == (ch)) || ('\n' == (ch)))
+#else // original one.
+    #define CLI_IS_CMD_SEPARATOR(ch) ((' ' == (ch)) || ('\t' == (ch)) || ('\r' == (ch)) || ('\n' == (ch)))
+#endif //end AT_CMD
 
 /** TBD: Move to limits/configuration header file */
 #define CLI_MAX_ARGS    16

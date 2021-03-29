@@ -326,7 +326,7 @@ void hal_pwm_module_deinit(void);
  * @return      None.
  **************************************************************************************/
 void hal_pwm_ch_start(pwm_ch_t ch);
-void hal_pwm_ch_start_config(pwm_ch_t ch);
+
 /**************************************************************************************
  * @fn          hal_pwm_ch_stop
  *

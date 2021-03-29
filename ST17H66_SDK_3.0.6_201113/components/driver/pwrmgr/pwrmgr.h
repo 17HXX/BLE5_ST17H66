@@ -18,6 +18,8 @@ extern "C" {
 #define PWR_MODE_SLEEP			    2
 #define PWR_MODE_PWROFF_NO_SLEEP    4
 
+//WAKEUP FROM STANDBY MODE
+#define WAKEUP_PIN_MAX   3
 
 #define HAL_PWRMGR_TASK_MAX_NUM     10
 
@@ -28,7 +30,7 @@ extern "C" {
 #define   DEF_CLKG_CONFIG_0       (_CLK_IOMUX|_CLK_UART0|_CLK_GPIO|_CLK_SPIF)
 
 #define   DEF_CLKG_CONFIG_1       (_CLK_M0_CPU | _CLK_BB |_CLK_TIMER |_CLK_BBREG \
-                                  |_CLK_TIMER1|_CLK_TIMER2|_CLK_TIMER3|_CLK_TIMER4)
+                                   |_CLK_TIMER1|_CLK_TIMER2|_CLK_TIMER3|_CLK_TIMER4|_CLK_COM)
 
 typedef struct{
   gpio_pin_e pin;
@@ -57,7 +59,7 @@ int hal_pwrmgr_LowCurrentLdo_enable(void);
 int hal_pwrmgr_LowCurrentLdo_disable(void);
 
 void hal_pwrmgr_poweroff(pwroff_cfg_t* pcfg, uint8_t wakeup_pin_num);
-void hal_pwrmgr_enter_standby(pwroff_cfg_t* pcfg);
+void hal_pwrmgr_enter_standby(pwroff_cfg_t* pcfg,uint8_t wakeup_pin_num) ;
 #ifdef __cplusplus
 }
 #endif

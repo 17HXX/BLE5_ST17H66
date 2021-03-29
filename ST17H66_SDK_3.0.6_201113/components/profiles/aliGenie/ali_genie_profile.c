@@ -86,8 +86,9 @@ int gen_aligenie_auth_val(void)
 
     //load ProductID
     for(i=0;i<4;i++)
-        ali_genie_pid[i]=(uint8_t)ReadFlash(VENDOR_PRODUCT_ID_ADDR+i);
+        hal_flash_read(VENDOR_PRODUCT_ID_ADDR+i,ali_genie_pid+i,1);
 
+//        ali_genie_pid[i]=(uint8_t)ReadFlash(VENDOR_PRODUCT_ID_ADDR+i);
     hex2Str(ali_genie_pid,buf,4,0);
 
 
@@ -100,15 +101,12 @@ int gen_aligenie_auth_val(void)
 
     //load MAC
     uint32 address = VENDOR_PRODUCT_MAC_ADDR;
-   
-    ali_genie_mac[3] = (uint8_t)ReadFlash(address ++);
-    ali_genie_mac[2] = (uint8_t)ReadFlash(address ++);
-    ali_genie_mac[1] = (uint8_t)ReadFlash(address ++);
-    ali_genie_mac[0] = (uint8_t)ReadFlash(address ++);
-    
-    ali_genie_mac[5] = (uint8_t)ReadFlash(address ++);
-    ali_genie_mac[4] = (uint8_t)ReadFlash(address);
-
+    hal_flash_read(address ++,&ali_genie_mac[3],1);
+    hal_flash_read(address ++,&ali_genie_mac[2],1);
+    hal_flash_read(address ++,&ali_genie_mac[1],1);
+    hal_flash_read(address ++,&ali_genie_mac[0],1);
+    hal_flash_read(address ++,&ali_genie_mac[5],1);
+    hal_flash_read(address ++,&ali_genie_mac[4],1);
     printf("\n ===  MAC  === \n");
     for(i=0;i<6;i++)
         printf("%02X ",ali_genie_mac[5-i]);
@@ -123,8 +121,9 @@ int gen_aligenie_auth_val(void)
 
     //load secert
     for(i=0;i<16;i++)
-        ali_genie_sec[i]=(uint8_t)ReadFlash(VENDOR_PRODUCT_SECRERT_ADDR+i);
+        hal_flash_read(VENDOR_PRODUCT_SECRERT_ADDR+i,ali_genie_sec+i,1);
 
+//        ali_genie_sec[i]=(uint8_t)ReadFlash(VENDOR_PRODUCT_SECRERT_ADDR+i);
     hex2Str(ali_genie_sec,buf+22,16,0);
 
 

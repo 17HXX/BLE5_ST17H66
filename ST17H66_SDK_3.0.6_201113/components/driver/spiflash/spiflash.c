@@ -26,8 +26,8 @@ void dma_cb(DMA_CH_t ch)
 
 spi_Cfg_t spi_cfg = {
 	.sclk_pin = GPIO_P02,
-	.ssn_pin = GPIO_P00,
-	.MOSI = GPIO_P10,
+    .ssn_pin = GPIO_P07,
+    .MOSI = GPIO_P00,
 	.MISO = GPIO_P03,
 	
 	.baudrate = 8000000,
@@ -170,6 +170,7 @@ void spiflash_chip_erase(void)
 	{
 		;
 	}
+    while(spiflash_bus_busy());
 }
 
 void spiflash_sector_erase(uint32_t addr)
@@ -186,6 +187,7 @@ void spiflash_sector_erase(uint32_t addr)
 	{
 		;
 	}
+    while(spiflash_bus_busy());
 }
 
 void spiflash_block_erase_32KB(uint32_t addr)
@@ -202,6 +204,7 @@ void spiflash_block_erase_32KB(uint32_t addr)
 	{
 		;
 	}
+    while(spiflash_bus_busy());
 }
 
 void spiflash_block_erase_64KB(uint32_t addr)
@@ -218,6 +221,7 @@ void spiflash_block_erase_64KB(uint32_t addr)
 	{
 		;
 	}
+    while(spiflash_bus_busy());
 }
 
 

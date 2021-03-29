@@ -66,6 +66,8 @@ const static uint8_t KSCAN_COL_GPIO[12] =
 #define MAX_KEY_ROWS    (sizeof(KSCAN_ROW_GPIO)/sizeof(uint8_t))
 #define MAX_KEY_COLS    (sizeof(KSCAN_COL_GPIO)/sizeof(uint8_t))
 
+#define KSCAN_ALL_ROW_NUM 11
+#define KSCAN_ALL_COL_NUM 12
 /*************************************************************
 *	@brief		enum variable used for setting rows
 *
@@ -101,8 +103,8 @@ typedef enum
 	KEY_COL_P33   =   6,
 	KEY_COL_P31   =   7,
 	KEY_COL_P26   =   8,
-	KEY_COL_P17   =   9,
-	KEY_COL_P16   =   10,
+    //KEY_COL_P17   =   9,
+    //KEY_COL_P16   =   10,
     KEY_COL_P11   =   11,
 	
 }KSCAN_COLS_e;

@@ -1312,7 +1312,7 @@ extern bStatus_t GATT_WriteLongCharDesc( uint16 connHandle, gattPrepareWriteReq_
  *
  * @return  void
  */
-extern void GATT_SetHostToAppFlowCtrl( uint8 flowCtrlMode );
+extern void GATT_SetHostToAppFlowCtrl( uint16 hostBufSize,uint8 flowCtrlMode );
 
 /**
  * @brief   This API is used by the Application to notify GATT that

@@ -109,13 +109,13 @@ void Hal_GetIIC_PIN_Fmux(uint8_t id,Fmux_Type_e *SCL_Fmux,Fmux_Type_e *SDA_Fmux)
 {
 	if(IIC_Module0 == id)
 	{
-		*SCL_Fmux = IIC0_SCL;
-		*SDA_Fmux = IIC0_SDA;
+        *SCL_Fmux = FMUX_IIC0_SCL;
+        *SDA_Fmux = FMUX_IIC0_SDA;
 	}
 	else
 	{
-		*SCL_Fmux = IIC1_SCL;
-		*SDA_Fmux = IIC1_SDA;
+        *SCL_Fmux = FMUX_IIC1_SCL;
+        *SDA_Fmux = FMUX_IIC1_SDA;
 	}
 }
 
@@ -167,10 +167,10 @@ uint8_t Hal_IIC_unRegister_CallBack(uint8_t id)
 *******************************************************************************/
 uint8_t Hal_IIC_Valid_Check(uint8_t id)
 {
-	if( id > IIC_COUNT)
-		return PPlus_ERR_IIC_ID;
-	else
-		return (I2C_Mode[id].busy);
+    if( id > (IIC_COUNT-1))
+        return PPlus_ERR_IIC_ID;
+    else
+        return (I2C_Mode[id].busy);
 }
 
 /*******************************************************************************

@@ -91,14 +91,14 @@ int hal_timer_set(User_Timer_e timeId, uint32_t us)
     switch(timeId)
     {
         case AP_TIMER_ID_5:
-			JUMP_FUNCTION(V24_IRQ_HANDLER)                  =   (uint32_t)&hal_TIMER5_IRQHandler;
+        	JUMP_FUNCTION(TIM5_IRQ_HANDLER)                  =   (uint32_t)&hal_TIMER5_IRQHandler;
             NVIC_EnableIRQ((IRQn_Type)TIM5_IRQn);
             NVIC_SetPriority((IRQn_Type)TIM5_IRQn, IRQ_PRIO_HAL);
             hal_timer_set_loadtimer(AP_TIM5, time);
 			hal_clk_gate_enable(MOD_TIMER5);
 			break;
         case AP_TIMER_ID_6:
-			JUMP_FUNCTION(V25_IRQ_HANDLER)                  =   (uint32_t)&hal_TIMER6_IRQHandler;
+        	JUMP_FUNCTION(TIM6_IRQ_HANDLER)                  =   (uint32_t)&hal_TIMER6_IRQHandler;
             NVIC_EnableIRQ((IRQn_Type)TIM6_IRQn);
             NVIC_SetPriority((IRQn_Type)TIM6_IRQn, IRQ_PRIO_HAL);
             hal_timer_set_loadtimer(AP_TIM6, time);
@@ -115,13 +115,13 @@ int hal_timer_stop(User_Timer_e timeId)
     switch(timeId)
     {
         case AP_TIMER_ID_5:
-			JUMP_FUNCTION(V24_IRQ_HANDLER) = 0;
+            JUMP_FUNCTION(TIM5_IRQ_HANDLER) = 0;
             hal_timer_stop_counter(AP_TIM5);
             NVIC_DisableIRQ((IRQn_Type)TIM5_IRQn);
 			hal_clk_gate_disable(MOD_TIMER5);
             break;
         case AP_TIMER_ID_6:
-			JUMP_FUNCTION(V25_IRQ_HANDLER) = 0;
+            JUMP_FUNCTION(TIM6_IRQ_HANDLER) = 0;
             hal_timer_stop_counter(AP_TIM6);
             NVIC_DisableIRQ((IRQn_Type)TIM6_IRQn);
 			hal_clk_gate_disable(MOD_TIMER6);

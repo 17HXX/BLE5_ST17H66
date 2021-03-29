@@ -188,14 +188,6 @@ static pfnGATTReadAttrCB_t gattServApp_FindReadAttrCB( uint16 handle );
 static pfnGATTWriteAttrCB_t gattServApp_FindWriteAttrCB( uint16 handle );
 static pfnGATTAuthorizeAttrCB_t gattServApp_FindAuthorizeAttrCB( uint16 handle );
 
-/*
-need include cksys.lib
-*/
-extern bStatus_t GATTServApp_simple_WriteAttrCB( uint16 connHandle, gattAttribute_t *pAttr,uint8 *pValue, uint8 len, uint16 offset );
-extern bStatus_t GATTServApp_RegisterService_simple( gattAttribute_t *pAttrs, uint16 numAttrs );					
-extern uint8 gattServApp_simple_flag;
-extern uint16 gattServApp_simple_handle;
-
 /*********************************************************************
  * API FUNCTIONS
  */
@@ -343,11 +335,7 @@ bStatus_t GATTServApp_RegisterService( gattAttribute_t *pAttrs, uint16 numAttrs,
 
     status = GATT_RegisterService( &service );
 	  
-	  if(gattServApp_simple_flag==0)
-		{
 
-			GATTServApp_RegisterService_simple(pAttrs,numAttrs);
-		}
 
     if ( ( status == SUCCESS ) && ( pServiceCBs != NULL ) )
     {
@@ -2127,7 +2115,6 @@ uint8 GATTServApp_WriteAttr( uint16 connHandle, uint16 handle,
     if ( pfnCB != NULL )
     {  
       // Try to write the new value
-		GATTServApp_simple_WriteAttrCB( connHandle, pAttr, pValue, len, offset );
       status = (*pfnCB)( connHandle, pAttr, pValue, len, offset );
     }
     else

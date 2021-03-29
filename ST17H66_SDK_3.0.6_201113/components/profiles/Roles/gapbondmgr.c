@@ -35,6 +35,8 @@
 // #define osal_snv_write( a, b, c )      (1)
 // #define osal_snv_read( a, b, c )       (1)
 // #define osal_snv_compact( a )          (1)
+#define BOND_LOG(...)
+//#define BOND_LOG   LOG
 
 /*********************************************************************
  * MACROS
@@ -169,7 +171,9 @@ static uint8 gapBond_KeyDistList =
 );
 static uint32 gapBond_Passcode = 0;
 static uint8  gapBond_KeySize = MAX_ENC_KEYSIZE;
-
+#if (GAP_BOND_MGR_INDEX_REPLACE)
+    static uint8 bondReplaceCnt=0;
+#endif
 #if ( HOST_CONFIG & CENTRAL_CFG )
 static uint8  gapBond_BondFailOption = GAPBOND_FAIL_TERMINATE_LINK;
 #endif
@@ -1339,63 +1343,68 @@ static uint8 gapBondMgrAddBond( gapBondRec_t *pBondRec, gapAuthCompleteEvent_t *
     {
       bondIdx = gapBondMgrFindEmpty();
     }
-  }
-
-  if ( bondIdx < GAP_BONDINGS_MAX )
-  { 
-    // See if this is a new bond record
-    if ( pAuthEvt == NULL )
-    {
-      gapBondCharCfg_t charCfg[GAP_CHAR_CFG_MAX];
-      
-      // Save the main information
-      VOID osal_snv_write( mainRecordNvID(bondIdx), sizeof ( gapBondRec_t ), pBondRec );
-    
-      // Write out FF's over the charactersitic configuration entry, to overwrite
-      // any previous bond data that may have been stored
-      VOID osal_memset( charCfg, 0xFF, sizeof ( charCfg ) );
-
-      VOID osal_snv_write( gattCfgNvID(bondIdx), sizeof ( charCfg ), charCfg );
-
-      // Update Bond RAM Shadow just with the newly added bond entry
-      VOID osal_memcpy( &(bonds[bondIdx]), pBondRec, sizeof ( gapBondRec_t ) );
-      
-      // Keep the OSAL message to store the security keys later - will be freed then
-      pAuthEvt = pPkt;
-    }
-    else
-    {
-      // If available, save the LTK information
-      if ( pAuthEvt->pSecurityInfo )
-      {
-        VOID osal_snv_write( localLTKNvID(bondIdx), sizeof ( gapBondLTK_t ), pAuthEvt->pSecurityInfo );
-        pAuthEvt->pSecurityInfo = NULL;
-      }
-      // If availabe, save the connected device's LTK information
-      else if ( pAuthEvt->pDevSecInfo )
-      {
-        VOID osal_snv_write( devLTKNvID(bondIdx), sizeof ( gapBondLTK_t ), pAuthEvt->pDevSecInfo );
-        pAuthEvt->pDevSecInfo = NULL;
-      }
-      // If available, save the connected device's IRK
-      else if ( pAuthEvt->pIdentityInfo )
-      {
-        VOID osal_snv_write( devIRKNvID(bondIdx), KEYLEN, pAuthEvt->pIdentityInfo->irk );
-        pAuthEvt->pIdentityInfo = NULL;
-      }
-      // If available, save the connected device's Signature information
-      else if ( pAuthEvt->pSigningInfo )
-      {
-        VOID osal_snv_write( devCSRKNvID(bondIdx), KEYLEN, pAuthEvt->pSigningInfo->srk );    
-        VOID osal_snv_write( devSignCounterNvID(bondIdx), sizeof ( uint32 ), &(pAuthEvt->pSigningInfo->signCounter) );
-        pAuthEvt->pSigningInfo = NULL;
-      }
-      else
-      {
-        if ( autoSyncWhiteList )
+        #if(GAP_BOND_MGR_INDEX_REPLACE)
+        /*replace bondIdx*/
+        if(bondIdx==GAP_BONDINGS_MAX)
         {
-          gapBondMgr_SyncWhiteList();
+            bondIdx = (bondReplaceCnt++)%GAP_BONDINGS_MAX;
+            BOND_LOG("replace BondIdx %d \n",bondIdx);
         }
+
+        #endif
+        BOND_LOG("BondMgrAdd idx=%03d\n",bondIdx);
+    }
+
+    if ( bondIdx < GAP_BONDINGS_MAX )
+    {
+        // See if this is a new bond record
+        if ( pAuthEvt == NULL )
+        {
+            gapBondCharCfg_t charCfg[GAP_CHAR_CFG_MAX];
+            // Save the main information
+            VOID osal_snv_write( mainRecordNvID(bondIdx), sizeof ( gapBondRec_t ), pBondRec );
+            // Write out FF's over the charactersitic configuration entry, to overwrite
+            // any previous bond data that may have been stored
+            VOID osal_memset( charCfg, 0xFF, sizeof ( charCfg ) );
+            VOID osal_snv_write( gattCfgNvID(bondIdx), sizeof ( charCfg ), charCfg );
+            // Update Bond RAM Shadow just with the newly added bond entry
+            VOID osal_memcpy( &(bonds[bondIdx]), pBondRec, sizeof ( gapBondRec_t ) );
+            // Keep the OSAL message to store the security keys later - will be freed then
+            pAuthEvt = pPkt;
+        }
+        else
+        {
+            // If available, save the LTK information
+            if ( pAuthEvt->pSecurityInfo )
+            {
+                VOID osal_snv_write( localLTKNvID(bondIdx), sizeof ( gapBondLTK_t ), pAuthEvt->pSecurityInfo );
+                pAuthEvt->pSecurityInfo = NULL;
+            }
+            // If availabe, save the connected device's LTK information
+            else if ( pAuthEvt->pDevSecInfo )
+            {
+                VOID osal_snv_write( devLTKNvID(bondIdx), sizeof ( gapBondLTK_t ), pAuthEvt->pDevSecInfo );
+                pAuthEvt->pDevSecInfo = NULL;
+            }
+            // If available, save the connected device's IRK
+            else if ( pAuthEvt->pIdentityInfo )
+            {
+                VOID osal_snv_write( devIRKNvID(bondIdx), KEYLEN, pAuthEvt->pIdentityInfo->irk );
+                pAuthEvt->pIdentityInfo = NULL;
+            }
+            // If available, save the connected device's Signature information
+            else if ( pAuthEvt->pSigningInfo )
+            {
+                VOID osal_snv_write( devCSRKNvID(bondIdx), KEYLEN, pAuthEvt->pSigningInfo->srk );
+                VOID osal_snv_write( devSignCounterNvID(bondIdx), sizeof ( uint32 ), &(pAuthEvt->pSigningInfo->signCounter) );
+                pAuthEvt->pSigningInfo = NULL;
+            }
+            else
+            {
+                if ( autoSyncWhiteList )
+                {
+                    gapBondMgr_SyncWhiteList();
+                }
 
         // Update the GAP Privacy Flag Properties
         gapBondSetupPrivFlag();

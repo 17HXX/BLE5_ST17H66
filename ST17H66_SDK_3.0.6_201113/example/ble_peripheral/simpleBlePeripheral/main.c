@@ -34,8 +34,8 @@ extern void hal_rom_boot_init(void);
 */
 
 #define   BLE_MAX_ALLOW_CONNECTION              1
-#define   BLE_MAX_ALLOW_PKT_PER_EVENT_TX        4
-#define   BLE_MAX_ALLOW_PKT_PER_EVENT_RX        4
+#define   BLE_MAX_ALLOW_PKT_PER_EVENT_TX        3
+#define   BLE_MAX_ALLOW_PKT_PER_EVENT_RX        3
 #define   BLE_PKT_VERSION                       BLE_PKT_VERSION_5_1 //BLE_PKT_VERSION_5_1 //BLE_PKT_VERSION_5_1     
 
 
@@ -66,7 +66,7 @@ extern void hal_rom_boot_init(void);
 #define   BLE_CONN_BUF_SIZE                 (BLE_MAX_ALLOW_CONNECTION * BLE_MAX_ALLOW_PER_CONNECTION)
                                                                                         
 
-__align(4) uint8            g_pConnectionBuffer[BLE_CONN_BUF_SIZE];
+ALIGN4_U8            g_pConnectionBuffer[BLE_CONN_BUF_SIZE];
 llConnState_t               pConnContext[BLE_MAX_ALLOW_CONNECTION];
 
 /*********************************************************************
@@ -82,8 +82,8 @@ uint16 g_llCteSampleQ[LL_CTE_MAX_SUPP_LEN * LL_CTE_SUPP_LEN_UNIT];
 /*********************************************************************
 *  OSAL LARGE HEAP CONFIG
 */
-#define     LARGE_HEAP_SIZE  (4*1024)
-uint8       g_largeHeap[LARGE_HEAP_SIZE];
+#define     LARGE_HEAP_SIZE  (2*1024)
+ALIGN4_U8   g_largeHeap[LARGE_HEAP_SIZE];
 
 /*********************************************************************
  * GLOBAL VARIABLES
@@ -107,12 +107,13 @@ static void hal_low_power_io_init(void)
        {GPIO_P03,   GPIO_FLOATING   },/*SWD*/
        {GPIO_P09,   GPIO_PULL_UP    },/*UART TX*/
        {GPIO_P10,   GPIO_PULL_UP    },/*UART RX*/
-       {GPIO_P11,   GPIO_PULL_DOWN  },
-       {GPIO_P14,   GPIO_PULL_DOWN  },
-       {GPIO_P15,   GPIO_PULL_DOWN  },
-       {GPIO_P16,   GPIO_FLOATING   },
-       {GPIO_P18,   GPIO_PULL_DOWN  },
-       {GPIO_P20,   GPIO_PULL_DOWN  },
+       {GPIO_P11,   GPIO_FLOATING  },
+       {GPIO_P14,   GPIO_FLOATING  },
+       {GPIO_P15,   GPIO_FLOATING  },
+//       {GPIO_P16,   GPIO_FLOATING   },
+       {GPIO_P18,   GPIO_FLOATING  },
+       {GPIO_P20,   GPIO_FLOATING  },
+	   {GPIO_P34,   GPIO_FLOATING  },
 #if(SDK_VER_CHIP==__DEF_CHIP_QFN32__)
         //6222 23 IO  
        {GPIO_P00,   GPIO_PULL_DOWN  },
@@ -133,10 +134,11 @@ static void hal_low_power_io_init(void)
     for(uint8_t i=0;i<sizeof(ioInit)/sizeof(ioinit_cfg_t);i++)
         hal_gpio_pull_set(ioInit[i].pin,ioInit[i].type);
 
-    DCDC_CONFIG_SETTING(0x0f);
+    DCDC_CONFIG_SETTING(0x0a);
+    DCDC_REF_CLK_SETTING(1);
     DIG_LDO_CURRENT_SETTING(0x01);
     //hal_pwrmgr_RAM_retention(RET_SRAM0|RET_SRAM1|RET_SRAM2);
-    hal_pwrmgr_RAM_retention(RET_SRAM0|RET_SRAM1);
+    hal_pwrmgr_RAM_retention(RET_SRAM0);//|RET_SRAM1);
     hal_pwrmgr_RAM_retention_set(); 
     hal_pwrmgr_LowCurrentLdo_enable();
  
@@ -208,7 +210,7 @@ static void hal_init(void)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 int  main(void)  
 {
-    g_system_clk = SYS_CLK_XTAL_16M;//SYS_CLK_XTAL_16M;//SYS_CLK_DLL_64M;
+    g_system_clk = SYS_CLK_XTAL_16M;//SYS_CLK_DLL_48M;//SYS_CLK_XTAL_16M;//SYS_CLK_DLL_64M;
     g_clk32K_config = CLK_32K_RCOSC;//CLK_32K_XTAL;//CLK_32K_XTAL,CLK_32K_RCOSC      
     
     drv_irq_init();
@@ -223,12 +225,13 @@ int  main(void)
     rf_phy_direct_test();
 #endif
         
-	LOG("SDK Version ID %08x \n",SDK_VER_RELEASE_ID);
-    LOG("rfClk %d rcClk %d sysClk %d tpCap[%02x %02x]\n",g_rfPhyClkSel,g_clk32K_config,g_system_clk,g_rfPhyTpCal0,g_rfPhyTpCal1);
+//	LOG("SDK Version ID %08x \n",SDK_VER_RELEASE_ID);
+//    LOG("rfClk %d rcClk %d sysClk %d tpCap[%02x %02x]\n",g_rfPhyClkSel,g_clk32K_config,g_system_clk,g_rfPhyTpCal0,g_rfPhyTpCal1);
 
-    LOG("sizeof(struct ll_pkt_desc) = %d, buf size = %d\n", sizeof(struct ll_pkt_desc), BLE_CONN_BUF_SIZE);
-    LOG("sizeof(g_pConnectionBuffer) = %d, sizeof(pConnContext) = %d, sizeof(largeHeap)=%d \n",\
-         sizeof(g_pConnectionBuffer), sizeof(pConnContext),sizeof(g_largeHeap));  
+//    LOG("sizeof(struct ll_pkt_desc) = %d, buf size = %d\n", sizeof(struct ll_pkt_desc), BLE_CONN_BUF_SIZE);
+//    LOG("sizeof(g_pConnectionBuffer) = %d, sizeof(pConnContext) = %d, sizeof(largeHeap)=%d \n",\
+//         sizeof(g_pConnectionBuffer), sizeof(pConnContext),sizeof(g_largeHeap));  
+//    LOG("[REST CAUSE] %d\n ",g_system_reset_cause);
     app_main();	
 
 

@@ -15,7 +15,7 @@ typedef struct {
 
 typedef struct{
 	uint8 len;
-	uint8 data[100];
+	uint8 data[512];
 }AT_BLEUART_RX_t;
 
 
@@ -37,6 +37,8 @@ extern AT_BLEUART_RX_t at_bleuart_rx;
 
 extern uint8 AT_query(AT_BLEUART_RX_t* pev);
 extern uint8 AT_setdata(AT_BLEUART_RX_t* pev);
+
+extern void Hex_to_Ascii(uint8* data_hex , uint8* data_ascii , uint8 len );
 
 //void AT_Response(UART_INDEX_e uart_index,AT_BLEUART_RX_t* pev,uint8_t *buff,uint8 len);
 

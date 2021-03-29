@@ -187,8 +187,10 @@
 #define   SIMUL_CONN_ADV_ALLOW             0x00000020       // allow send adv in connect state
 #define   SIMUL_CONN_SCAN_ALLOW            0x00000040       // allow scan in connect state
 
-#define   GAP_DUP_RPT_FILTER_DISALLOW      0x00000100       // duplicate report filter in GAP layer, allow default
+#define   CONN_CSA2_ALLOW                  0x00000080       // allow using CSA2 in connection state
 
+#define   GAP_DUP_RPT_FILTER_DISALLOW      0x00000100       // duplicate report filter in GAP layer, allow default
+#define   ENH_CONN_CMP_EVENT_ALLOW         0x00000200       // allow LL to send enhanced connection complete event.
 // delete 2018-7-17, should use enum  H_SYSCLK_SEL
 //enum
 //{

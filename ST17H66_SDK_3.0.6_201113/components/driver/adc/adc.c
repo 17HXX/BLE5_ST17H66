@@ -21,6 +21,7 @@
 #include "adc.h"
 #include "log.h"
 #include "jump_function.h"
+#include "version.h"
 
 static bool mAdc_init_flg = FALSE;
 static adc_Ctx_t mAdc_Ctx;
@@ -240,7 +241,7 @@ int hal_adc_start(void)
 	mAdc_Ctx.enable = TRUE;
 	hal_pwrmgr_lock(MOD_ADCC);
 	
-	JUMP_FUNCTION(V29_IRQ_HANDLER)                  =   (uint32_t)&hal_ADC_IRQHandler;
+    JUMP_FUNCTION(ADCC_IRQ_HANDLER)                  =   (uint32_t)&hal_ADC_IRQHandler;
 	//ENABLE_ADC;
 	AP_PCRM->ANA_CTL |= BIT(3);
 	AP_PCRM->ANA_CTL |= BIT(0);//new
@@ -338,6 +339,7 @@ int hal_adc_config_channel(adc_Cfg_t cfg, adc_Hdl_t evt_handler)
 		for(i=2;i<8;i++){
 			if(cfg.channel & BIT(i)){
 				gpio_pin_e pin = s_pinmap[i];			
+                hal_gpio_pull_set(pin,GPIO_FLOATING);
 				hal_gpio_ds_control(pin, Bit_ENABLE);                				
 				hal_gpio_cfg_analog_io(pin, Bit_ENABLE);
 				
@@ -417,6 +419,8 @@ int hal_adc_config_channel(adc_Cfg_t cfg, adc_Hdl_t evt_handler)
 		set_differential_mode();
 		
 		//LOG("%d %d %x\n",pin,pin_neg,*(volatile int*)0x40003800);		
+        hal_gpio_pull_set(pin,GPIO_FLOATING);
+        hal_gpio_pull_set(pin_neg,GPIO_FLOATING);
 		hal_gpio_cfg_analog_io(pin,Bit_ENABLE);
 		hal_gpio_cfg_analog_io(pin_neg,Bit_ENABLE);
 		//LOG("%d %d %x\n",pin,pin_neg,*(volatile int*)0x40003800);
@@ -438,7 +442,7 @@ int hal_adc_stop(void)
     AP_ADCC->intr_mask = 0x1ff;
 
     NVIC_DisableIRQ((IRQn_Type)ADCC_IRQn);
-	JUMP_FUNCTION(V29_IRQ_HANDLER)                  =   0;
+    JUMP_FUNCTION(ADCC_IRQ_HANDLER)                  =   0;
 	
 	ADC_INIT_TOUT(to);
 	AP_ADCC->intr_clear = 0x1FF;
@@ -494,11 +498,40 @@ static void hal_adc_load_calibration_value(void)
     }   
 }
 
+#if(SDK_VER_CHIP==__DEF_CHIP_QFN32__)
+const unsigned short adc_Lambda[ADC_CH_NUM] =
+{
+    0, //ADC_CH0 =0,
+    0, //ADC_CH1 =1,
+    869,//P11,
+    810,//P23,
+    823,//P24,
+    840,//P14,
+    798,//P15,
+    767,//P20,
+    0,//GPIO_DUMMY,  //ADC_CH_VOICE =8,
+};
+
+#elif(SDK_VER_CHIP == __DEF_CHIP_TSOP16__)
+const unsigned short adc_Lambda[ADC_CH_NUM] =
+{
+    0, //ADC_CH0 =0,
+    0, //ADC_CH1 =1,
+    867,//P11,
+    810,//P23,
+    0,//P24,
+    857,//P14,
+    800,//P15,
+    780,//P20,
+    0,//GPIO_DUMMY,  //ADC_CH_VOICE =8,
+};
+#endif
+
 float hal_adc_value_cal(adc_CH_t ch,uint16_t* buf, uint32_t size, uint8_t high_resol, uint8_t diff_mode)
 {
 	uint32_t i;
 	int adc_sum = 0;
-	float result = 0.0;
+    volatile float result = 0.0;
 	
     for (i = 0; i < size; i++) {
        adc_sum += (buf[i]&0xfff);			
@@ -521,12 +554,17 @@ float hal_adc_value_cal(adc_CH_t ch,uint16_t* buf, uint32_t size, uint8_t high_r
         }
         
     }else{			
-        result = (diff_mode) ? (result / 2048 -1) : (result /4096);
+            result = (diff_mode) ? (float)(result / 2048 -1) : (float)(result /4096);
     } 
-	
-	result *= 0.8;	
-    if(high_resol == FALSE)
-        result = result * 4; 
+    if(high_resol == TRUE)
+    {
+        result *= 0.8;
+    }
+    else
+    {
+        result = (float)result *(float)adc_Lambda[ch];
+        result = result*4096 /1000000.0;
+    }
 
     return result;
 }

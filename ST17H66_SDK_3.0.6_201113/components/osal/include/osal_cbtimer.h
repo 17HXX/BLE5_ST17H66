@@ -80,12 +80,12 @@ extern uint16 osal_CbTimerProcessEvent( uint8 taskId, uint16 events );
  * Function to start a timer to expire in n mSecs.
  */
 extern Status_t osal_CbTimerStart( pfnCbTimer_t pfnCbTimer, uint8 *pData, 
-                                   uint16 timeout, uint8 *pTimerId );
+                                   uint32 timeout, uint8* pTimerId );
 
 /*
  * Function to update a timer that has already been started.
  */
-extern Status_t osal_CbTimerUpdate( uint8 timerId, uint16 timeout );
+extern Status_t osal_CbTimerUpdate( uint8 timerId, uint32 timeout );
 
 /*
  * Function to stop a timer that has already been started.

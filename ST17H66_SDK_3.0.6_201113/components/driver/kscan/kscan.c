@@ -51,6 +51,7 @@ static void get_key_matrix(uint16_t* key_matrix);
 static void rmv_ghost_key(uint16_t* key_matrix);
 static kscan_Evt_t 	kscan_compare_key(uint16_t* key_pre, uint16_t* key_nxt);
 static void hal_kscan_clear_config(void);
+extern void hal_gpioin_set_flag(gpio_pin_e pin);
 
 #define	TIMEOUT_DELTA	10
 /**************************************************************************************
@@ -72,8 +73,6 @@ int hal_kscan_init(kscan_Cfg_t cfg, uint8 task_id, uint16 event)
 {	
     if(m_kscanCtx.enable)
         return PPlus_ERR_INVALID_STATE;
-    
-    hal_clk_gate_enable(MOD_KSCAN);
 
     m_kscanCtx.cfg = cfg;
     m_kscanCtx.kscan_task_id = task_id;
@@ -82,7 +81,7 @@ int hal_kscan_init(kscan_Cfg_t cfg, uint8 task_id, uint16 event)
 
     kscan_hw_config();
     
-    JUMP_FUNCTION(V5_IRQ_HANDLER)   =   (uint32_t)&hal_KSCAN_IRQHandler;
+    JUMP_FUNCTION(KSCAN_IRQ_HANDLER)   =   (uint32_t)&hal_KSCAN_IRQHandler;
 
     hal_pwrmgr_register(MOD_KSCAN, kscan_sleep_handler, kscan_wakeup_handler);
 
@@ -148,12 +147,12 @@ void hal_kscan_timeout_handler()
         hal_kscan_clear_config();
         reScan_flag=1;
         kscan_hw_config();
-        osal_start_timerEx(m_kscanCtx.kscan_task_id, m_kscanCtx.timeout_event, TIMEOUT_DELTA);//todo
+        osal_start_timerEx(m_kscanCtx.kscan_task_id, m_kscanCtx.timeout_event, m_kscanCtx.cfg.interval+TIMEOUT_DELTA);
     }
     else if(reScan_flag==1)
     {
         //LOG("kscan_timeout_handler\n\r");
-        //osal_stop_timerEx(m_kscanCtx.kscan_task_id, m_kscanCtx.timeout_event);//todo
+        osal_stop_timerEx(m_kscanCtx.kscan_task_id, m_kscanCtx.timeout_event);
 
         uint16_t key_nxt[MULTI_KEY_NUM<<1];
         memset(&key_nxt[0],0,sizeof(uint16_t)*(MULTI_KEY_NUM<<1)); //all register must be 0.teedy add 2019/01/23
@@ -171,24 +170,24 @@ void hal_kscan_timeout_handler()
         
         memcpy(m_kscanCtx.key_state, key_nxt, sizeof(uint16_t)*(MULTI_KEY_NUM<<1));
         reScan_flag=0;
-        //hal_pwrmgr_unlock(MOD_KSCAN);//todo
+        hal_pwrmgr_unlock(MOD_KSCAN);
     }
 }
 
 static void kscan_hw_config(void)
 {
+    kscan_Cfg_t* cfg = &(m_kscanCtx.cfg);
+    hal_clk_gate_enable(MOD_KSCAN);
     hal_kscan_clear_config();
 
-    kscan_Cfg_t* cfg = &(m_kscanCtx.cfg);
-    
-    for(uint8_t i=0;i<NUM_KEY_ROWS;i++)
+    for(uint8_t i=0; i<NUM_KEY_ROWS; i++)
         hal_kscan_config_row(cfg->key_rows[i]);
 
     for(uint8_t i=0;i<NUM_KEY_COLS;i++)
         hal_kscan_config_col(cfg->key_cols[i]);
 
-    //subWriteReg((&AP_KSCAN->ctrl0),20,20,NOT_IGNORE_MULTI_KEY)
-    subWriteReg((&AP_KSCAN->ctrl0),23,23,SENCE_HIGH);
+    subWriteReg((&AP_KSCAN->ctrl0),20,20,NOT_IGNORE_MULTI_KEY);
+    subWriteReg((&AP_KSCAN->ctrl0),23,23,SENCE_LOW);//SENCE_HIGH
     subWriteReg((&AP_KSCAN->ctrl0),31,24,cfg->interval);    
     //ENABLE_AUTO_SCAN;
     NVIC_SetPriority((IRQn_Type)KSCAN_IRQn, IRQ_PRIO_HAL);
@@ -217,7 +216,7 @@ static void hal_kscan_config_row(KSCAN_ROWS_e row)
     gpio_pin_e row_pin = (gpio_pin_e)KSCAN_ROW_GPIO[row];
 
     hal_gpio_fmux(row_pin, Bit_DISABLE);
-    hal_gpio_pull_set(row_pin, GPIO_PULL_DOWN);   
+    hal_gpio_pull_set(row_pin,GPIO_PULL_UP_S);
     
     subWriteReg(&(AP_IOMUX->keyscan_in_en),row,row,1);
     subWriteReg((&AP_KSCAN->mk_in_en),row,row, 1);
@@ -241,12 +240,8 @@ static void hal_kscan_config_row(KSCAN_ROWS_e row)
 static void hal_kscan_config_col(KSCAN_COLS_e col)
 {
     gpio_pin_e col_pin = (gpio_pin_e)KSCAN_COL_GPIO[col];
-
-    if(col == KEY_COL_P16 || col == KEY_COL_P17)    
-        hal_gpio_cfg_analog_io(col_pin, Bit_DISABLE);
-
     hal_gpio_fmux(col_pin, Bit_DISABLE);
-    hal_gpio_pull_set(col_pin, GPIO_PULL_DOWN);
+    hal_gpio_pull_set(col_pin,GPIO_PULL_UP_S);
 
     subWriteReg(&(AP_IOMUX->keyscan_out_en),col,col,1);
     subWriteReg((&AP_KSCAN->ctrl0),(col+2),(col+2), 1);
@@ -261,15 +256,17 @@ static void kscan_sleep_handler(void)
     {	
 		gpio_pin_e col_pin = (gpio_pin_e)KSCAN_COL_GPIO[m_kscanCtx.cfg.key_cols[i]];		
         subWriteReg(&(AP_IOMUX->keyscan_out_en),m_kscanCtx.cfg.key_cols[i],m_kscanCtx.cfg.key_cols[i],0);
-		hal_gpio_pin_init(col_pin, GPIO_INPUT);
-		hal_gpio_pull_set(col_pin, GPIO_PULL_UP_S);
-	}
-	
-	for(uint8_t i=0;i<NUM_KEY_ROWS;i++)
+        hal_gpioin_set_flag(col_pin);
+        hal_gpio_pull_set(col_pin, GPIO_PULL_DOWN);
+        hal_gpio_pin_init(col_pin, GPIO_INPUT);
+    }
+
+    for(uint8_t i=0; i<NUM_KEY_ROWS; i++)
     {
 		gpio_pin_e row_pin = (gpio_pin_e)KSCAN_ROW_GPIO[m_kscanCtx.cfg.key_rows[i]];	
         subWriteReg(&(AP_IOMUX->keyscan_in_en),m_kscanCtx.cfg.key_rows[i],m_kscanCtx.cfg.key_rows[i],0);
-	    hal_gpio_pull_set(row_pin, GPIO_PULL_DOWN);
+        hal_gpioin_set_flag(row_pin);
+        hal_gpio_pull_set(row_pin, GPIO_PULL_UP);
 		hal_gpio_pin_init(row_pin, GPIO_INPUT);
 		pol = hal_gpio_read(row_pin) ? POL_FALLING:POL_RISING;
 
@@ -283,15 +280,17 @@ static void kscan_wakeup_handler(void)
     for(uint8_t i=0;i<NUM_KEY_COLS;i++)
     {
         gpio_pin_e col_pin = (gpio_pin_e)KSCAN_COL_GPIO[m_kscanCtx.cfg.key_cols[i]];
+        subWriteReg(&(AP_IOMUX->keyscan_out_en),m_kscanCtx.cfg.key_cols[i],m_kscanCtx.cfg.key_cols[i],0);
+        hal_gpio_pull_set(col_pin, GPIO_PULL_DOWN);
         hal_gpio_pin_init(col_pin, GPIO_INPUT);
-        hal_gpio_pull_set(col_pin, GPIO_PULL_UP_S);
     }
 
     for(uint8_t i=0;i<NUM_KEY_ROWS;i++)
     {
         gpio_pin_e row_pin = (gpio_pin_e)KSCAN_ROW_GPIO[m_kscanCtx.cfg.key_rows[i]];
+        subWriteReg(&(AP_IOMUX->keyscan_in_en),m_kscanCtx.cfg.key_rows[i],m_kscanCtx.cfg.key_rows[i],0);
+        hal_gpio_pull_set(row_pin, GPIO_PULL_UP);//teddy add 20190122
         hal_gpio_pin_init(row_pin, GPIO_INPUT);
-        hal_gpio_pull_set(row_pin, GPIO_PULL_DOWN);//teddy add 20190122
     }
 
     for(uint8_t i=0;i<NUM_KEY_ROWS;i++)
@@ -311,17 +310,17 @@ static void kscan_wakeup_handler(void)
         }
     }
 
-    //hal_pwrmgr_lock(MOD_KSCAN);//todo
+    hal_pwrmgr_lock(MOD_KSCAN);
     for(uint8_t i=0;i<NUM_KEY_COLS;i++)  //teddy add 20190122
     {
         gpio_pin_e col_pin = (gpio_pin_e)KSCAN_COL_GPIO[m_kscanCtx.cfg.key_cols[i]];
+        hal_gpio_pull_set(col_pin, GPIO_PULL_UP);
         hal_gpio_pin_init(col_pin, GPIO_INPUT);
-        hal_gpio_pull_set(col_pin, GPIO_PULL_DOWN);
     }
 
     kscan_hw_config();
     reScan_flag=0;
-    //osal_start_timerEx(m_kscanCtx.kscan_task_id, m_kscanCtx.timeout_event, (m_kscanCtx.cfg.interval + TIMEOUT_DELTA));//todo
+    osal_start_timerEx(m_kscanCtx.kscan_task_id, m_kscanCtx.timeout_event, (m_kscanCtx.cfg.interval + TIMEOUT_DELTA));
 }
 
 

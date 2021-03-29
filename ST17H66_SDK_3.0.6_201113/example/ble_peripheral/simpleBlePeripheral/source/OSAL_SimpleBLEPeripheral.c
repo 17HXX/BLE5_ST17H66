@@ -45,7 +45,7 @@
 
 /* Application */
 #include "simpleBLEPeripheral.h"
-#include "halPeripheral.h"
+
 
 /*********************************************************************
  * GLOBAL VARIABLES
@@ -64,7 +64,9 @@ const pTaskEventHandlerFn tasksArr[] =
 	GAP_ProcessEvent,                                                 // task 4
 	GATT_ProcessEvent,                                                // task 5
 	GAPRole_ProcessEvent,                                             // task 6
+#if (DEF_GAPBOND_MGR_ENABLE==1)
 	GAPBondMgr_ProcessEvent,                                          // task , add 2017-11-15
+#endif
 	GATTServApp_ProcessEvent,                                         // task 7
 	SimpleBLEPeripheral_ProcessEvent,                                 // task 8
 
@@ -119,12 +121,13 @@ void osalInitTasks( void )
 
 	/* Profiles */
 	GAPRole_Init( taskID++ );
+#if(DEF_GAPBOND_MGR_ENABLE==1)
 	GAPBondMgr_Init( taskID++ );          // 2017-11-15
-
+#endif
 	GATTServApp_Init( taskID++ );
 	/* Application */
 	SimpleBLEPeripheral_Init( taskID++ );
-	//HalPeripheral_Init(taskID);
+	
 	
 }
 #endif

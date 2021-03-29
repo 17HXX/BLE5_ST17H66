@@ -47,8 +47,12 @@
 
 //#define FLOW_CTRL_IO_UART_TX          P18 //mobile --> ble --> uart --> host
 //#define FLOW_CTRL_IO_BLE_TX           P23 //host-->uart-->ble-->mobile
-#define FLOW_CTRL_IO_HOST_WAKEUP      P14 //host mcu wakeup befor host-->uart-->620x
-#define UART_INDICATE_LED             P15
+
+#define UART_TX_PIN					  P34	//串口TX引脚
+#define UART_RX_PIN					  P2	//串口RX引脚
+#define FLOW_CTRL_IO_HOST_WAKEUP      P15 	//串口低功耗模式唤醒脚
+#define UART_INDICATE_LED             P14	//蓝牙连接指示灯
+
 //#define FLOW_CTRL_IO_BLE_CONNECTION   P20 //indicate host 620x BLE connection status: 1: connected; 0: advertising
 
 
@@ -85,6 +89,7 @@ extern uint8 at_tx_power;
 extern uint8*scanR;
 extern uint8*advertdata;
 extern uint8 Modify_Mac_Data;
+extern uint8 AT_cnt_advdata;
 
 
 

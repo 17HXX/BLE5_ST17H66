@@ -145,7 +145,7 @@ void GPIO_Wakeup_Init(uint8 task_id ){
 	gpio_wakeup_TaskID = task_id;
 	LOG("gpio wakeup demo start...\n");
 
-    hal_gpio_pull_set(P14,WEAK_PULL_UP);
+    //hal_gpio_pull_set(P14,WEAK_PULL_UP);
 	
 	for(i = 0;i<GPIO_WAKEUP_PIN_NUM;i++){
 		hal_gpioin_register(gpiodemo[i].pin,gpiodemo[i].posedgeHdl,gpiodemo[i].negedgeHdl);
@@ -253,6 +253,8 @@ void Key_Demo_Init(uint8 task_id)
 	LOG("gpio key demo start...\n");
     
     hal_gpio_init();
+    hal_gpioretention_register(P20);
+    hal_gpio_write(P20,1);
 //    hal_gpio_pin2pin3_control(P2,1);
 	
 /*

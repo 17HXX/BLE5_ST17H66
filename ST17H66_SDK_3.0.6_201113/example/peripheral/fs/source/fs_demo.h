@@ -34,7 +34,8 @@ extern "C"
 #define FS_TEST_EVT                                   0x0002
 #define FS_EXAMPLE_EVT                                0x0004
 #define FS_TIMING_EVT                                 0x0008
-	
+#define FS_XIP_EVT                                    0x0010
+
 /*********************************************************************
  * FUNCTIONS
  */

@@ -66,6 +66,7 @@
 
 #define reportQEmpty()                        ( firstQIdx == lastQIdx )
 
+#define CCD_CHECK_EN_FLAG  0 
 /*********************************************************************
  * CONSTANTS
  */
@@ -1198,6 +1199,7 @@ static hidRptMap_t *hidDevRptById( uint8 id, uint8 type )
   return NULL;
 }
 
+#if CCD_CHECK_EN_FLAG  
 /*********************************************************************
  * @fn      hidDevSendReport
  *
@@ -1253,6 +1255,58 @@ static void hidDevSendReport( uint8 id, uint8 type, uint8 len, uint8 *pData )
     }
   }
 }
+#else
+/*********************************************************************
+    @fn      hidDevSendReport
+
+    @brief   Send a HID report.
+
+    @param   id - HID report ID.
+    @param   type - HID report type.
+    @param   len - Length of report.
+    @param   pData - Report data.
+
+    @return  None.
+*/
+static void hidDevSendReport( uint8 id, uint8 type, uint8 len, uint8* pData )
+{
+    hidRptMap_t*           pRpt;
+    gattAttribute_t*       pAttr;
+    uint16                retHandle;
+    LOG("%s\n",__FUNCTION__);
+
+    // Get ATT handle for report
+    if ( (pRpt = hidDevRptById(id, type)) != NULL )
+    {
+        // if notifications are enabled
+        if ( (pAttr = GATT_FindHandle(pRpt->cccdHandle, &retHandle)) != NULL )
+        {
+            uint16 value;
+            value  = GATTServApp_ReadCharCfg( gapConnHandle, (gattCharCfg_t*) pAttr->pValue );
+
+            //if ( value & GATT_CLIENT_CFG_NOTIFY )
+            {
+                // After service discovery and encryption, the HID Device should request to
+                // change to the preferred connection parameters that best suit its use case.
+                if ( updateConnParams )
+                {
+                    GAPRole_SetParameter( GAPROLE_PARAM_UPDATE_REQ, sizeof( uint8 ), &updateConnParams );
+                    updateConnParams = FALSE;
+                }
+
+                // send notification
+                lastNoti.handle = pRpt->handle;
+                lastNoti.len = len;
+                osal_memcpy(lastNoti.value, pData, len);
+                GATT_Notification( gapConnHandle, &lastNoti, FALSE );
+                // start idle timer
+                hidDevStartIdleTimer();
+            }
+        }
+    }
+}
+#endif
+
 
 /*********************************************************************
  * @fn      hidDevEnqueueReport

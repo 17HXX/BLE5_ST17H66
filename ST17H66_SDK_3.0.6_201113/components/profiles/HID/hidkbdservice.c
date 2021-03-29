@@ -193,11 +193,11 @@ static CONST uint8 hidReportMap[] =
 #endif    
     
 #if EN_CONSUMER_MODE
-
+    #if 0
     0x05, 0x0C,	// Usage Pg (Consumer Devices)
 	0x09, 0x01,   // Usage (Consumer Control)
 	0xA1, 0x01,   // Collection (Application)
-	0x85, HID_RPT_ID_CC_IN,   // Report Id (3)
+	0x85, HID_RPT_ID_CC_IN,   //z Report Id (3)
 	0x09, 0x02,   //   Usage (Numeric Key Pad)
 	0xA1, 0x02,   //   Collection (Logical)
 	0x05, 0x09,   //	 Usage Pg (Button)
@@ -251,8 +251,56 @@ static CONST uint8 hidReportMap[] =
 	0x81, 0x00,   //	 Input (Data, Ary, Abs)
 	0xC0,		  //   End Collection
 	0x81, 0x03,   //   Input (Const, Var, Abs)
-	0xC0,	 // End Collection
+  0xC0                /*  End Collection                              */
+    #else
+		0x05, 0x01,         /*  Usage Page (Desktop),                   */
+		0x09, 0x06,         /*  Usage (Keyboard),                       */
+		0xA1, 0x01,         /*  Collection (Application),               */
+		0x85, 0x02,         /*      Report ID (1),                      */
+		0x05, 0x07,         /*      Usage Page (Keyboard),              */
+		0x19, 0xE0,         /*      Usage Minimum (KB Leftcontrol),     */
+		0x29, 0xE7,         /*      Usage Maximum (KB Right GUI),       */
+		0x15, 0x00,         /*      Logical Minimum (0),                */
+		0x25, 0x01,         /*      Logical Maximum (1),                */
+		0x75, 0x01,         /*      Report Size (1),                    */
+		0x95, 0x08,         /*      Report Count (8),                   */
+		0x81, 0x02,         /*      Input (Variable),                   */
+		0x95, 0x01,         /*      Report Count (1),                   */
+		0x75, 0x08,         /*      Report Size (8),                    */
+		0x81, 0x01,         /*      Input (Constant),                   */
+		0x95, 0x05,         /*      Report Count (5),                   */
+		0x75, 0x01,         /*      Report Size (1),                    */
+		0x05, 0x08,         /*      Usage Page (LED),                   */
+		0x19, 0x01,         /*      Usage Minimum (01h),                */
+		0x29, 0x05,         /*      Usage Maximum (05h),                */
+		0x91, 0x02,         /*      Output (Variable),                  */
+		0x95, 0x01,         /*      Report Count (1),                   */
+		0x75, 0x03,         /*      Report Size (3),                    */
+		0x91, 0x01,         /*      Output (Constant),                  */
+		0x95, 0x06,         /*      Report Count (6),                   */
+		0x75, 0x08,         /*      Report Size (8),                    */
+		0x15, 0x00,         /*      Logical Minimum (0),                */
+		0x25, 0x65,         /*      Logical Maximum (101),              */
+		0x05, 0x07,         /*      Usage Page (Keyboard),              */
+		0x19, 0x00,         /*      Usage Minimum (None),               */
+		0x29, 0x65,         /*      Usage Maximum (KB Application),     */
+		0x81, 0x00,         /*      Input,                              */
+		0xC0,               /*  End Collection,                         */
 
+		0x05, 0x0C,         /*  Usage Page (Consumer),                  */
+		0x09, 0x01,         /*  Usage (Consumer Control),               */
+		0xA1, 0x01,         /*  Collection (Application),               */
+		0x85, 0x03,         /*      Report ID (2),                      */
+		0x75, 0x10,         /*      Report Size (16),                   */
+		0x95, 0x01,         /*      Report Count (1),                   */
+		0x15, 0x01,         /*      Logical Minimum (1),                */
+		0x26, 0x8C, 0x02,   /*      Logical Maximum (652),              */
+		0x19, 0x01,         /*      Usage Minimum (Consumer Control),   */
+		0x2A, 0x8C, 0x02,   /*      Usage Maximum (AC Send),            */
+		0x81, 0x60,         /*      Input (No Preferred, Null State),   */
+		0xC0,               /*  End Collection,                         */
+		
+		#endif
 
 #endif
 

@@ -14,8 +14,8 @@
 #define TWI_SCL_LOW()     hal_gpio_write(IIC_SCL_PIN,0)
 #define TWI_SCL_HIGH()    hal_gpio_write(IIC_SCL_PIN,1)
 
-#define TWI_SCL_READ()    ((hal_gpio_read(IIC_SCL_PIN)>>IIC_SCL_PIN)&0x01)
-#define TWI_SDA_READ()    ((hal_gpio_read(IIC_SDA_PIN)>>IIC_SDA_PIN)&0x01)
+#define TWI_SCL_READ()    hal_gpio_read(IIC_SCL_PIN)
+#define TWI_SDA_READ()    hal_gpio_read(IIC_SDA_PIN)
 
 #define TWI_SDA_OUTPUT()  hal_gpio_pin_init(IIC_SDA_PIN,OEN)
 #define TWI_SDA_INPUT()   hal_gpio_pin_init(IIC_SDA_PIN,IE); hal_gpio_pull_set(IIC_SDA_PIN, STRONG_PULL_UP)

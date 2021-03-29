@@ -319,6 +319,7 @@ void dbg_printf(const char *format, ...)
     va_list args;
     va_start(args, format);
     log_vsprintf(_uart_putc, format, args);
+    va_end(args);
 }
 
 void dbg_printf_init(void)
@@ -338,5 +339,13 @@ void dbg_printf_init(void)
   hal_uart_init(cfg, UART0);//uart init
 }
 
+void my_dump_byte(uint8_t* pData, int dlen)
+{
+    for(int i=0; i<dlen; i++)
+    {
+        dbg_printf("%02x ",pData[i]);
+    }
 
+    dbg_printf("\n");
+}
 

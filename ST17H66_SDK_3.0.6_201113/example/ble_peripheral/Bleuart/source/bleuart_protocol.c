@@ -20,7 +20,7 @@ uint8 AT_BLEUART_EVT=0;
 
 uint32 UART_Baudrate = 115200;
 
-//bleuart传输指令——>0	传输数据——>1
+//bleuart传输指令——>0	传输数据——>1	   
 uint8 Bleuart_C_D=0;
 
 //固件版本FW Version  v1.1.1
@@ -123,11 +123,14 @@ void uart_evt_hdl(uart_Evt_t* pev)
 				break;
 
 /***************************************************************************************************************************/
-//串口接收AT指令
+
+#if (AT_UART==1)
+
+	//串口接收AT指令
 	if(Bleuart_C_D==0)
 	{	
 		osal_stop_timerEx(bleuart_TaskID, BUP_OSAL_EVT_AT);
-		osal_start_timerEx(bleuart_TaskID, BUP_OSAL_EVT_AT, 10);
+		osal_start_timerEx(bleuart_TaskID, BUP_OSAL_EVT_AT, 15);
 		
 		memcpy(at_rx->data + at_rx->len, pev->data, pev->len);
 		at_rx->len += pev->len;
@@ -138,6 +141,7 @@ void uart_evt_hdl(uart_Evt_t* pev)
 /***************************************************************************************************************************/
 	else
 	{
+#endif
 			
 	  uartrx_timeout_timer_stop();
       uartrx_timeout_timer_start();
@@ -146,7 +150,9 @@ void uart_evt_hdl(uart_Evt_t* pev)
 
 //			LOG("LEN1:%d\n",pev->len);
 //			LOG("RXLEN1:%d\n",pctx->hal_uart_rx_size);
+#if (AT_UART==1)
 	}
+#endif
 //			uartrx_timeout_timer_stop();
 //      uartrx_timeout_timer_start();
 //      memcpy(pctx->hal_uart_rx_buf + pctx->hal_uart_rx_size, pev->data, pev->len);
@@ -155,13 +161,14 @@ void uart_evt_hdl(uart_Evt_t* pev)
     case  UART_EVT_TYPE_RX_DATA_TO:
 			if((pctx->hal_uart_rx_size + pev->len)>=UART_RX_BUF_SIZE)
 				break;
-			
+
+#if (AT_UART==1)
 /***************************************************************************************************************************/
 //串口接收AT指令
 	if(Bleuart_C_D==0)
 	{	
 		osal_stop_timerEx(bleuart_TaskID, BUP_OSAL_EVT_AT);
-		osal_start_timerEx(bleuart_TaskID, BUP_OSAL_EVT_AT, 10);
+		osal_start_timerEx(bleuart_TaskID, BUP_OSAL_EVT_AT, 15);
 		
 		memcpy(at_rx->data + at_rx->len, pev->data, pev->len);
 		at_rx->len += pev->len;
@@ -172,13 +179,15 @@ void uart_evt_hdl(uart_Evt_t* pev)
 /***************************************************************************************************************************/
 	else
 	{
-			
-			uartrx_timeout_timer_stop();
+#endif
+	  uartrx_timeout_timer_stop();
       uartrx_timeout_timer_start();
       memcpy(pctx->hal_uart_rx_buf + pctx->hal_uart_rx_size, pev->data, pev->len);
       pctx->hal_uart_rx_size += pev->len;
       //BUP_data_uart_to_BLE();
+#if (AT_UART==1)	
     } 
+#endif
       //pctx->hal_uart_rx_size = 0;
       //LOG("uart_evt_hdl: %d\n", pev->type);
       break;
@@ -333,7 +342,7 @@ int BUP_data_uart_to_BLE_send(void)
       else
       {
 				LOG("TX R=%x\n",ret);
-        if(ret == MSG_BUFFER_NOT_AVAIL){
+        if(ret == MSG_BUFFER_NOT_AVAIL || ret == INVALID_INTERRUPT_ID){
           if(start_flg){
             rx_start_timer(1);
           }
@@ -440,8 +449,8 @@ int BUP_init(BUP_CB_t cb)
 {
   BUP_ctx_t* pctx = &mBUP_Ctx;
   uart_Cfg_t cfg = {
-  .tx_pin = P2,
-  .rx_pin = P3,
+  .tx_pin = UART_TX_PIN,
+  .rx_pin = UART_RX_PIN,
   .rts_pin = GPIO_DUMMY,
   .cts_pin = GPIO_DUMMY,
   .baudrate = UART_Baudrate,
@@ -455,14 +464,18 @@ int BUP_init(BUP_CB_t cb)
   
   hal_uart_set_tx_buf(UART1,pctx->hal_uart_tx_buf, UART_TX_BUF_SIZE);
 
+  
 #if(CFG_SLEEP_MODE == PWR_MODE_SLEEP)
 	hal_gpio_pin_init(FLOW_CTRL_IO_HOST_WAKEUP,IE);						/*UART唤醒控制*/
 	hal_gpio_pull_set(FLOW_CTRL_IO_HOST_WAKEUP,STRONG_PULL_UP);
     hal_gpioin_register(FLOW_CTRL_IO_HOST_WAKEUP, gpio_sleep_handle, gpio_wakeup_handle);
 #endif  
+  
+  
 	hal_gpio_pin_init(UART_INDICATE_LED,OEN);
+    hal_gpioretention_register(UART_INDICATE_LED);
 	hal_gpio_write(UART_INDICATE_LED,0);
-//	hal_gpio_retention_enable(UART_INDICATE_LED,1);
+	
   //config gpio wakeup
 	hal_pwrmgr_register(MOD_USR1, NULL, NULL);
 
@@ -472,10 +485,13 @@ int BUP_init(BUP_CB_t cb)
   
   memset(&mBUP_Ctx, 0, sizeof(mBUP_Ctx));
   LOG("BUP_init\n");
+ 
     
   return PPlus_SUCCESS;
 }
 
+
+#if (AT_UART==1)
 
 void AT_Response(UART_INDEX_e uart_index,AT_BLEUART_RX_t* pev,uint8_t *buff,uint8 len)
 {
@@ -559,6 +575,23 @@ uint8 AT_query(AT_BLEUART_RX_t* pev)
 			hal_uart_send_buff(UART1,response, pev->len+4);
 			return 0;
 		}
+		//关机
+		if(((pev->len)==8)&&((pev->data[3])==0x4F)&&((pev->data[4])==0x46)&&((pev->data[5])==0x46))
+		{
+			hal_gpio_pin_init(UART_TX_PIN,IE) ;				   //设置为输入
+			hal_gpio_pull_set(UART_TX_PIN,STRONG_PULL_UP) ;	   //设置当前io的上下拉
+			hal_gpio_pin_init(UART_RX_PIN,IE) ;				   //设置为输入
+			hal_gpio_pull_set(UART_RX_PIN,STRONG_PULL_UP) ;	   //设置当前io的上下拉
+			
+			pwroff_cfg_t temp_gpio_wakeup ;
+			temp_gpio_wakeup.pin = UART_RX_PIN ;
+			temp_gpio_wakeup.type = NEGEDGE ;
+			temp_gpio_wakeup.on_time=1;
+			
+			hal_pwrmgr_enter_standby(&temp_gpio_wakeup,1) ;
+			
+			return 0;
+		}
 		//设置FLASH记忆参数46 4C 41 53 48
 		if(((pev->len)==10)&&((pev->data[3])==0x46)&&((pev->data[4])==0x4C)&&((pev->data[5])==0x41)&&((pev->data[6])==0x53)&&((pev->data[7])==0x48))
 		{
@@ -575,7 +608,7 @@ uint8 AT_query(AT_BLEUART_RX_t* pev)
 			osal_snv_write(0x85,1,&AT_bleuart_auto);			// 1 Byte BLE_UART AUTO
 			osal_snv_write(0x86,1,&AT_bleuart_sleep);			// 1 Byte SLEEP MODE
 			osal_snv_write(0x87,1,&AT_bleuart_txpower);			// 1 Byte TX power
-			osal_snv_write(0x88,8,&(advertdata[23]));			// 8 Bytes reserved data
+			osal_snv_write(0x88,8,&(advertdata[AT_cnt_advdata]));			// 8 Bytes reserved data
 			
 			memcpy(response, pev->data, pev->len);
 			response[pev->len]=0x4f;
@@ -606,8 +639,7 @@ uint8 AT_query(AT_BLEUART_RX_t* pev)
 			uint8 at_mac_address[6];
 			uint8 mac_addr[12];
 			uint8 i,j;
-			hal_flash_read(0x4004,at_mac_address,2);   //读取mac地址
-			hal_flash_read(0x4000,at_mac_address+2,4);
+			osal_snv_read(0x89,6,at_mac_address);				//读取mac地址
 			
 			for(i=0,j=0;i<6;i++,j++)
 			{
@@ -656,7 +688,7 @@ uint8 AT_query(AT_BLEUART_RX_t* pev)
 			AT_Response(UART1,pev,&at_bleuart_auto,1);
 			return 0;
 		}
-		//查询连接状态4C 49 4E 4B 3F
+		//查询蓝牙连接状态4C 49 4E 4B 3F
 		if(((pev->len)==10)&&((pev->data[3])==0x4C)&&((pev->data[4])==0x49)&&((pev->data[5])==0x4E)&&((pev->data[6])==0x4B)&&((pev->data[7])==0x3F))
 		{
 			uint16_t conn_hdl;
@@ -721,32 +753,45 @@ uint8 AT_query(AT_BLEUART_RX_t* pev)
 		//查询UUID 55 55 49 44 3F
 		if(((pev->len)==10)&&((pev->data[3])==0x55)&&((pev->data[4])==0x55)&&((pev->data[5])==0x49)&&((pev->data[6])==0x44)&&((pev->data[7])==0x3F))
 		{
-			uint8 service_uuid[41]={0x41,0x54,0x2B,0x62,0x6c,0x65,0x55,0x61,0x72,0x74,0x5f,0x53,0x65,0x72,0x76,0x65,0x72,0x5f,0x55,0x75,0x69,0x64,0x3a};
-			uint8 service_tx_uuid[44]={0x41,0x54,0x2B,0x62,0x6c,0x65,0x55,0x61,0x72,0x74,0x5f,0x53,0x65,0x72,0x76,0x65,0x72,0x5f,0x54,0x78,0x5f,0x55,0x75,0x69,0x64,0x3a};
-			uint8 service_rx_uuid[44]={0x41,0x54,0x2B,0x62,0x6c,0x65,0x55,0x61,0x72,0x74,0x5f,0x53,0x65,0x72,0x76,0x65,0x72,0x5f,0x52,0x78,0x5f,0x55,0x75,0x69,0x64,0x3a};
+			uint8 ser_uuid[4];
+			uint8 tx_uuid[4];
+			uint8 rx_uuid[4];
+			uint8 uuid_ser[2]={bleuart_ServiceUUID[1],bleuart_ServiceUUID[0]};
+			uint8 uuid_tx[2]={bleuart_TxCharUUID[1],bleuart_TxCharUUID[0]};
+			uint8 uuid_rx[2]={bleuart_RxCharUUID[1],bleuart_RxCharUUID[0]};
+			uint8 service_uuid[53]={0x41,0x54,0x2B,0x53,0x65,0x72,0x76,0x65,0x72,0x5f,0x55,0x75,0x69,0x64,0x3a};
+			uint8 service_tx_uuid[8]={0x54,0x78,0x5f,0x55,0x75,0x69,0x64,0x3a};
+			uint8 service_rx_uuid[8]={0x52,0x78,0x5f,0x55,0x75,0x69,0x64,0x3a};
+			
+			Hex_to_Ascii(uuid_ser,ser_uuid,2);
+			Hex_to_Ascii(uuid_tx,tx_uuid,2);
+			Hex_to_Ascii(uuid_rx,rx_uuid,2);
 				
-			memcpy(&service_uuid[23], bleuart_ServiceUUID, 16);
-			service_uuid[39]=0x0d;
-			service_uuid[40]=0x0a;
-			memcpy(&service_tx_uuid[26], bleuart_TxCharUUID, 16);
-			service_tx_uuid[42]=0x0d;
-			service_tx_uuid[43]=0x0a;
-			memcpy(&service_rx_uuid[26], bleuart_RxCharUUID, 16);
-			service_rx_uuid[42]=0x0d;
-			service_rx_uuid[43]=0x0a;
+			memcpy(&service_uuid[15], ser_uuid, 4);
+			service_uuid[19]=0x0d;
+			service_uuid[20]=0x0a;
+			memcpy(&service_uuid[21], service_tx_uuid, 8);
+			memcpy(&service_uuid[29], tx_uuid, 4);
+			service_uuid[33]=0x0d;
+			service_uuid[34]=0x0a;
+			memcpy(&service_uuid[35], service_rx_uuid, 8);
+			memcpy(&service_uuid[43], rx_uuid, 4);
+			service_uuid[47]=0x0d;
+			service_uuid[48]=0x0a;
+			service_uuid[49]=0x4f;
+			service_uuid[50]=0x4b;
+			service_uuid[51]=0x0d;
+			service_uuid[52]=0x0a;
 
-			hal_uart_send_buff(UART1,service_uuid, 41);
-			WaitMs(50);
-			hal_uart_send_buff(UART1,service_tx_uuid, 44);
-			WaitMs(50);
-			hal_uart_send_buff(UART1,service_rx_uuid, 44);
+			hal_uart_send_buff(UART1,service_uuid, 53);
+			
 			return 0;
 		}
 		//查询自定义广播数据52 45 53 45 3F
 		if(((pev->len)==10)&&((pev->data[3])==0x52)&&((pev->data[4])==0x45)&&((pev->data[5])==0x53)&&((pev->data[6])==0x45)&&((pev->data[7])==0x3F))
 		{
 			uint8 reserved_data[8];
-			memcpy(reserved_data, &(advertdata[23]), 8);
+			memcpy(reserved_data, &(advertdata[AT_cnt_advdata]), 8);
 			AT_Response(UART1,pev,reserved_data,8);
 			return 0;
 		}
@@ -840,7 +885,7 @@ uint8 AT_setdata(AT_BLEUART_RX_t* pev)
 			memcpy(uart_baudrate, &pev->data[8], 4);
 			UART_Baudrate=BUILD_UINT32(uart_baudrate[3],uart_baudrate[2],uart_baudrate[1],uart_baudrate[0]);
 			AT_Response2(UART1,pev,uart_baudrate, 4, 7);
-			WaitMs(70);
+			WaitMs(2);
 			hal_uart_deinit(UART1);
 			BUP_init(on_BUP_Evt);
 			return 0;
@@ -874,14 +919,44 @@ uint8 AT_setdata(AT_BLEUART_RX_t* pev)
 		//设置自定义广播数据52 45 53 45 3D
 		if(((pev->len)==18)&&((pev->data[3])==0x52)&&((pev->data[4])==0x45)&&((pev->data[5])==0x53)&&((pev->data[6])==0x45)&&((pev->data[7])==0x3D))
 		{
-			memcpy(&(advertdata[23]), &(pev->data[8]), 8);
-			AT_Response2(UART1,pev,&(advertdata[23]), 8, 7);
+			memcpy(&(advertdata[AT_cnt_advdata]), &(pev->data[8]), 8);
+			AT_Response2(UART1,pev,&(advertdata[AT_cnt_advdata]), 8, 7);
 			return 3;
 		}
 	}
 	return 4;
 }
 
+#endif
+
+//Hex to ASCII		len:hex数据的字节数
+void Hex_to_Ascii(uint8* data_hex , uint8* data_ascii , uint8 len )
+{
+	uint8 i,j;
+	for(i=0,j=0;i<len;i++,j++)
+	{
+		if((((data_hex[i])>>4)<=9)&&(((data_hex[i])>>4)>=0))
+		{
+			data_ascii[j]=((data_hex[i])>>4)+0x30;
+		}
+		else
+		{
+			data_ascii[j]=((data_hex[i])>>4)+0x37;
+		}
+		
+		j=j+1;
+		
+		if(((data_hex[i]&0x0f)<=9)&&((data_hex[i]&0x0f)>=0))
+		{
+			data_ascii[j]=(data_hex[i]&0x0f)+0x30;
+		}
+		else
+		{
+			data_ascii[j]=(data_hex[i]&0x0f)+0x37;
+		}
+	}
+	return ;
+}
 
 
 

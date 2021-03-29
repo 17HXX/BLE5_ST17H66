@@ -321,7 +321,8 @@ void hal_pwrmgr_poweroff(pwroff_cfg_t* pcfg, uint8_t wakeup_pin_num)
 }
 
 #define STANDBY_WAIT_MS(a)  WaitRTCCount((a)<<5) // 32us * 32  around 1ms
-__attribute__((section("_section_standby_code_"))) pwroff_cfg_t s_pwroff_cfg; 
+__attribute__((section("_section_standby_code_"))) pwroff_cfg_t s_pwroff_cfg[WAKEUP_PIN_MAX];
+__attribute__((section("_section_standby_code_"))) __attribute__((used)) uint8 pwroff_register_number=0;
 __attribute__((section("_section_standby_code_"))) void wakeupProcess_standby(void)
 {
     subWriteReg(0x4000f014,29,27,0x07);
@@ -332,35 +333,64 @@ __attribute__((section("_section_standby_code_"))) void wakeupProcess_standby(vo
     STANDBY_WAIT_MS(15);
 #endif
     uint32_t volatile cnt=0;
+    uint8_t volatile find_flag=0;
+    uint8 pin_n=0;
+    extern bool gpio_read(gpio_pin_e pin);
+
+    for(pin_n=0; pin_n<pwroff_register_number; pin_n++)
+    {
+        if(gpio_read(s_pwroff_cfg[pin_n].pin)==s_pwroff_cfg[pin_n].type)
+        {
+            find_flag=1;
+            break;
+        }
+    }
+
     while(1)
     {
-        extern bool gpio_read(gpio_pin_e pin);
-        if(gpio_read(s_pwroff_cfg.pin)==s_pwroff_cfg.type)
+        if(gpio_read(s_pwroff_cfg[pin_n].pin)==s_pwroff_cfg[pin_n].type&&find_flag==1)
         {
             cnt++;
             STANDBY_WAIT_MS(32);
-            if(cnt>(s_pwroff_cfg.on_time>>5))
+            if(cnt>(s_pwroff_cfg[pin_n].on_time>>5))
+            {
+                write_reg(0x4000f030, 0x01);
                 break;
+            }
         }
         else
-            hal_pwrmgr_enter_standby(&s_pwroff_cfg);
+            hal_pwrmgr_enter_standby(&s_pwroff_cfg[0],pwroff_register_number);
     }
     set_sleep_flag(0);
+    AP_AON->SLEEP_R[0] = 4;
     HAL_ENTER_CRITICAL_SECTION(); 
     AP_PCR->SW_RESET1 = 0;  
     while(1);
 }
-__attribute__((section("_section_standby_code_"))) void hal_pwrmgr_enter_standby(pwroff_cfg_t* pcfg) 
-{ 
+extern void gpio_wakeup_set(gpio_pin_e pin, gpio_polarity_e type);
+extern void gpio_pull_set(gpio_pin_e pin, gpio_pupd_e type);
+__attribute__((section("_section_standby_code_"))) void hal_pwrmgr_enter_standby(pwroff_cfg_t* pcfg,uint8_t wakeup_pin_num)
+{
     HAL_ENTER_CRITICAL_SECTION();
     subWriteReg(0x4000f01c,6,6,0x00);   //disable software control
-    if(pcfg[0].type==POL_FALLING)
-        gpio_pull_set(pcfg[0].pin ,GPIO_PULL_UP_S);
-    else
-        gpio_pull_set(pcfg[0].pin,GPIO_PULL_DOWN);
-    gpio_wakeup_set(pcfg[0].pin, pcfg[0].type);
-    //copy the first io
-    osal_memcpy(&s_pwroff_cfg,&(pcfg[0]),sizeof(pwroff_cfg_t));
+    uint8_t i = 0;
+
+    if(wakeup_pin_num>WAKEUP_PIN_MAX)
+    {
+        wakeup_pin_num=WAKEUP_PIN_MAX;
+    }
+
+    for(i = 0; i < wakeup_pin_num; i++)
+    {
+        if(pcfg[0].type==POL_FALLING)
+            gpio_pull_set(pcfg[i].pin,GPIO_PULL_UP_S);
+        else
+            gpio_pull_set(pcfg[i].pin,GPIO_PULL_DOWN);
+
+        gpio_wakeup_set(pcfg[i].pin, pcfg[i].type);
+        osal_memcpy(&s_pwroff_cfg[i],&(pcfg[i]),sizeof(pwroff_cfg_t));
+        pwroff_register_number++;
+    }
 
     JUMP_FUNCTION(WAKEUP_PROCESS)=   (uint32_t)&wakeupProcess_standby;
 

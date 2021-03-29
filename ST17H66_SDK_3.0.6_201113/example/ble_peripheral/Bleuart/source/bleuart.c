@@ -34,6 +34,7 @@
 #include "log.h"
 #include "osal_snv.h"
 #include "flash.h"
+#include "ota_app_service.h"
 
 /*********************************************************************
  * MACROS
@@ -62,7 +63,7 @@
 #define DEFAULT_DESIRED_SLAVE_LATENCY         0
 
 // Supervision timeout value (units of 10ms, 1000=10s) if automatic parameter update request is enabled
-#define DEFAULT_DESIRED_CONN_TIMEOUT          1000
+#define DEFAULT_DESIRED_CONN_TIMEOUT          600
 
 // Whether to enable automatic parameter update request when a connection is formed
 #define DEFAULT_ENABLE_UPDATE_REQUEST         TRUE
@@ -93,30 +94,34 @@
 #define DEFAULT_IO_CAPABILITIES               GAPBOND_IO_CAP_NO_INPUT_NO_OUTPUT//GAPBOND_IO_CAP_DISPLAY_ONLY // GAPBOND_IO_CAP_NO_INPUT_NO_OUTPUT
 
 
-//AT脰赂脕卯脢媒戮脻卤锚脰戮脦禄
+//AT指令数据标志位
 uint8 Modify_BLEDevice_Data = 0;
 
 
-//鹿茫虏楼录盲赂么
-uint16 advInt[6] ={80,160,320,800,1600,3200};   // actual time = advInt * 625us				鹿茫虏楼录盲赂么
-uint8  advint = 2;								//脛卢脠脧鹿茫虏楼录盲赂么200ms
+//广播间隔
+uint16 advInt[6] ={80,160,320,800,1600,3200};   // actual time = advInt * 625us				广播间隔
+uint8  advint = 2;								//默认广播间隔200ms
 
-//脢脟路帽脕卢陆脫脡脧脳脭露炉陆酶脠毛脥赂麓芦
-uint8 AT_bleuart_auto=0x59;
+//是否连接上自动进入透传
+uint8 AT_bleuart_auto=0x59;			//0x59:Y  默认蓝牙连接后自动进入透传	0x4E：N   蓝牙连接后不自动进入透传
 uint8 AT_bleuart_sleep=0;			//UNUSED
 
 
-//路垄脡盲鹿娄脗脢
-//0拢潞10DB
-//1拢潞5DB
-//2拢潞4DB
-//3拢潞3DB
-//4拢潞0DB
-//5拢潞-2DB
-//6拢潞-5DB
-//7拢潞-10DB
+//发射功率
+//0：10DB
+//1：5DB
+//2：4DB
+//3：3DB
+//4：0DB
+//5：-2DB
+//6：-5DB
+//7：-10DB
 uint8 AT_Tx_Power[8]={0x1f,0x1d,0x17,0x15,0x0d,0x0a,0x06,0x03};		
-uint8 AT_bleuart_txpower=4;											//脛卢脠脧路垄脡盲鹿娄脗脢0DB
+uint8 AT_bleuart_txpower=4;											//默认发射功率0DB
+
+
+//广播包自定义数据起始字节数
+uint8 AT_cnt_advdata=9;
 
 
 uint8 bleuart_TaskID;   // Task ID for internal task/event processing
@@ -131,15 +136,16 @@ static uint8 scanRspData[] =
     // complete name
     21,   // length of this data
     GAP_ADTYPE_LOCAL_NAME_COMPLETE,
-    'B','L','E','_','U','a','r','t',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+    'U','a','r','t','-','T','e','s','t',' ',
+	' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
 
-    // connection interval range
-    0x05,   // length of this data
-    GAP_ADTYPE_SLAVE_CONN_INTERVAL_RANGE,
-    LO_UINT16( DEFAULT_DESIRED_MIN_CONN_INTERVAL ),   // 100ms
-    HI_UINT16( DEFAULT_DESIRED_MIN_CONN_INTERVAL ),
-    LO_UINT16( DEFAULT_DESIRED_MAX_CONN_INTERVAL ),   // 1s
-    HI_UINT16( DEFAULT_DESIRED_MAX_CONN_INTERVAL ),
+// connection interval range
+//    0x05,   // length of this data
+//    GAP_ADTYPE_SLAVE_CONN_INTERVAL_RANGE,
+//    LO_UINT16( DEFAULT_DESIRED_MIN_CONN_INTERVAL ),   // 100ms
+//    HI_UINT16( DEFAULT_DESIRED_MIN_CONN_INTERVAL ),
+//    LO_UINT16( DEFAULT_DESIRED_MAX_CONN_INTERVAL ),   // 1s
+//    HI_UINT16( DEFAULT_DESIRED_MAX_CONN_INTERVAL ),
 
     // Tx power level
 //    0x02,   // length of this data
@@ -155,22 +161,26 @@ static uint8 advertData[] =
     0x02,   // length of this data
     GAP_ADTYPE_FLAGS,
     DEFAULT_DISCOVERABLE_MODE | GAP_ADTYPE_FLAGS_BREDR_NOT_SUPPORTED,
-    0x11,
-    0x07,//Complete list of 128-bit UUIDs available
-    0x55, 0xe4,0x05,0xd2,0xaf,0x9f,0xa9,0x8f,0xe5,0x4a,0x7d,0xfe,0x43,0x53,0x53,0x49,
+	
+    0x03,
+    0x03,											//Complete list of 16-bit UUIDs
+    0xf0, 0xff,
+	
 	0x09,
 	0xff,
-	0x07,										//reserved data
-	0x10,										//
-	0xff,0xff,0xff,0xff,0xff,0xff,
+	0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,		//reserved data
 };
 
 
 // GAP GATT Attributes
-static uint8 attDeviceName[GAP_DEVICE_NAME_LEN] = "BLE-Uart";
+static uint8 attDeviceName[GAP_DEVICE_NAME_LEN] = "Uart-Test           ";
 
 uint8*scanR=scanRspData;
 uint8*advertdata=advertData;
+
+//OTA升级密钥
+uint8 ota_keylen=10;
+uint8 ota_key[10]={'0','0','0','0','0','0','0','0','0','2'};
 /*********************************************************************
  * LOCAL FUNCTIONS
  */
@@ -334,25 +344,26 @@ void bleuart_Init( uint8 task_id )
     };
 	
 /***************************************************************************************************************/
-//禄帽脠隆脨脼赂脛脡猫卤赂脢媒戮脻
+//获取修改设备数据
 	uint8 AT_mac_address[6];
-	hal_flash_read(0x4004,AT_mac_address,2);   //露脕脠隆mac碌脴脰路
+	hal_flash_read(0x4004,AT_mac_address,2);   //读取mac地址
 	hal_flash_read(0x4000,AT_mac_address+2,4);  
 //	LOG("MAC: %x %x %x %x %x %x",AT_mac_address[0],AT_mac_address[1],AT_mac_address[2],AT_mac_address[3],AT_mac_address[4],AT_mac_address[5]) ;
 
 	uint8 uart_baudrate[4]={BREAK_UINT32(UART_Baudrate,3),BREAK_UINT32(UART_Baudrate,2),BREAK_UINT32(UART_Baudrate,1),BREAK_UINT32(UART_Baudrate,0)};
 	
+#if (AT_UART==1)
 	osal_snv_read(0x80,1,&Modify_BLEDevice_Data);
 	if(Modify_BLEDevice_Data==1)
 	{
-		osal_snv_read(0x81,20,&(scanRspData[2]));			// 15 Bytes Device Name
+		osal_snv_read(0x81,20,&(scanRspData[2]));			// 20 Bytes Device Name
 		osal_snv_read(0x82,6,AT_mac_address);				// 6 Bytes MAC address
 		osal_snv_read(0x83,4,uart_baudrate);				// 4 Bytes uart_baudrate
 		osal_snv_read(0x84,1,&advint);						// 1 Byte Advert interval
 		osal_snv_read(0x85,1,&AT_bleuart_auto);				// 1 Byte BLE_UART AUTO
-		osal_snv_read(0x86,1,&AT_bleuart_sleep);			// 1 Byte SLEEP MODE
+		osal_snv_read(0x86,1,&AT_bleuart_sleep);			// 1 Byte SLEEP MODE		UNUSED
 		osal_snv_read(0x87,1,&AT_bleuart_txpower);			// 1 Byte TX power
-		osal_snv_read(0x88,8,&(advertdata[23]));			// 8 Bytes reserved data
+		osal_snv_read(0x88,8,&(advertdata[AT_cnt_advdata]));			// 8 Bytes reserved data
 		
 		UART_Baudrate=BUILD_UINT32(uart_baudrate[3],uart_baudrate[2],uart_baudrate[1],uart_baudrate[0]);
 		g_rfPhyTxPower = AT_Tx_Power[AT_bleuart_txpower];
@@ -362,59 +373,59 @@ void bleuart_Init( uint8 task_id )
 	{
 
 	}
-	else if(Modify_BLEDevice_Data==3)						//禄脰赂麓鲁枚鲁搂脡猫脰脙
+	else if(Modify_BLEDevice_Data==3)						//恢复出厂设置
 	{
 		osal_snv_read(0x92,6,AT_mac_address);				// 6 Bytes MAC address
 		
-		osal_snv_write(0x81,20,&(scanRspData[2]));			// 15 Bytes Device Name
+		osal_snv_write(0x81,20,&(scanRspData[2]));			// 20 Bytes Device Name
 		osal_snv_write(0x82,6,AT_mac_address);				// 6 Bytes MAC address
 		osal_snv_write(0x83,4,uart_baudrate);				// 4 Bytes uart_baudrate
 		osal_snv_write(0x84,1,&advint);						// 1 Byte Advert interval
 		osal_snv_write(0x85,1,&AT_bleuart_auto);			// 1 Byte BLE_UART AUTO
-		osal_snv_write(0x86,1,&AT_bleuart_sleep);			// 1 Byte SLEEP MODE
+		osal_snv_write(0x86,1,&AT_bleuart_sleep);			// 1 Byte SLEEP MODE		UNUSED
 		osal_snv_write(0x87,1,&AT_bleuart_txpower);			// 1 Byte TX power
-		osal_snv_write(0x88,8,&(advertdata[23]));			// 8 Bytes reserved data
+		osal_snv_write(0x88,8,&(advertdata[AT_cnt_advdata]));			// 8 Bytes reserved data
 		
 		osal_snv_write(0x89,6,AT_mac_address);				// 6 Bytes MAC address
 		
 		Modify_BLEDevice_Data = 2;
 		osal_snv_write(0x80,1,&Modify_BLEDevice_Data);
 	}
-	else													//鲁玫脢录禄炉脡猫脰脙
+	else													//初始化设置
 	{
-		osal_snv_write(0x81,20,&(scanRspData[2]));			// 15 Bytes Device Name
+		osal_snv_write(0x81,20,&(scanRspData[2]));			// 20 Bytes Device Name
 		osal_snv_write(0x82,6,AT_mac_address);				// 6 Bytes MAC address
 		osal_snv_write(0x83,4,uart_baudrate);				// 4 Bytes uart_baudrate
 		osal_snv_write(0x84,1,&advint);						// 1 Byte Advert interval
 		osal_snv_write(0x85,1,&AT_bleuart_auto);			// 1 Byte BLE_UART AUTO
-		osal_snv_write(0x86,1,&AT_bleuart_sleep);			// 1 Byte SLEEP MODE
+		osal_snv_write(0x86,1,&AT_bleuart_sleep);			// 1 Byte SLEEP MODE		UNUSED
 		osal_snv_write(0x87,1,&AT_bleuart_txpower);			// 1 Byte TX power
-		osal_snv_write(0x88,8,&(advertdata[23]));			// 8 Bytes reserved data
+		osal_snv_write(0x88,8,&(advertdata[AT_cnt_advdata]));			// 8 Bytes reserved data
 		
 		osal_snv_write(0x89,6,AT_mac_address);				// 6 Bytes MAC address
 		
-		osal_snv_write(0x91,20,&(scanRspData[2]));			// 15 Bytes Device Name
+		osal_snv_write(0x91,20,&(scanRspData[2]));			// 20 Bytes Device Name
 		osal_snv_write(0x92,6,AT_mac_address);				// 6 Bytes MAC address
 		osal_snv_write(0x93,4,uart_baudrate);				// 4 Bytes uart_baudrate
 		osal_snv_write(0x94,1,&advint);						// 1 Byte Advert interval
 		osal_snv_write(0x95,1,&AT_bleuart_auto);			// 1 Byte BLE_UART AUTO
-		osal_snv_write(0x96,1,&AT_bleuart_sleep);			// 1 Byte SLEEP MODE
+		osal_snv_write(0x96,1,&AT_bleuart_sleep);			// 1 Byte SLEEP MODE		UNUSED
 		osal_snv_write(0x97,1,&AT_bleuart_txpower);			// 1 Byte TX power
-		osal_snv_write(0x98,8,&(advertdata[23]));			// 8 Bytes reserved data
+		osal_snv_write(0x98,8,&(advertdata[AT_cnt_advdata]));			// 8 Bytes reserved data
 		
 		Modify_BLEDevice_Data = 2;
 		osal_snv_write(0x80,1,&Modify_BLEDevice_Data);
 		
-		osal_snv_read(0x81,20,&(scanRspData[2]));			// 15 Bytes Device Name
+		osal_snv_read(0x81,20,&(scanRspData[2]));			// 20 Bytes Device Name
 		osal_snv_read(0x82,6,AT_mac_address);				// 6 Bytes MAC address
 		osal_snv_read(0x83,4,uart_baudrate);				// 4 Bytes uart_baudrate
 		osal_snv_read(0x84,1,&advint);						// 1 Byte Advert interval
 		osal_snv_read(0x85,1,&AT_bleuart_auto);				// 1 Byte BLE_UART AUTO
-		osal_snv_read(0x86,1,&AT_bleuart_sleep);			// 1 Byte SLEEP MODE
+		osal_snv_read(0x86,1,&AT_bleuart_sleep);			// 1 Byte SLEEP MODE		UNUSED
 		osal_snv_read(0x87,1,&AT_bleuart_txpower);			// 1 Byte TX power
-		osal_snv_read(0x88,8,&(advertdata[23]));			// 8 Bytes reserved data
+		osal_snv_read(0x88,8,&(advertdata[AT_cnt_advdata]));			// 8 Bytes reserved data
 	}
-	
+#endif
 /***************************************************************************************************************/		
 	
 	
@@ -442,6 +453,7 @@ void bleuart_Init( uint8 task_id )
   }
     
   // Set the GAP Characteristics
+  osal_memcpy(attDeviceName,&scanRspData[2],20);
   GGS_SetParameter( GGS_DEVICE_NAME_ATT, GAP_DEVICE_NAME_LEN, attDeviceName );
     
 //	 // Setup the GAP Bond Manager chendy 20200605
@@ -475,11 +487,14 @@ void bleuart_Init( uint8 task_id )
   }
       
   // Initialize GATT attributes
-  GGS_AddService( GATT_ALL_SERVICES );            // GAP
-  GATTServApp_AddService( GATT_ALL_SERVICES );    // GATT attributes
-  DevInfo_AddService();                           // Device Information Service
-  bleuart_AddService(on_bleuartServiceEvt);
-  BUP_init(on_BUP_Evt);
+//  GGS_AddService( GATT_ALL_SERVICES );            // GAP
+//  GATTServApp_AddService( GATT_ALL_SERVICES );    // GATT attributes
+//  DevInfo_AddService();                           // Device Information Service
+  
+//  ota_app_AddService(ota_keylen,ota_key);			//开启OTA服务
+  
+  bleuart_AddService(on_bleuartServiceEvt);		//串口透传服务
+  BUP_init(on_BUP_Evt);							//串口初始化
 	
   // Setup a delayed profile startup
   osal_set_event( bleuart_TaskID, BUP_OSAL_EVT_START_DEVICE );
@@ -489,6 +504,17 @@ void bleuart_Init( uint8 task_id )
 //	 RF433_analysis_init(bleuart_TaskID,BUP_OSAL_EVT_RF433_KEY);
 //	 
 // }
+}
+
+
+static void BUP_ProcessOSALMsg( osal_event_hdr_t* pMsg )
+{
+    switch ( pMsg->event )
+    {
+		default:
+        // do nothing
+        break;
+    }
 }
 
 /*********************************************************************
@@ -507,13 +533,28 @@ void bleuart_Init( uint8 task_id )
 uint16 bleuart_ProcessEvent( uint8 task_id, uint16 events )
 {
   VOID task_id; // OSAL required parameter that isn't used in this function
+	
+    if (events & SYS_EVENT_MSG)
+	{
+		uint8* pMsg;
+
+		if ((pMsg = osal_msg_receive(bleuart_TaskID)) != NULL)
+		{
+			BUP_ProcessOSALMsg((osal_event_hdr_t*)pMsg);
+			// Release the OSAL message
+			VOID osal_msg_deallocate(pMsg);
+		}
+
+		// return unprocessed events
+		return (events ^ SYS_EVENT_MSG);
+	}
 
   if ( events & BUP_OSAL_EVT_START_DEVICE )
   {
     // Start the Device
     VOID GAPRole_StartDevice( &bleuart_PeripheralCBs );
 
-		GAPBondMgr_Register(&BleUart_BondMgrCBs); //chendy add 20200605
+//		GAPBondMgr_Register(&BleUart_BondMgrCBs); //chendy add 20200605
     return ( events ^ BUP_OSAL_EVT_START_DEVICE );
   }
 
@@ -569,12 +610,14 @@ uint16 bleuart_ProcessEvent( uint8 task_id, uint16 events )
   
    if( events & BUP_OSAL_EVT_AT)
   {
+#if (AT_UART==1)
+	  
 	uint8 ret=2;
 	AT_BLEUART_RX_t* at_rx = & at_bleuart_rx;
 	  
-	//禄霉麓隆脰赂脕卯潞脥虏茅脩炉脰赂脕卯
+	//基础指令和查询指令
 	ret=AT_query(at_rx);
-	//脡猫脰脙脰赂脕卯
+	//设置指令
 	if(ret==2){
 	ret=AT_setdata(at_rx);
 	}
@@ -584,18 +627,20 @@ uint16 bleuart_ProcessEvent( uint8 task_id, uint16 events )
 	}
 	else if(ret==3){
 		GAPRole_TerminateConnection();
-		WaitMs(100);
+//		WaitMs(100);
 		uint8 initial_advertisin_enable = FALSE;		
 		GAPRole_SetParameter( GAPROLE_ADVERT_ENABLED, sizeof( uint8 ), &initial_advertisin_enable );
-		GAPRole_SetParameter( GAPROLE_SCAN_RSP_DATA, sizeof ( scanRspData ), scanRspData );				//赂眉脨脗脡猫卤赂脙没
-		GAPRole_SetParameter( GAPROLE_ADVERT_DATA, sizeof( advertData ), advertData );					//赂眉脨脗脳脭露篓脪氓鹿茫虏楼脢媒戮脻
-		GAP_SetParamValue( TGAP_LIM_DISC_ADV_INT_MIN, advInt[advint] );									//赂眉脨脗鹿茫虏楼录盲赂么
+		osal_memcpy(attDeviceName,&scanRspData[2],20);
+		GAPRole_SetParameter( GAPROLE_SCAN_RSP_DATA, sizeof ( scanRspData ), scanRspData );				//更新设备名
+		GGS_SetParameter( GGS_DEVICE_NAME_ATT, GAP_DEVICE_NAME_LEN, attDeviceName );
+		GAPRole_SetParameter( GAPROLE_ADVERT_DATA, sizeof( advertData ), advertData );					//更新自定义广播数据
+		GAP_SetParamValue( TGAP_LIM_DISC_ADV_INT_MIN, advInt[advint] );									//更新广播间隔
 		GAP_SetParamValue( TGAP_LIM_DISC_ADV_INT_MAX, advInt[advint] );
 		GAP_SetParamValue( TGAP_GEN_DISC_ADV_INT_MIN, advInt[advint] );
 		GAP_SetParamValue( TGAP_GEN_DISC_ADV_INT_MAX, advInt[advint] );
-		g_rfPhyTxPower = AT_Tx_Power[AT_bleuart_txpower];												//赂眉脨脗路垄脡盲鹿娄脗脢
+		g_rfPhyTxPower = AT_Tx_Power[AT_bleuart_txpower];												//更新发射功率
 		at_rx->len=0;
-		osal_start_timerEx(bleuart_TaskID, BUP_OSAL_EVT_RESET_ADV,1000);	
+		osal_start_timerEx(bleuart_TaskID, BUP_OSAL_EVT_RESET_ADV,50);									//修改广播数据后必须延时30ms以上再开启广播
 	}
 	else if(ret==1){
 	Modify_BLEDevice_Data = 1;
@@ -607,6 +652,8 @@ uint16 bleuart_ProcessEvent( uint8 task_id, uint16 events )
 		hal_uart_send_buff(UART1,at_error, 8);
 		at_rx->len=0;
 	}
+	
+#endif
     return ( events ^ BUP_OSAL_EVT_AT);
   }
 	
@@ -655,10 +702,11 @@ static void bleuart_StateNotificationCB( gaprole_States_t newState )
         
             DevInfo_SetParameter(DEVINFO_SYSTEM_ID, DEVINFO_SYSTEM_ID_LEN, systemId);
 			
+			#if (AT_UART==1)
 			uint8 i;
 			uint8 mac_addr[6];
 			osal_snv_read(0x80,1,&Modify_BLEDevice_Data);
-			if((Modify_BLEDevice_Data==2)||	(Modify_BLEDevice_Data==1))								//赂眉脨脗MAC碌脴脰路
+			if((Modify_BLEDevice_Data==2)||	(Modify_BLEDevice_Data==1))								//更新MAC地址
 			{
 				osal_snv_read(0x89,6,mac_addr);
 				for(i=0;i<LL_DEVICE_ADDR_LEN;i++)
@@ -666,6 +714,7 @@ static void bleuart_StateNotificationCB( gaprole_States_t newState )
 					ownPublicAddr[i]=mac_addr[LL_DEVICE_ADDR_LEN-1-i];
 				}
 			}
+			#endif
         }
             break;
         
@@ -675,10 +724,12 @@ static void bleuart_StateNotificationCB( gaprole_States_t newState )
 				  hal_gpio_write(UART_INDICATE_LED,0);
          // FLOW_CTRL_UART_TX_UNLOCK();
          // FLOW_CTRL_BLE_TX_UNLOCK();
+		#if (AT_UART==1)
 			if(AT_bleuart_auto==0x59){
 				Bleuart_C_D=0;
 			}
 			else{Bleuart_C_D=0;}
+		#endif
           LOG("advertising!\n");
           break;
         
@@ -686,10 +737,12 @@ static void bleuart_StateNotificationCB( gaprole_States_t newState )
           GAPRole_GetParameter( GAPROLE_CONNHANDLE, &gapConnHandle );
 				  hal_gpio_write(UART_INDICATE_LED,1);
          // FLOW_CTRL_BLE_CONN();
+		#if (AT_UART==1)
 			if(AT_bleuart_auto==0x59){
 				Bleuart_C_D=1;
 			}
 			else{Bleuart_C_D=0;}
+		#endif
           LOG("connected handle[%d]!\n", gapConnHandle);
           break;
         

@@ -31,6 +31,10 @@
 #ifdef EXT_ADV_ENABLE
 	#include "rf_phy_driver.h"
 #endif
+
+#ifndef DEF_GAPBOND_MGR_ENABLE
+    #define DEF_GAPBOND_MGR_ENABLE 1
+#endif
 /*********************************************************************
  * MACROS
  */
@@ -1152,8 +1156,9 @@ static void gapRole_ProcessGAPMsg( gapEventHdr_t *pMsg )
           }
 
           // Notify the Bond Manager to the connection
+        #if(DEF_GAPBOND_MGR_ENABLE == TRUE)
           VOID GAPBondMgr_LinkEst( pPkt->devAddrType, pPkt->devAddr, pPkt->connectionHandle, GAP_PROFILE_PERIPHERAL );
-          
+		#endif
           // Set enabler to FALSE; device will become discoverable again when
           // this value gets set to TRUE
           gapRole_AdvEnabled = FALSE;          

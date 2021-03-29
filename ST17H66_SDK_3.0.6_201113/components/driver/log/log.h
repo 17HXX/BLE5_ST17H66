@@ -24,7 +24,7 @@ extern "C" {
     #include "uart.h"
     void dbg_printf(const char *format, ...);
     void dbg_printf_init(void);
-
+	void my_dump_byte(uint8_t* pData, int dlen);
     #ifndef DEBUG_INFO
     #error "DEBUG_INFO undefined!"
     #endif
@@ -36,22 +36,26 @@ extern "C" {
         #define LOG_DEBUG(...)
         #define LOG(...)  dbg_printf(__VA_ARGS__)
         #define LOG_INIT() dbg_printf_init()
+		#define LOG_DUMP_BYTE(a,b) my_dump_byte(a,b)
     #elif(DEBUG_INFO == 2)
 
         #define AT_LOG(...)  dbg_printf(__VA_ARGS__)
         #define LOG_DEBUG(...)  dbg_printf(__VA_ARGS__)
         #define LOG(...)
         #define LOG_INIT() dbg_printf_init()
+		#define LOG_DUMP_BYTE(a,b) my_dump_byte(a,b)
     #elif(DEBUG_INFO == 3)
         #define LOG(...)  dbg_printf(__VA_ARGS__)
         #define AT_LOG(...)  dbg_printf(__VA_ARGS__)
         #define LOG_DEBUG(...)  dbg_printf(__VA_ARGS__)
         #define LOG_INIT() dbg_printf_init()
+		#define LOG_DUMP_BYTE(a,b) my_dump_byte(a,b)
     #else
         #define AT_LOG(...)
         #define LOG_DEBUG(...)
         #define LOG(...)
         #define LOG_INIT()  //{clk_gate_enable(MOD_UART);clk_reset(MOD_UART);clk_gate_disable(MOD_UART);}
+		#define LOG_DUMP_BYTE(a,b)
     #endif
 
 #ifdef __cplusplus

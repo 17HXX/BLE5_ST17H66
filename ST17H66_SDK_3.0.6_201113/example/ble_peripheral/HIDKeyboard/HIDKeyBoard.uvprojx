@@ -536,11 +536,6 @@
               <FileType>4</FileType>
               <FilePath>..\..\..\lib\ble_host.lib</FilePath>
             </File>
-            <File>
-              <FileName>cksys.lib</FileName>
-              <FileType>4</FileType>
-              <FilePath>..\..\..\lib\cksys.lib</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

@@ -50,11 +50,19 @@ static int txmit_buf_use_tx_buf(UART_INDEX_e uart_index,uint8_t *buf,uint16_t le
     if(p_txbuf->tx_state == TX_STATE_UNINIT)
         return PPlus_ERR_NO_MEM;
     
-    if(p_txbuf->tx_state != TX_STATE_IDLE)
-        return PPlus_ERR_BUSY;
-    
     if(p_txbuf->tx_buf_size < len)
         return PPlus_ERR_NO_MEM;
+    if(p_txbuf->tx_state != TX_STATE_IDLE)
+    {
+        if(p_txbuf->tx_data_size + len > p_txbuf->tx_buf_size)
+            return PPlus_ERR_NO_MEM;
+
+        HAL_ENTER_CRITICAL_SECTION();
+        memcpy(p_txbuf->tx_buf + p_txbuf->tx_data_size, buf, len);
+        p_txbuf->tx_data_size += len;
+        HAL_EXIT_CRITICAL_SECTION();
+        return PPlus_SUCCESS;
+    }
 
     memcpy(p_txbuf->tx_buf, buf, len);
     p_txbuf->tx_data_size = len;
@@ -62,7 +70,7 @@ static int txmit_buf_use_tx_buf(UART_INDEX_e uart_index,uint8_t *buf,uint16_t le
     p_txbuf->tx_state = TX_STATE_TX;
 
     p_data = p_txbuf->tx_buf;
-    len = p_txbuf->tx_data_size - p_txbuf->tx_data_offset;
+//    len = p_txbuf->tx_data_size;
     len = len > UART_TX_FIFO_SIZE ? UART_TX_FIFO_SIZE : len;
 
     if(uart_index == UART1)    
@@ -248,10 +256,10 @@ static int uart_hw_init(UART_INDEX_e uart_index)
         cur_uart->IER |= IER_ETBEI;    
     
 	if(uart_index== UART0){
-		JUMP_FUNCTION(V11_IRQ_HANDLER)   =   (uint32_t)&hal_UART0_IRQHandler;
+        JUMP_FUNCTION(UART0_IRQ_HANDLER)   =   (uint32_t)&hal_UART0_IRQHandler;
 	}
 	else{
-		JUMP_FUNCTION(V17_IRQ_HANDLER)   =   (uint32_t)&hal_UART1_IRQHandler;
+        JUMP_FUNCTION(UART1_IRQ_HANDLER)   =   (uint32_t)&hal_UART1_IRQHandler;
 	}
 	
     NVIC_SetPriority(irq_type, IRQ_PRIO_HAL);
@@ -288,10 +296,10 @@ static int uart_hw_deinit(UART_INDEX_e uart_index)
     hal_clk_gate_disable(mod);
 	
 	if(uart_index== UART0){
-		JUMP_FUNCTION(V11_IRQ_HANDLER)   =   0;
+        JUMP_FUNCTION(UART0_IRQ_HANDLER)   =   0;
 	}
 	else{
-		JUMP_FUNCTION(V17_IRQ_HANDLER)   =   0;
+        JUMP_FUNCTION(UART1_IRQ_HANDLER)   =   0;
 	}
 	
     return PPlus_SUCCESS;
@@ -311,7 +319,7 @@ static int uart_hw_deinit(UART_INDEX_e uart_index)
  *
  * @return      None.
  **************************************************************************************/
-void __attribute__((used)) hal_UART0_IRQHandler(void)
+void __ATTR_SECTION_SRAM__  __attribute__((used)) hal_UART0_IRQHandler(void)
 {
     uint8_t IRQ_ID= (AP_UART0->IIR & 0x0f);
     
@@ -404,7 +412,7 @@ int hal_uart_deinit(UART_INDEX_e uart_index)
 {
     uart_hw_deinit(uart_index);
      
-    memset(&(m_uartCtx[uart_index]), 0, sizeof(m_uartCtx)); 
+    memset(&(m_uartCtx[uart_index]), 0, sizeof(uart_Ctx_t));
     m_uartCtx[uart_index].enable = FALSE;
     if(uart_index == UART0)
         hal_pwrmgr_unregister(MOD_UART0);

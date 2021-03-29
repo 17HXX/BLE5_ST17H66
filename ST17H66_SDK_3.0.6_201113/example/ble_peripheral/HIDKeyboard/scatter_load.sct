@@ -6,9 +6,10 @@
   ER_IROM1 0x1fff1838 0x000E7C8  {  ; load address = execution address
    *.o (RESET, +First)
    *(InRoot$$Sections)
+   *.o(_section_standby_code_)
+   *.o(_section_sram_code_)
    .ANY (+RO)  
    .ANY (+RW +ZI)
-   l2cap_util.o(+RO)
   }
   
  }
@@ -55,6 +56,7 @@ LR_ROM_XIP  0x11020000 0x020000 {
    my_printf.o(+RO)
    osal_snv.o(+RO)
    fs.o(+RO)
+   *.o(_section_xip_code_)
   }
  }  
 

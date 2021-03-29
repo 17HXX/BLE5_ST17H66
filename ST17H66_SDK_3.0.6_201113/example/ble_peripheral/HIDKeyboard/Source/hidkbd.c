@@ -575,7 +575,7 @@ static void hidCCSendReport( uint8 cmd, bool keyPressed, uint8 keyRepeated )
         // No need to include Report Id
         if ( keyPressed )
         {
-            buf[0]=0X40;
+            buf[0]=0XE9;
             buf[1]=0X00;
         }
         else

@@ -36,6 +36,10 @@ extern "C"
   #define GAP_BONDINGS_MAX    10    //!< Maximum number of bonds that can be saved in NV.
 #endif
 
+#if !defined ( GAP_BOND_MGR_INDEX_REPLACE )
+#define GAP_BOND_MGR_INDEX_REPLACE  TRUE    //!< Maximum number of bonds that can be saved in NV.
+#endif
+
 #if !defined ( GAP_CHAR_CFG_MAX )
   #define GAP_CHAR_CFG_MAX    4    //!< Maximum number of characteristic configuration that can be saved in NV.
 #endif

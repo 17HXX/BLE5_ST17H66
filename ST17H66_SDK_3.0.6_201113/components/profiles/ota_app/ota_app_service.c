@@ -31,6 +31,9 @@ CONST uint8 ota_CommandUUID[ATT_UUID_SIZE] =
 CONST uint8 ota_ResponseUUID[ATT_UUID_SIZE] =
     {0x23, 0xf1, 0x6e, 0x53, 0xa4, 0x22, 0x42, 0x61, 0x91, 0x51, 0x8b, 0x9b, 0x03, 0xff, 0x33, 0x58};
 
+static uint8 ota_passcode[11]={0};
+static uint8 ota_key_register_flag=0;
+static uint8 ota_key_check_flag=0;
 static CONST gattAttrType_t ota_Service = {ATT_UUID_SIZE, ota_ServiceUUID};
 
 static uint8 ota_CommandProps = GATT_PROP_WRITE;
@@ -175,6 +178,13 @@ static void process_cmd(uint8_t *cmdbuf, uint8_t size)
     {
     case OTAAPP_CMD_START_OTA:
     {
+		  if(ota_key_register_flag==1&&ota_key_check_flag==0)
+		  {
+               LOG("key error\n");
+				rsp = PPlus_ERR_OTA_CRYPTO;
+               response(&rsp, 1);
+			  break;
+			}
         uint8_t ota_mode = cmdbuf[1];
         s_reboot_flg = false;
         //set AON register then reboot
@@ -232,6 +242,53 @@ static void process_cmd(uint8_t *cmdbuf, uint8_t size)
             sprintf((char *)(info_rsp + 7), "V%d.%d.%d", s_ota_app.ver_major, s_ota_app.ver_minor, s_ota_app.ver_revision);
         }
         response(info_rsp, 8 + strlen((const char *)info_rsp + 7));
+    }
+    break;
+		case OTAAPP_CMD_CHECKKEY:
+		{
+
+      if((size-1)==ota_passcode[0]&&ota_passcode[0]>0)
+      {
+        if(osal_memcmp(&ota_passcode[1],&cmdbuf[1],ota_passcode[0])==TRUE)
+        {
+         ota_key_check_flag=1; 
+				 rsp = PPlus_SUCCESS;
+         response(&rsp, 1);
+				 break;
+          
+				}
+				else
+				{
+				 LOG("pass key error\n\r");
+          rsp = PPlus_ERR_NOT_SUPPORTED;
+          response(&rsp, 1);
+
+				}
+
+
+			}
+			else
+			{
+				rsp = PPlus_ERR_NOT_SUPPORTED;
+				response(&rsp, 1);
+
+			}
+		}
+		break;
+
+		case OTAAPP_CMD_GETKEY:
+		{
+		 if(cmdbuf[1]==0x0F&&ota_passcode[0]>0&&ota_passcode[0]<=10)
+		 {
+		  uint8 buf[20]={OTAAPP_CMD_GETKEY};
+		  osal_memcpy(&buf[1],&ota_passcode[0],ota_passcode[0]+1);
+           response(buf, ota_passcode[0]+2);
+		 }
+		 else
+		 {
+               rsp = PPlus_ERR_NOT_SUPPORTED;
+				response(&rsp, 1);
+		 }
     }
     break;
 
@@ -347,6 +404,23 @@ static bStatus_t ota_WriteAttrCB(uint16 connHandle, gattAttribute_t *pAttr,
 bStatus_t ota_app_AddService(void)
 {
     uint8 status = SUCCESS;
+    // Register with Link DB to receive link status change callback
+    VOID linkDB_Register(handleConnStatusCB);
+    load_ota_version();
+    GATTServApp_InitCharCfg(INVALID_CONNHANDLE, ota_ResponseCCCD);
+    // Register GATT attribute list and CBs with GATT Server App
+    status = GATTServApp_RegisterService(ota_AttrTbl,
+                                         GATT_NUM_ATTRS(ota_AttrTbl),
+                                         &ota_ProfileCBs);
+
+    if (status != SUCCESS)
+        LOG("Add OTA service failed!\n");
+
+    return (status);
+}
+bStatus_t ota_app_AddService_UseKey(uint8 ota_key_len,uint8 * ota_key)
+{
+    uint8 status = SUCCESS;
 
     // Register with Link DB to receive link status change callback
     VOID linkDB_Register(handleConnStatusCB);
@@ -362,6 +436,17 @@ bStatus_t ota_app_AddService(void)
 
     if (status != SUCCESS)
         LOG("Add OTA service failed!\n");
+
+
+		if(ota_key_len<=10&&ota_key_len>0)
+		{
+      ota_key_register_flag=1;
+			ota_key_check_flag=0;
+			ota_passcode[0]=ota_key_len;
+			osal_memcpy(&ota_passcode[1],ota_key,ota_key_len);
+			LOG("Add OTA passcode!\n");
+
+		}
 
     return (status);
 }

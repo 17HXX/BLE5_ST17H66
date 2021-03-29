@@ -58,12 +58,12 @@ static bool watchdog_init(WDG_CYCLE_Type_e cycle)
     AP_WDT->TORR = cycle;
     
 #if(HAL_WDG_CFG_MODE == WDG_USE_INT_MODE)
-	 JUMP_FUNCTION(V10_IRQ_HANDLER)                  =   (uint32_t)&hal_WATCHDOG_IRQHandler;
+    JUMP_FUNCTION(WDT_IRQ_HANDLER)                  =   (uint32_t)&hal_WATCHDOG_IRQHandler;
 	AP_WDT->CR = 0x1F;//use int
 	NVIC_SetPriority((IRQn_Type)WDT_IRQn, IRQ_PRIO_HAL);
 	NVIC_EnableIRQ((IRQn_Type)WDT_IRQn);
 #else 
-	JUMP_FUNCTION(V10_IRQ_HANDLER)                  =   0;	
+    JUMP_FUNCTION(WDT_IRQ_HANDLER)                  =   0;
 	AP_WDT->CR = 0x1D;//no use int
 	NVIC_DisableIRQ((IRQn_Type)WDT_IRQn);
 #endif

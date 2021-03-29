@@ -96,6 +96,32 @@ typedef enum{
 #define _CLK_TIMER2      (BIT(22))
 #define _CLK_TIMER3      (BIT(23))
 #define _CLK_TIMER4      (BIT(24))
+
+#define     BB_IRQ_HANDLER              V4_IRQ_HANDLER
+#define     KSCAN_IRQ_HANDLER           V5_IRQ_HANDLER
+#define     RTC_IRQ_HANDLER             V6_IRQ_HANDLER
+#define     CP_COM_IRQ_HANDLER          V7_IRQ_HANDLER
+#define     AP_COM_IRQ_HANDLER          V8_IRQ_HANDLER
+#define     WDT_IRQ_HANDLER             V10_IRQ_HANDLER
+#define     UART0_IRQ_HANDLER           V11_IRQ_HANDLER
+#define     I2C0_IRQ_HANDLER            V12_IRQ_HANDLER
+#define     I2C1_IRQ_HANDLER            V13_IRQ_HANDLER
+#define     SPI0_IRQ_HANDLER            V14_IRQ_HANDLER
+#define     SPI1_IRQ_HANDLER            V15_IRQ_HANDLER
+#define     GPIO_IRQ_HANDLER            V16_IRQ_HANDLER
+#define     UART1_IRQ_HANDLER           V17_IRQ_HANDLER
+#define     SPIF_IRQ_HANDLER            V18_IRQ_HANDLER
+#define     DMAC_IRQ_HANDLER            V19_IRQ_HANDLER
+#define     TIM1_IRQ_HANDLER            V20_IRQ_HANDLER
+#define     TIM2_IRQ_HANDLER            V21_IRQ_HANDLER
+#define     TIM3_IRQ_HANDLER            V22_IRQ_HANDLER
+#define     TIM4_IRQ_HANDLER            V23_IRQ_HANDLER
+#define     TIM5_IRQ_HANDLER            V24_IRQ_HANDLER
+#define     TIM6_IRQ_HANDLER            V25_IRQ_HANDLER
+#define     AES_IRQ_HANDLER             V28_IRQ_HANDLER
+#define     ADCC_IRQ_HANDLER            V29_IRQ_HANDLER
+#define     QDEC_IRQ_HANDLER            V30_IRQ_HANDLER
+
 /*******************************************************************************
  * TYPEDEFS
  */

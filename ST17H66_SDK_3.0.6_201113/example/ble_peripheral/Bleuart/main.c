@@ -14,6 +14,8 @@ THIS IS EMPTY HEADER
 #include "rf_phy_driver.h"
 #include "flash.h"
 #include "version.h"
+#include "fs.h" 
+#include "bleuart.h"
 
 #define DEFAULT_UART_BAUD   115200
 
@@ -102,19 +104,20 @@ static void hal_low_power_io_init(void)
 {
    //========= pull all io to gnd by default
     ioinit_cfg_t ioInit[]= {
-        //TSOP6252 10 IO
+        //TSOP17H66 11 IO
        {GPIO_P02,   GPIO_FLOATING   },/*SWD*/
        {GPIO_P03,   GPIO_FLOATING   },/*SWD*/
-       {GPIO_P09,   GPIO_PULL_UP    },/*UART TX*/
-       {GPIO_P10,   GPIO_PULL_UP    },/*UART RX*/
-       {GPIO_P11,   GPIO_PULL_DOWN  },
-       {GPIO_P14,   GPIO_PULL_DOWN  },
-       {GPIO_P15,   GPIO_PULL_DOWN  },
+       {GPIO_P09,   GPIO_FLOATING    },/*UART TX*/
+       {GPIO_P10,   GPIO_FLOATING    },/*UART RX*/
+       {GPIO_P11,   GPIO_FLOATING  },
+       {GPIO_P14,   GPIO_FLOATING  },
+       {GPIO_P15,   GPIO_FLOATING  },
        {GPIO_P16,   GPIO_FLOATING   },
-       {GPIO_P18,   GPIO_PULL_DOWN  },
-       {GPIO_P20,   GPIO_PULL_DOWN  },
+       {GPIO_P18,   GPIO_FLOATING  },
+       {GPIO_P20,   GPIO_FLOATING  },
+	   {GPIO_P34,   GPIO_FLOATING  },
 #if(SDK_VER_CHIP==__DEF_CHIP_QFN32__)
-        //6222 23 IO  
+        //17H65 23 IO  
        {GPIO_P00,   GPIO_PULL_DOWN  },
        {GPIO_P01,   GPIO_PULL_DOWN  },
        {GPIO_P07,   GPIO_PULL_DOWN  },
@@ -163,7 +166,7 @@ static void ble_mem_init_config(void)
 static void hal_rfphy_init(void)
 {
     //============config the txPower
-    g_rfPhyTxPower  = RF_PHY_TX_POWER_0DBM ;
+    g_rfPhyTxPower  = AT_Tx_Power[AT_bleuart_txpower];//RF_PHY_TX_POWER_5DBM ;
     //============config BLE_PHY TYPE
     g_rfPhyPktFmt   = PKT_FMT_BLE1M;
     //============config RF Frequency Offset
@@ -201,14 +204,15 @@ static void hal_init(void)
     hal_spif_cache_init(cfg);
     
     LOG_INIT();
-    hal_gpio_init();				
+    hal_gpio_init();	
+	hal_fs_init(0x1103C000,2);
 }
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 int  main(void)  
 {
-    g_system_clk = SYS_CLK_XTAL_16M;//SYS_CLK_XTAL_16M;//SYS_CLK_DLL_64M;
+    g_system_clk = SYS_CLK_DLL_48M;//SYS_CLK_XTAL_16M;//SYS_CLK_XTAL_16M;//SYS_CLK_DLL_64M;
     g_clk32K_config = CLK_32K_RCOSC;//CLK_32K_XTAL;//CLK_32K_XTAL,CLK_32K_RCOSC      
     
     drv_irq_init();
@@ -223,11 +227,11 @@ int  main(void)
     rf_phy_direct_test();
 #endif
         
-	LOG("SDK Version ID %08x \n",SDK_VER_RELEASE_ID);
-    LOG("rfClk %d rcClk %d sysClk %d tpCap[%02x %02x]\n",g_rfPhyClkSel,g_clk32K_config,g_system_clk,g_rfPhyTpCal0,g_rfPhyTpCal1);
+//	LOG("SDK Version ID %08x \n",SDK_VER_RELEASE_ID);
+//    LOG("rfClk %d rcClk %d sysClk %d tpCap[%02x %02x]\n",g_rfPhyClkSel,g_clk32K_config,g_system_clk,g_rfPhyTpCal0,g_rfPhyTpCal1);
 
-    LOG("sizeof(struct ll_pkt_desc) = %d, buf size = %d\n", sizeof(struct ll_pkt_desc), BLE_CONN_BUF_SIZE);
-    LOG("sizeof(g_pConnectionBuffer) = %d, sizeof(pConnContext) = %d, sizeof(largeHeap)=%d \n",\
+//    LOG("sizeof(struct ll_pkt_desc) = %d, buf size = %d\n", sizeof(struct ll_pkt_desc), BLE_CONN_BUF_SIZE);
+//    LOG("sizeof(g_pConnectionBuffer) = %d, sizeof(pConnContext) = %d, sizeof(largeHeap)=%d \n",\
          sizeof(g_pConnectionBuffer), sizeof(pConnContext),sizeof(g_largeHeap));  
     app_main();	
 

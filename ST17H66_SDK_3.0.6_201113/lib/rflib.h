@@ -1,7 +1,6 @@
 /**************************************************************************************************
-*******
+THIS IS EMPTY HEADER
 **************************************************************************************************/
-
 
 #ifndef __RF_LIB_H
 #define __RF_LIB_H
@@ -14,7 +13,7 @@ void rflib_vesion(uint8_t* major, uint8_t* minor, uint8_t* revision, char* test_
 void check_PerStatsProcess(void);
 int8  LL_PLUS_GetCurrentRSSI(void);
 
-hciStatus_t HCI_LE_SetHostChanClassificationCmd(uint8 *chanMap);
+hciStatus_t HCI_LE_SetHostChanClassificationCmd(uint8* chanMap);
 
 void LL_PLUS_GetCurrentPduDle(uint8_t connId, ll_pdu_length_ctrl_t* ppdu);
 

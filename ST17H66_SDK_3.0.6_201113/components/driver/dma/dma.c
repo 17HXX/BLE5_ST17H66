@@ -66,7 +66,7 @@ static void dma_wakeup_handler(void)
     NVIC_SetPriority((IRQn_Type)DMAC_IRQn, IRQ_PRIO_HAL);
     NVIC_EnableIRQ((IRQn_Type)DMAC_IRQn);
 
-    JUMP_FUNCTION(V19_IRQ_HANDLER)      =   (uint32_t)&hal_DMA_IRQHandler;
+    JUMP_FUNCTION(DMAC_IRQ_HANDLER)      =   (uint32_t)&hal_DMA_IRQHandler;
 
     AP_DMA_MISC->DmaCfgReg = DMA_DMAC_E;
 }
@@ -322,7 +322,7 @@ int hal_dma_init(void)
     NVIC_SetPriority((IRQn_Type)DMAC_IRQn, IRQ_PRIO_HAL);
     NVIC_EnableIRQ((IRQn_Type)DMAC_IRQn);
 
-    JUMP_FUNCTION(V19_IRQ_HANDLER)      =   (uint32_t)&hal_DMA_IRQHandler;
+    JUMP_FUNCTION(DMAC_IRQ_HANDLER)      =   (uint32_t)&hal_DMA_IRQHandler;
 
     ret = hal_pwrmgr_register(MOD_DMA,NULL, dma_wakeup_handler);
     if(ret == PPlus_SUCCESS)
@@ -333,12 +333,8 @@ int hal_dma_init(void)
         //dmac controller enable
         AP_DMA_MISC->DmaCfgReg = DMA_DMAC_E;
     }
-    else
-    {
-        return ret;
-    }
 
-    return PPlus_SUCCESS;
+    return ret;
 }
 
 int hal_dma_deinit(void)
@@ -348,7 +344,7 @@ int hal_dma_deinit(void)
 
     s_dma_ctx.init_flg = FALSE;
     memset(&(s_dma_ctx.dma_ch_ctx[0]), 0, sizeof(DMA_CH_Ctx_t)*DMA_CH_NUM);
-
+    hal_pwrmgr_unregister(MOD_DMA);
     hal_clk_gate_disable(MOD_DMA);
     
     return PPlus_SUCCESS;

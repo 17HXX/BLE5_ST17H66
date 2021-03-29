@@ -38,6 +38,7 @@
 #define HAL_CACHE_ENTER_BYPASS_SECTION()  do{ \
 	HAL_ENTER_CRITICAL_SECTION();\
 	AP_CACHE->CTRL0 = 0x02; \
+    AP_PCR->CACHE_RST = 0x02;\
 	AP_PCR->CACHE_BYPASS = 1;    \
 	HAL_EXIT_CRITICAL_SECTION();\
 }while(0);
@@ -46,6 +47,7 @@
 #define HAL_CACHE_EXIT_BYPASS_SECTION()  do{ \
 	HAL_ENTER_CRITICAL_SECTION();\
 	AP_CACHE->CTRL0 = 0x00;\
+    AP_PCR->CACHE_RST = 0x03;\
 	AP_PCR->CACHE_BYPASS = 0;\
 	HAL_EXIT_CRITICAL_SECTION();\
 }while(0);
@@ -218,12 +220,14 @@ int hal_flash_erase_sector(unsigned int addr)
 {
     uint8_t retval;
     uint32_t cb = AP_PCR->CACHE_BYPASS;
-
+    HAL_CACHE_ENTER_BYPASS_SECTION();
     SPIF_STATUS_WAIT_IDLE(SPIF_WAIT_IDLE_CYC);
     spif_wait_nobusy(SFLG_WIP, SPIF_TIMEOUT, PPlus_ERR_BUSY);
 
     retval = spif_erase_sector(addr);
+    SPIF_STATUS_WAIT_IDLE(SPIF_WAIT_IDLE_CYC);
     spif_wait_nobusy(SFLG_WELWIP, SPIF_TIMEOUT, PPlus_ERR_BUSY);
+    HAL_CACHE_EXIT_BYPASS_SECTION();
     if(cb == 0)
     {
         hal_cache_tag_flush();
@@ -235,10 +239,13 @@ int hal_flash_erase_block64(unsigned int addr)
 {
     uint8_t retval;
     uint32_t cb = AP_PCR->CACHE_BYPASS;
+    HAL_CACHE_ENTER_BYPASS_SECTION();
     SPIF_STATUS_WAIT_IDLE(SPIF_WAIT_IDLE_CYC);
     spif_wait_nobusy(SFLG_WIP, SPIF_TIMEOUT, PPlus_ERR_BUSY);
     retval = spif_erase_block64(addr);
+    SPIF_STATUS_WAIT_IDLE(SPIF_WAIT_IDLE_CYC);
     spif_wait_nobusy(SFLG_WELWIP, SPIF_TIMEOUT, PPlus_ERR_BUSY);
+    HAL_CACHE_EXIT_BYPASS_SECTION();
     if(cb == 0)
     {
         hal_cache_tag_flush();
@@ -250,10 +257,13 @@ int hal_flash_erase_all(void)
 {
     uint8_t retval;
     uint32_t cb = AP_PCR->CACHE_BYPASS;
+    HAL_CACHE_ENTER_BYPASS_SECTION();
     SPIF_STATUS_WAIT_IDLE(SPIF_WAIT_IDLE_CYC);
     spif_wait_nobusy(SFLG_WIP, SPIF_TIMEOUT, PPlus_ERR_BUSY);
     retval = spif_erase_all();
+    SPIF_STATUS_WAIT_IDLE(SPIF_WAIT_IDLE_CYC);
     spif_wait_nobusy(SFLG_WELWIP, SPIF_TIMEOUT, PPlus_ERR_BUSY);
+    HAL_CACHE_EXIT_BYPASS_SECTION();
     if(cb == 0)
     {
         hal_cache_tag_flush();

@@ -26,6 +26,8 @@ enum{
   OTAAPP_CMD_INFO,
   OTAAPP_CMD_FORMAT,
   OTAAPP_CMD_VER,
+  OTAAPP_CMD_CHECKKEY,
+  OTAAPP_CMD_GETKEY,
 };
 
 typedef struct{
@@ -42,6 +44,7 @@ typedef struct{
 
 
 bStatus_t ota_app_AddService(void);
+bStatus_t ota_app_AddService_UseKey(uint8 ota_key_len,uint8 * ota_key);
 
 int ota_vendor_module_StartOTA(uint8_t mode);
 int ota_vendor_module_Version(  uint8_t* major, uint8_t* minor, uint8_t* revision, uint8_t *test_build);

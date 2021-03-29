@@ -270,4 +270,6 @@ uint8_t     rf_phy_direct_test_ate(uint32_t cmdWord,uint8_t regPatchNum,uint32_t
 
 void        rf_phy_dtm_zigbee_pkt_gen(void);
 
+void        TRNG_INIT(void);
+uint8_t		TRNG_Rand(uint8_t* buf,uint8_t len);
 #endif
