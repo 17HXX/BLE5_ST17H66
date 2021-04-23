@@ -1,6 +1,17 @@
-/**************************************************************************************************
-*******
-**************************************************************************************************/
+/**
+ *                         -----------------------------------
+ *                         |           ST17H66               |
+ *  GPIO 34               -| 01 P34                    RF 16 |- RF antenna
+ *  GPIO 2                -| 02 P2                    VSS 15 |- GND
+ *  GPIO 3                -| 03 P3                   VDD3 14 |- 3.3V power supply
+ *  GPIO 7                -| 04 P7              XTAL16M_I 13 |- 16MHz crystal input
+ *  GPIO 9                -| 05 P9              XTAL16M_O 12 |- 16MHz crystal output
+ *  GPIO 10               -| 06 P10           AIO_9 / P20 11 |- GPIO 20 / ADC input 9 / PGA positive input
+ *  GPIO 11 / ADC input 0 -| 07 P11 / AIO_0   AIO_7 / P18 10 |- GPIO 18 /             / PGA negative input
+ *  GPIO 14 / ADC input 3 -| 08 P14 / AIO_3   AIO_4 / P15 09 |- GPIO 15 / ADC input 4 / micbias output
+ *                         |                                 |
+ *                         -----------------------------------
+ */
 
 #include "bus_dev.h"
 #include "gpio.h"
