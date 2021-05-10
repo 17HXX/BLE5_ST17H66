@@ -492,6 +492,7 @@ void bleuart_Init( uint8 task_id )
 //  DevInfo_AddService();                           // Device Information Service
   
 //  ota_app_AddService(ota_keylen,ota_key);			//开启OTA服务
+//  ota_app_AddService_UseKey(ota_keylen,ota_key);  //开启OTA升级密钥
   
   bleuart_AddService(on_bleuartServiceEvt);		//串口透传服务
   BUP_init(on_BUP_Evt);							//串口初始化

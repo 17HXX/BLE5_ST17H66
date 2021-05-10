@@ -36,8 +36,8 @@ extern void hal_rom_boot_init(void);
 */
 
 #define   BLE_MAX_ALLOW_CONNECTION              1
-#define   BLE_MAX_ALLOW_PKT_PER_EVENT_TX        4
-#define   BLE_MAX_ALLOW_PKT_PER_EVENT_RX        4
+#define   BLE_MAX_ALLOW_PKT_PER_EVENT_TX        3
+#define   BLE_MAX_ALLOW_PKT_PER_EVENT_RX        3
 #define   BLE_PKT_VERSION                       BLE_PKT_VERSION_5_1 //BLE_PKT_VERSION_5_1 //BLE_PKT_VERSION_5_1     
 
 
@@ -68,7 +68,7 @@ extern void hal_rom_boot_init(void);
 #define   BLE_CONN_BUF_SIZE                 (BLE_MAX_ALLOW_CONNECTION * BLE_MAX_ALLOW_PER_CONNECTION)
                                                                                         
 
-__align(4) uint8            g_pConnectionBuffer[BLE_CONN_BUF_SIZE];
+ALIGN4_U8            g_pConnectionBuffer[BLE_CONN_BUF_SIZE];
 llConnState_t               pConnContext[BLE_MAX_ALLOW_CONNECTION];
 
 /*********************************************************************
@@ -85,7 +85,7 @@ uint16 g_llCteSampleQ[LL_CTE_MAX_SUPP_LEN * LL_CTE_SUPP_LEN_UNIT];
 *  OSAL LARGE HEAP CONFIG
 */
 #define     LARGE_HEAP_SIZE  (4*1024)
-uint8       g_largeHeap[LARGE_HEAP_SIZE];
+ALIGN4_U8   g_largeHeap[LARGE_HEAP_SIZE];
 
 /*********************************************************************
  * GLOBAL VARIABLES
@@ -136,7 +136,8 @@ static void hal_low_power_io_init(void)
     for(uint8_t i=0;i<sizeof(ioInit)/sizeof(ioinit_cfg_t);i++)
         hal_gpio_pull_set(ioInit[i].pin,ioInit[i].type);
 
-    DCDC_CONFIG_SETTING(0x0f);
+    DCDC_CONFIG_SETTING(0x0a);
+    DCDC_REF_CLK_SETTING(1);
     DIG_LDO_CURRENT_SETTING(0x01);
     //hal_pwrmgr_RAM_retention(RET_SRAM0|RET_SRAM1|RET_SRAM2);
     hal_pwrmgr_RAM_retention(RET_SRAM0|RET_SRAM1);
