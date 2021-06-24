@@ -798,7 +798,8 @@ static uint8 MultiRole_processGAPMsg(gapEventHdr_t* pMsg)
 
             if( info.value.role == Slave_Role )
             {
-                gapBond_PairingMode[ pPkt->connectionHandle ] = GAPBOND_PAIRING_MODE_INITIATE ;
+//								gapBond_PairingMode[ pPkt->connectionHandle ] = GAPBOND_PAIRING_MODE_INITIATE ;
+								gapBond_PairingMode[ pPkt->connectionHandle ] = GAPBOND_PAIRING_MODE_NO_PAIRING ;
                 uint8 bondret = GAPBondMgr_LinkEst( pPkt->devAddrType, pPkt->devAddr, pPkt->connectionHandle, GAP_PROFILE_PERIPHERAL );
                 LOG("GAPBondMgr_LinkEst SLAVE bondret %d\n",bondret);
                 // varify if enable connection parameter update?

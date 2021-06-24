@@ -60,7 +60,7 @@ uint8 test_type;
 
 // Scan duration in ms
 #if ONLY_SCAN_MODE
-#define DEFAULT_SCAN_DURATION                 1400
+#define DEFAULT_SCAN_DURATION                 100	///1400
 #else 
 #define DEFAULT_SCAN_DURATION                 5000
 #endif
@@ -433,6 +433,15 @@ void SimpleBLECentral_Init( uint8 task_id )
     // Setup GAP
     GAP_SetParamValue(TGAP_GEN_DISC_SCAN, DEFAULT_SCAN_DURATION);
     GAP_SetParamValue(TGAP_LIM_DISC_SCAN, DEFAULT_SCAN_DURATION);
+		
+		#if ONLY_SCAN_MODE
+			GAP_SetParamValue(TGAP_GEN_DISC_SCAN_INT,	5);
+			GAP_SetParamValue(TGAP_GEN_DISC_SCAN_WIND,	5);
+			
+			GAP_SetParamValue(TGAP_LIM_DISC_SCAN_INT, 5);
+			GAP_SetParamValue(TGAP_LIM_DISC_SCAN_WIND, 5);
+		#endif
+		
     GAP_SetParamValue(TGAP_CONN_EST_INT_MIN, 30); //  * 1.25ms      // 30
     GAP_SetParamValue(TGAP_CONN_EST_INT_MAX, 40);
     GGS_SetParameter(GGS_DEVICE_NAME_ATT, GAP_DEVICE_NAME_LEN, (uint8*)simpleBLEDeviceName);
